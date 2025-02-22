@@ -15,4 +15,9 @@ public class Player : Actor
     {
         base.Update();
     }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
 }

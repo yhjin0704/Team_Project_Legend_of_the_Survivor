@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Actor : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public string Name;
+    public float Atk;
+
     protected virtual void Start()
     {
         
@@ -14,5 +16,18 @@ public class Actor : MonoBehaviour
     protected virtual void Update()
     {
         
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        Attak();
+    }
+
+    protected virtual void Attak()
+    {
+    }
+
+    protected virtual void Hit()
+    {
     }
 }
