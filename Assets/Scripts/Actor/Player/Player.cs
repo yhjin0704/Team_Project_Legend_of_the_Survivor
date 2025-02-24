@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class Player : Actor
 {
-    // Start is called before the first frame update
+    public float atk;
+    public float atkDelay;
+
+    private List<SkillBase> PlayerSkillList;
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
     protected override void Start()
     {
         base.Start();
     }
 
-    // Update is called once per frame
     protected override void Update()
     {
         base.Update();
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
     }
 }
