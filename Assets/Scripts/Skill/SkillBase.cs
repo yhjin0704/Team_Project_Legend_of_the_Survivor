@@ -31,7 +31,8 @@ public class SkillBase : MonoBehaviour
     }
 
     public virtual void Use()
-    { }
+    { 
+    }
 }
 
 public interface ISkillUseDelay

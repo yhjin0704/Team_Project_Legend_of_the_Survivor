@@ -5,14 +5,26 @@ using UnityEngine;
 
 public class Actor : MonoBehaviour
 {
-    public GameObject defaultBulletPrefab;
-
     [Range(1, 100)]public float hp = 100;
     [Range(1f, 20f)]public float speed = 3;
     public float atk = 1;
     public float atkDelay = 3;
     public int gold = 0;
-    public bool IsAlive = true; 
+    public bool IsAlive = true;
+
+    public GameObject defaultBulletPrefab;
+
+    private Transform target;
+    public Transform GetTarget()
+    {
+        return target;
+    }
+
+    protected Transform ShotPos;
+    public Transform GetShotPos()
+    {
+        return ShotPos;
+    }
     
     protected virtual void Awake()
     {

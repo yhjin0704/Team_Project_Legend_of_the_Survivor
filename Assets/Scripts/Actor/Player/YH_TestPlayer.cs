@@ -25,17 +25,24 @@ public class YH_TestPlayer : Player
     {
         base.Update();
 
+        Attak();
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
+
+    protected override void Attak()
+    {
+        base.Attak();
+
         UseSkills();
 
         if (checkDelay > 0)
         {
             checkDelay -= Time.deltaTime;
         }
-    }
-
-    protected override void FixedUpdate()
-    {
-        base.FixedUpdate();
     }
 
     protected void UseSkills()
