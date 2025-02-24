@@ -8,7 +8,7 @@ public class BaseController : MonoBehaviour
     protected Rigidbody2D _rigidbody;
 
     [SerializeField] private SpriteRenderer characterRenderer;
-    [SerializeField] private Transform weaponPivot;
+    //[SerializeField] private Transform weaponPivot;
 
     protected Vector2 movementDirection = Vector2.zero;
     public Vector2 MovementDirection { get { return movementDirection; } }
@@ -22,8 +22,8 @@ public class BaseController : MonoBehaviour
 
     protected StatHandler statHandler;
 
-    [SerializeField] public WeaponHandler WeaponPrefab;
-    protected WeaponHandler weaponHandler;
+    //[SerializeField] public WeaponHandler WeaponPrefab;
+    //protected WeaponHandler weaponHandler;
 
     protected bool isAttacking;
     private float timeSinceLastAttack = float.MaxValue;
@@ -34,10 +34,10 @@ public class BaseController : MonoBehaviour
         animationHandler = GetComponent<AnimationHandler>();
         statHandler = GetComponent<StatHandler>();
 
-        if (WeaponPrefab != null)
+        /*if (WeaponPrefab != null)
             weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
         else
-            weaponHandler = GetComponentInChildren<WeaponHandler>();
+            weaponHandler = GetComponentInChildren<WeaponHandler>();*/
     }
 
     protected virtual void Start()
@@ -86,12 +86,12 @@ public class BaseController : MonoBehaviour
 
         characterRenderer.flipX = isLeft;
 
-        if (weaponPivot != null)
+        /*if (weaponPivot != null)
         {
             weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ);
         }
 
-        weaponHandler?.Rotate(isLeft);
+        weaponHandler?.Rotate(isLeft);*/
     }
 
     public void ApplyKnockback(Transform other, float power, float duration)
@@ -102,7 +102,7 @@ public class BaseController : MonoBehaviour
 
     private void HandleAttackDelay()
     {
-        if (weaponHandler == null)
+        /*if (weaponHandler == null)
             return;
 
         if (timeSinceLastAttack <= weaponHandler.Delay)
@@ -114,12 +114,12 @@ public class BaseController : MonoBehaviour
         {
             timeSinceLastAttack = 0;
             Attack();
-        }
+        }*/
     }
 
     protected virtual void Attack()
     {
-        if (lookDirection != Vector2.zero)
-            weaponHandler?.Attack();
+        /*if (lookDirection != Vector2.zero)
+            weaponHandler?.Attack();*/
     }
 }
