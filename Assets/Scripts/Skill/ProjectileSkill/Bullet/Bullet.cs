@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] protected float speed = 10.0f;
 
-    private Vector2 dir = Vector2.right;
+    private Vector2 dir;
 
     private Rigidbody2D rigidbody;
 
@@ -33,5 +33,10 @@ public class Bullet : MonoBehaviour
     protected virtual void Move()
     {
         
+    }
+    
+    public void SetDir(Vector2 _dir)
+    {
+        dir = _dir.normalized;
     }
 }
