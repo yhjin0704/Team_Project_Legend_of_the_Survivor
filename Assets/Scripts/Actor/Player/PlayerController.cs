@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private Player player;
     private Rigidbody2D rigidBody;
     private Animator animator;
-    
+
 
     private Vector2 moveInput;
 
@@ -25,14 +25,28 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
-
-        player.isMove = (moveInput.x != 0 || moveInput.y != 0);
-        animator.SetBool("IsMove", player.isMove);
+        Move();
     }
 
     void FixedUpdate()
     {
         rigidBody.velocity = moveInput * player.speed;
+    }
+
+    private void Move()
+    {
+        moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+
+        if (moveInput.x > 0)
+        {
+            player.GetRenderer().transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (moveInput.x < 0)
+        {
+            player.GetRenderer().transform.localScale = new Vector3(-1, 1, 1);
+        }
+
+        player.isMove = (moveInput.x != 0 || moveInput.y != 0);
+        animator.SetBool("IsMove", player.isMove);
     }
 }

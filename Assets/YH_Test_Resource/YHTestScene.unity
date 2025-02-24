@@ -629,6 +629,7 @@ MonoBehaviour:
   atkDelay: 3
   gold: 0
   IsAlive: 1
+  isMove: 0
   defaultBulletPrefab: {fileID: 1468526609800095872, guid: e28bdba90f9845642aa96fa842731585, type: 3}
   shotPosDistance: 0.08
   level: 1
@@ -789,7 +790,7 @@ Transform:
   m_GameObject: {fileID: 2136570994}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 0}
+  m_LocalPosition: {x: 1.74, y: -1.48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -814,6 +815,7 @@ MonoBehaviour:
   atkDelay: 3
   gold: 0
   IsAlive: 1
+  isMove: 0
   defaultBulletPrefab: {fileID: 0}
   shotPosDistance: 0
 --- !u!1660057539 &9223372036854775807

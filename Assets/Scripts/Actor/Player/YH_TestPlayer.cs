@@ -30,7 +30,11 @@ public class YH_TestPlayer : Player
             Attak();
         }
 
-        if (checkDelay > 0)
+        if (checkDelay > 0.5f && isMove == true)
+        {
+            checkDelay -= Time.deltaTime;
+        }
+        else if (checkDelay > 0.0f && isMove == false)
         {
             checkDelay -= Time.deltaTime;
         }
@@ -66,7 +70,14 @@ public class YH_TestPlayer : Player
         if (checkDelay <= 0)
         {
             checkDelay = atkDelay;
-
+            if (shotPos.transform.rotation.z >= -0.9f && shotPos.transform.rotation.z < 0.9f)
+            {
+                _renderer.transform.localScale = new Vector3(1, 1, 1);
+            }
+            else
+            {
+                _renderer.transform.localScale = new Vector3(-1, 1, 1);
+            }
             animator.SetBool("IsAttack", true);
 
             foreach (ISkillUseDelay _shottingSkill in skillManager.GetPlayerSkillList())
