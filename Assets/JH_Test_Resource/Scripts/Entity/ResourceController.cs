@@ -6,6 +6,7 @@ public class ResourceController : MonoBehaviour
 {
     [SerializeField] private float healthChangeDelay = .5f;
 
+    private BaseController baseController;
     private StatHandler statHandler;
     private AnimationHandler animationHandler;
 
@@ -18,6 +19,7 @@ public class ResourceController : MonoBehaviour
     {
         statHandler = GetComponent<StatHandler>();
         animationHandler = GetComponent<AnimationHandler>();
+        baseController = GetComponent<BaseController>();
     }
 
     private void Start()
