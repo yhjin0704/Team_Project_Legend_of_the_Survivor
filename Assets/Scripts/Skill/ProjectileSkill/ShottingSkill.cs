@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ShottingSkill : ProjectileSkill, ISkillUseDelay
 {
-    Vector2 shotDir;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -22,6 +21,7 @@ public class StraightShotting : ShottingSkill
 {
     public override void Use()
     {
+        bulletPrefab = actor.defaultBulletPrefab;
 
     }
 }

@@ -1,15 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SkillManager : MonoBehaviour
 {
-    public Player player;
+    private Player player;
 
     private List<SkillBase> PlayerSkillList;
     public List<SkillBase> GetPlayerSkillList()
     {
         return PlayerSkillList;
+    }
+
+    private Transform target;
+    public Transform GetTarget()
+    {
+        return target;
     }
 
     void Awake()

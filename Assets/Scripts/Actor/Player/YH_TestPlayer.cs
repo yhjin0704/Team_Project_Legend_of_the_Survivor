@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class YH_TestPlayer : Player
 {
-    public GameObject bulletPrefab;
+    protected float checkDelay = 0;
 
-    private float checkDelay = 0;
-
-    private SkillManager skillManager;
+    protected SkillManager skillManager;
 
     protected override void Awake()
     {
@@ -40,7 +38,7 @@ public class YH_TestPlayer : Player
     }
 
 
-    private void UseSkills()
+    protected void UseSkills()
     {
         if (skillManager.GetPlayerSkillList() == null)
         {

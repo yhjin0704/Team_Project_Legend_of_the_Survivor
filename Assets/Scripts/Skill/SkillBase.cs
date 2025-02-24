@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class SkillBase : MonoBehaviour
 {
+    protected Actor actor;
+
     protected virtual void Awake()
     {
-
+        actor = GetComponent<Actor>();
     }
 
     protected virtual void Start()

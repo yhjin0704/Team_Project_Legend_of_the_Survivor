@@ -7,7 +7,6 @@ public class PlayerBullet : Bullet
 {
     private Renderer renderer;
 
-    [SerializeField] protected float damage;
     [SerializeField] protected float speed = 10.0f;
 
     private Vector2 dir;

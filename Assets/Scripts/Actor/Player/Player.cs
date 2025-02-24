@@ -7,8 +7,6 @@ public class Player : Actor
     public float atk;
     public float atkDelay;
 
-    protected List<SkillBase> PlayerSkillList;
-
     protected override void Awake()
     {
         base.Awake();

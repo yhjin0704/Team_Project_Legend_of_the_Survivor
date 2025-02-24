@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ProjectileSkill : SkillBase
 {
+    protected GameObject bulletPrefab;
+
     // Start is called before the first frame update
     protected override void Start()
     {

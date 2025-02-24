@@ -8,6 +8,9 @@ public class Actor : MonoBehaviour
     public float hp = 100.0f;
     public float speed = 3.0f;
 
+    public GameObject defaultBulletPrefab;
+
+
     protected virtual void Awake()
     {
 
