@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class YH_TestPlayer : Player
 {
-    [SerializeField] private GameObject bulletPrefab { get; }
+    public GameObject bulletPrefab;
 
     private float checkDelay = 0;
+
+    private SkillManager skillManager;
 
     protected override void Awake()
     {
         base.Awake();
+
+        skillManager = GetComponent<SkillManager>();
     }
 
     protected override void Start()
@@ -35,9 +39,10 @@ public class YH_TestPlayer : Player
         base.FixedUpdate();
     }
 
+
     private void UseSkills()
     {
-        if (PlayerSkillList == null)
+        if (skillManager.GetPlayerSkillList() == null)
         {
             Debug.LogError("PlayerSkillList가 null입니다.");
             return;
@@ -45,27 +50,11 @@ public class YH_TestPlayer : Player
 
         if (checkDelay <= 0)
         {
-            foreach (ISkillUseDelay _shottingSkill in PlayerSkillList)
+            foreach (ISkillUseDelay _shottingSkill in skillManager.GetPlayerSkillList())
             {
                 _shottingSkill.Use();
                 checkDelay = atkDelay;
             }
-        }
-    }
-
-    public void AddPlayerSkill(SkillBase _skill)
-    {
-        if (PlayerSkillList == null)
-        {
-            PlayerSkillList = new List<SkillBase>();
-        }
-
-        PlayerSkillList.Add(_skill);
-
-        // 스킬 리스트에 들어갈 때 한번 OnOff되면 되는 스킬들
-        if (_skill is RotationSkill)
-        {
-            _skill.Use();
         }
     }
 }
