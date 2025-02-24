@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShottingSkill : ProjectileSkill
+public class ShottingSkill : ProjectileSkill, ISkillUseDelay
 {
     Vector2 shotDir;
     // Start is called before the first frame update
@@ -20,12 +20,8 @@ public class ShottingSkill : ProjectileSkill
 
 public class StraightShotting : ShottingSkill
 {
-    protected override void Start()
+    public override void Use()
     {
-        base.Start();
-    }
-    protected override void Update()
-    {
-        base.Update();
+
     }
 }

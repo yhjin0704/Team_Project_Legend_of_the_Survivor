@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &113622285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 113622286}
+  m_Layer: 0
+  m_Name: ShotPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &113622286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113622285}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2098594569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519954338
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,32 +523,15 @@ GameObject:
   - component: {fileID: 2098594569}
   - component: {fileID: 2098594568}
   - component: {fileID: 2098594567}
-  - component: {fileID: 2098594566}
   - component: {fileID: 2098594570}
+  - component: {fileID: 2098594571}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Untagged
+  m_Name: Archer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2098594566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2098594565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 729b7647ba28af2449d10d9c1cfe31c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHp: 100
-  hp: 100
-  speed: 3
-  atk: 0
-  atkDelay: 0
 --- !u!70 &2098594567
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -594,6 +608,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 519954339}
+  - {fileID: 113622286}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2098594570
@@ -608,6 +623,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb36328fe8a473479314fc498e60fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2098594571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098594565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36d56ccfb6b1bf14d82e7bd44a1d1833, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 100
+  hp: 100
+  speed: 3
+  atk: 0
+  atkDelay: 0
+  bulletPrefab: {fileID: 6025022952148002506, guid: e28bdba90f9845642aa96fa842731585, type: 3}
 --- !u!1 &2136570994
 GameObject:
   m_ObjectHideFlags: 0
