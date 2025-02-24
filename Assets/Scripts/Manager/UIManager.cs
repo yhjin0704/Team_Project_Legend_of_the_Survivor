@@ -25,10 +25,10 @@ public class UIManager : MonoBehaviour
 
         gamePlayUI = sceneUIGameObject.GetComponentInChildren<GamePlayUI>(true);
         gamePlayUI.Init(this);
-        gameOverUI = sceneUIGameObject.GetComponentInChildren<GameOverUI>(true);
+       /* gameOverUI = sceneUIGameObject.GetComponentInChildren<GameOverUI>(true);
         gameOverUI.Init(this);
         lobbyUI = sceneUIGameObject.GetComponentInChildren<LobbyUI>(true);
-        lobbyUI.Init(this);
+        lobbyUI.Init(this);*/
         menuUI = sceneUIGameObject.GetComponentInChildren<MenuUI>(true);
         menuUI.Init(this);
     }
