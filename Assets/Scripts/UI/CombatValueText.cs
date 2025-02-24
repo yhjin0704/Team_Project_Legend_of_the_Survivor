@@ -31,7 +31,7 @@ public class CombatValueText : MonoBehaviour
         combatValue.color = Color.green; // 회복은 초록색
     }
 
-    IEnumerator MoveUp()
+    IEnumerator MoveUp()//위로 이동 코루틴
     {
         float elapsedTime = 0f;
 

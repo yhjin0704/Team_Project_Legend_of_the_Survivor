@@ -13,6 +13,7 @@ public class MenuUI : BaseUI
     public Button testExpButton;
     public Button testDamageButton;
     public Button testHealButton;
+    public Button testSkillSelectButton;
     [SerializeField] private Button menuExitButton; // 메뉴나가기 버튼
 
     //테스트용 변수(골드, 경험치, 대미지 등) 추후 삭제 필요
@@ -29,7 +30,7 @@ public class MenuUI : BaseUI
 
         testActorUI = GameObject.FindWithTag("Player").GetComponentInChildren<ActorUI>(); // 플레이어 태그를 찾아서 ActorUI를 찾아서 할당
 
-        // 테스트 버튼을 찾아서 할당(골드, 경험치, 대미지) 추후 삭제 필요
+        // 테스트 버튼을 찾아서 할당(골드, 경험치, 대미지, 스킬 선택) 추후 삭제 필요
         testGoldButton.onClick.AddListener(() =>
         {
             uIManager.ChangeGold(testGold);
@@ -39,6 +40,7 @@ public class MenuUI : BaseUI
         });
         testDamageButton.onClick.AddListener(OnClickTestDamage);
         testHealButton.onClick.AddListener(OnClickTestHeal);
+        testSkillSelectButton.onClick.AddListener(() => { uIManager.SetActiveSkillSelect(new int[] { 1, 2, 3 }); });
         menuExitButton.onClick.AddListener(OnClickExitButton); // 메뉴나가기 버튼 할당
     }
 
