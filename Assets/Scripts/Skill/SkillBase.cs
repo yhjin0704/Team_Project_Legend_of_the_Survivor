@@ -5,10 +5,13 @@ using UnityEngine;
 public class SkillBase : MonoBehaviour
 {
     protected Actor actor;
+    public void SetActor(Actor _actor)
+    {
+        this.actor = _actor;
+    }
 
     protected virtual void Awake()
     {
-        actor = GetComponent<Actor>();
     }
 
     protected virtual void Start()

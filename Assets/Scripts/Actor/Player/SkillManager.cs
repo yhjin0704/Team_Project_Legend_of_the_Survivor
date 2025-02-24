@@ -7,7 +7,7 @@ public class SkillManager : MonoBehaviour
 {
     private Player player;
 
-    private List<SkillBase> PlayerSkillList;
+    private List<SkillBase> PlayerSkillList = new List<SkillBase>();
     public List<SkillBase> GetPlayerSkillList()
     {
         return PlayerSkillList;
@@ -22,6 +22,9 @@ public class SkillManager : MonoBehaviour
     void Awake()
     {
         player = GetComponent<Player>();
+
+        StraightShotting straightShotting = new StraightShotting();
+        AddPlayerSkill(straightShotting);
     }   
 
     void Start()
@@ -39,9 +42,9 @@ public class SkillManager : MonoBehaviour
     {
         if (PlayerSkillList == null)
         {
-            PlayerSkillList = new List<SkillBase>();
+            Debug.LogError("PlayerSkillList가 null입니다.");
         }
-
+        _skill.SetActor(player);
         PlayerSkillList.Add(_skill);
 
         // 스킬 리스트에 들어갈 때 한번 OnOff되면 되는 스킬들

@@ -19,9 +19,20 @@ public class ShottingSkill : ProjectileSkill, ISkillUseDelay
 
 public class StraightShotting : ShottingSkill
 {
+    protected override void Start()
+    {
+        base.Start();
+    }
+
     public override void Use()
     {
-        bulletPrefab = actor.defaultBulletPrefab;
+        if (actor == null)
+        {
+            Debug.LogError("Actor가 null입니다.");
+            return;
+        }
+
+        bullet = Instantiate(actor.defaultBulletPrefab, actor.transform.position, actor.transform.rotation);
 
     }
 }

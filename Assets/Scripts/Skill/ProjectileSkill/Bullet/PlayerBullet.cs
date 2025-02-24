@@ -7,10 +7,6 @@ public class PlayerBullet : Bullet
 {
     private Renderer renderer;
 
-    [SerializeField] protected float speed = 10.0f;
-
-    private Vector2 dir;
-
     protected override void Awake()
     {
         base.Awake();
@@ -20,6 +16,8 @@ public class PlayerBullet : Bullet
     protected override void Start()
     {
         base.Start();
+
+        Destroy(gameObject, 10.0f);
     }
 
     // Update is called once per frame

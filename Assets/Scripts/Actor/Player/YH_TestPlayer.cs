@@ -18,6 +18,7 @@ public class YH_TestPlayer : Player
     protected override void Start()
     {
         base.Start();
+
     }
 
     protected override void Update()
@@ -36,7 +37,6 @@ public class YH_TestPlayer : Player
     {
         base.FixedUpdate();
     }
-
 
     protected void UseSkills()
     {

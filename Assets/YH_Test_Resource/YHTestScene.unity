@@ -226,7 +226,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 5021df915b291d445a082fc717581c8b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -525,6 +525,7 @@ GameObject:
   - component: {fileID: 2098594567}
   - component: {fileID: 2098594570}
   - component: {fileID: 2098594571}
+  - component: {fileID: 2098594572}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Player
@@ -638,9 +639,21 @@ MonoBehaviour:
   maxHp: 100
   hp: 100
   speed: 3
+  defaultBulletPrefab: {fileID: 1468526609800095872, guid: e28bdba90f9845642aa96fa842731585, type: 3}
   atk: 0
-  atkDelay: 0
-  bulletPrefab: {fileID: 6025022952148002506, guid: e28bdba90f9845642aa96fa842731585, type: 3}
+  atkDelay: 2
+--- !u!114 &2098594572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098594565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267ec0567dbc7bc4f869e6d42b0fce9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2136570994
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,6 +776,7 @@ MonoBehaviour:
   maxHp: 100
   hp: 100
   speed: 0
+  defaultBulletPrefab: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
