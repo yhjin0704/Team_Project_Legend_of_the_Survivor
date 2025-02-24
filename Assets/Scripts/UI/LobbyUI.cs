@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LobbyUI : MonoBehaviour
+public class LobbyUI : BaseSceneUI
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Init(UIManager uIManager)
     {
-        
+        base.Init(uIManager);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override UIState GetUIState()
     {
-        
+        return UIState.Lobby;
     }
 }

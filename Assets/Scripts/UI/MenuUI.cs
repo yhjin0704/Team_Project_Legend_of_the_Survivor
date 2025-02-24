@@ -1,18 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class MenuUI : MonoBehaviour
+public class MenuUI : BaseUI
 {
-    // Start is called before the first frame update
-    void Start()
+    public Button testGoldButton;
+    public Button testExpButton;
+    [SerializeField] private Button menuExitButton;
+
+    public int testGold;
+    public float testExp;
+    public float testMaxExp;
+
+    public override void Init(UIManager uIManager)
     {
-        
+        base.Init(uIManager);
+
+        testGoldButton.onClick.AddListener(() =>
+        {
+            uIManager.ChangeGold(testGold);
+        });
+        testExpButton.onClick.AddListener(() => {
+            uIManager.ChangeEXP(testExp, testMaxExp);
+        });
+        menuExitButton.onClick.AddListener(OnClickExitButton);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnClickExitButton()
     {
-        
+        uIManager.SetDeactiveMenu();
     }
 }
