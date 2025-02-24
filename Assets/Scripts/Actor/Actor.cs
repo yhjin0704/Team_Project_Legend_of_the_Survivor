@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Actor : MonoBehaviour
 {
-    public float maxHp = 100.0f;
-    public float hp = 100.0f;
-    public float speed = 3.0f;
-
+    [Range(1, 100)]public int hp = 100;
+    [Range(1f, 20f)]public float speed = 3;
+    public float atk = 1;
+    public int gold = 0;
+    public bool IsAlive = true; 
+    
     protected virtual void Awake()
     {
-
+     
     }
 
     protected virtual void Start()
