@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Actor : MonoBehaviour
 {
-    public string Name;
-    public float Atk;
+    public float maxHp = 100.0f;
+    public float hp = 100.0f;
+    public float speed = 3.0f;
+
+    protected virtual void Awake()
+    {
+
+    }
 
     protected virtual void Start()
     {
@@ -20,7 +26,6 @@ public class Actor : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        Attak();
     }
 
     protected virtual void Attak()
@@ -28,6 +33,10 @@ public class Actor : MonoBehaviour
     }
 
     protected virtual void Hit()
+    {
+    }
+
+    protected virtual void Dead()
     {
     }
 }

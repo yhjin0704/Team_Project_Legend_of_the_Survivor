@@ -513,8 +513,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 729b7647ba28af2449d10d9c1cfe31c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: TestPlayer
-  Atk: 5
+  maxHp: 100
+  hp: 100
+  speed: 3
+  atk: 0
+  atkDelay: 0
 --- !u!70 &2098594567
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -605,7 +608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb36328fe8a473479314fc498e60fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 3
 --- !u!1 &2136570994
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,7 +619,7 @@ GameObject:
   - component: {fileID: 2136570998}
   - component: {fileID: 2136570997}
   - component: {fileID: 2136570996}
-  - component: {fileID: 2136570995}
+  - component: {fileID: 2136570999}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Untagged
@@ -625,20 +627,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2136570995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136570994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a4c0e36821413e47ac7fd6ee5c3f660, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: 
-  Atk: 0
 --- !u!61 &2136570996
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -727,6 +715,21 @@ Transform:
   - {fileID: 1092097745}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2136570999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136570994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a4c0e36821413e47ac7fd6ee5c3f660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 100
+  hp: 100
+  speed: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

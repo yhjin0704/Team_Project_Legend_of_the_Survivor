@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float Speed;
-
+    private Player player;
     private Rigidbody2D rigidBody;
 
     private Vector2 moveInput;
 
-    // Start is called before the first frame update
+    void Awake()
+    {
+        player = GetComponent<Player>();
+        rigidBody = GetComponent<Rigidbody2D>();
+    }
+
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -24,6 +27,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rigidBody.velocity = moveInput * Speed;
+        rigidBody.velocity = moveInput * player.speed;
     }
 }
