@@ -9,7 +9,6 @@ public class Player : Actor
     protected override void Awake()
     {
         base.Awake();
-        PlayerSkillList = new List<SkillBase>();
     }
 
     protected override void Start()

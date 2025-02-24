@@ -5,16 +5,12 @@ using UnityEngine;
 
 public class Actor : MonoBehaviour
 {
-    public float maxHp = 100.0f;
-    public float hp = 100.0f;
-    public float speed = 3.0f;
-
     public GameObject defaultBulletPrefab;
-
 
     [Range(1, 100)]public float hp = 100;
     [Range(1f, 20f)]public float speed = 3;
     public float atk = 1;
+    public float atkDelay = 3;
     public int gold = 0;
     public bool IsAlive = true; 
     
