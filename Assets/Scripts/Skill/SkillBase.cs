@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class SkillBase : MonoBehaviour
 {
-    // Start is called before the first frame update
+    protected Actor actor;
+    public void SetActor(Actor _actor)
+    {
+        this.actor = _actor;
+    }
+
+    protected virtual void Awake()
+    {
+    }
+
     protected virtual void Start()
     {
         
@@ -15,4 +24,18 @@ public class SkillBase : MonoBehaviour
     {
         
     }
+
+    protected virtual void fixedUpdate()
+    {
+
+    }
+
+    public virtual void Use()
+    { 
+    }
+}
+
+public interface ISkillUseDelay
+{
+    void Use();
 }
