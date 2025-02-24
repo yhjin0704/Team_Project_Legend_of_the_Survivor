@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Player : Actor
 {
-    public float atk;
-    public float atkDelay;
+    public int level = 1;
 
     protected override void Awake()
     {
         base.Awake();
+        PlayerSkillList = new List<SkillBase>();
     }
 
     protected override void Start()
@@ -27,3 +27,4 @@ public class Player : Actor
         base.FixedUpdate();
     }
 }
+
