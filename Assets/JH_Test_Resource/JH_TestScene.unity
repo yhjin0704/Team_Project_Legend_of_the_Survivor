@@ -123,7 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &1140887834
+--- !u!1001 &1795621570
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -134,10 +134,6 @@ PrefabInstance:
     - target: {fileID: 1241997740830865549, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
       propertyPath: m_Name
       value: Orc
-      objectReference: {fileID: 0}
-    - target: {fileID: 5709762889552983792, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
-      propertyPath: weaponPivot
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7126696235968860198, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
       propertyPath: m_LocalPosition.x
@@ -281,4 +277,4 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1985429401}
-  - {fileID: 1140887834}
+  - {fileID: 1795621570}
