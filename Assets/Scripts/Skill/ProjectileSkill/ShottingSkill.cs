@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShottingSkill : ProjectileSkill
+public class ShottingSkill : ProjectileSkill, ISkillUseDelay
 {
-    Vector2 shotDir;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -24,8 +23,16 @@ public class StraightShotting : ShottingSkill
     {
         base.Start();
     }
-    protected override void Update()
+
+    public override void Use()
     {
-        base.Update();
+        if (actor == null)
+        {
+            Debug.LogError("Actor가 null입니다.");
+            return;
+        }
+
+        bullet = Instantiate(actor.defaultBulletPrefab, actor.transform.position, actor.transform.rotation);
+
     }
 }

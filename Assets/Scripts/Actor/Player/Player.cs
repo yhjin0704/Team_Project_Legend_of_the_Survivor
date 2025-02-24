@@ -6,12 +6,9 @@ public class Player : Actor
 {
     public int level = 1;
 
-    private List<SkillBase> PlayerSkillList;
-
     protected override void Awake()
     {
         base.Awake();
-        PlayerSkillList = new List<SkillBase>();
     }
 
     protected override void Start()
