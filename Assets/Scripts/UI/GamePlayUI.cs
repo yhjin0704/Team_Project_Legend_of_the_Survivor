@@ -6,38 +6,39 @@ using UnityEngine.UI;
 
 public class GamePlayUI : BaseSceneUI
 {
+    // 골드 텍스트, 경험치 실린더, 메뉴버튼
     [SerializeField] private TextMeshProUGUI goldText;
     [SerializeField] private Slider expSlider;
     [SerializeField] private Button menuButton;
 
     public override void Init(UIManager uIManager)
     {
-        base.Init(uIManager);
-        menuButton.onClick.AddListener(OnClickMenuButton);
+        base.Init(uIManager); // 배이스UI의 Init을 실행
+        menuButton.onClick.AddListener(OnClickMenuButton); // 메뉴버튼 할당
     }
 
-    public void OnClickMenuButton()
+    public void OnClickMenuButton() // 메뉴버튼 클릭시
     {
         uIManager.SetActiveMenu();
         menuButton.gameObject.SetActive(false);
     }
 
-    public void SetActiveMenuButton()
+    public void SetActiveMenuButton() // 메뉴버튼 활성화
     {
         menuButton.gameObject.SetActive(true);
     }
 
-    public void UpdateEXPSlider(float percentage)
+    public void UpdateEXPSlider(float percentage) // 경험치 실린더 갱신
     {
         expSlider.value = percentage;
     }
 
-    public void UpdateGoldText(int gold)
+    public void UpdateGoldText(int gold) // 골드 텍스트 갱신
     {
         goldText.text = gold.ToString();
     }
 
-    protected override UIState GetUIState()
+    protected override UIState GetUIState() // UI상태 반환
     {
         return UIState.GamePlay;
     }

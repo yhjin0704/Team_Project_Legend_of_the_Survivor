@@ -601,13 +601,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d56ccfb6b1bf14d82e7bd44a1d1833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultBulletPrefab: {fileID: 1468526609800095872, guid: e28bdba90f9845642aa96fa842731585, type: 3}
   hp: 100
   speed: 3
   atk: 0
   atkDelay: 2
   gold: 0
   IsAlive: 1
+  defaultBulletPrefab: {fileID: 1468526609800095872, guid: e28bdba90f9845642aa96fa842731585, type: 3}
+  shotPosDistance: 0
   level: 1
 --- !u!114 &2098594572
 MonoBehaviour:
@@ -766,7 +767,7 @@ Transform:
   m_GameObject: {fileID: 2136570994}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4214522, y: -0.23049515, z: -0.004793996}
+  m_LocalPosition: {x: -2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -785,13 +786,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4c0e36821413e47ac7fd6ee5c3f660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultBulletPrefab: {fileID: 0}
   hp: 100
   speed: 0
   atk: 1
   atkDelay: 3
   gold: 0
   IsAlive: 1
+  defaultBulletPrefab: {fileID: 0}
+  shotPosDistance: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
