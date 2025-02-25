@@ -4,14 +4,7 @@ using UnityEngine;
 
 public class EnemyController : BaseController
 {
-    private Transform target;
-
     [SerializeField] private float followRange = 15f;
-
-    public void Init(Transform target)
-    {
-        this.target = target;
-    }
 
     protected override void Movement(Vector2 direction)
     {
@@ -28,43 +21,42 @@ public class EnemyController : BaseController
 
     protected float DistanceToTarget()
     {
-        return Vector3.Distance(transform.position, target.position);
+        return Vector3.Distance(transform.position, GetTarget().position);
     }
 
     protected void HandleAction()
     {
-        //if (weaponHandler == null || target == null)
-        //{
-        //    if (!movementDirection.Equals(Vector2.zero)) movementDirection = Vector2.zero;
-        //    return;
-        //}
+        if (GetTarget() == null)
+        {
+            if (!movementDirection.Equals(Vector2.zero)) movementDirection = Vector2.zero;
+            return;
+        }
 
-        //float distance = DistanceToTarget();
-        //Vector2 direction = DirectionToTarget();
+        float distance = DistanceToTarget();
+        Vector2 direction = DirectionToTarget();
 
-        //isAttacking = false;
-        //if (distance <= followRange)
-        //{
-        //    lookDirection = direction;
+        isAttacking = false;
+        if (distance <= followRange)
+        {
+            lookDirection = direction;
 
-        //    if (distance <= weaponHandler.AttackRange)
-        //    {
-        //        int layerMaskTarget = weaponHandler.target;
-        //        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, weaponHandler.AttackRange * 1.5f,
-        //            (1 << LayerMask.NameToLayer("Level")) | layerMaskTarget);
+            if (distance <= attackRange)
+            {
+                int layerMaskTarget = GetTarget().gameObject.layer;
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, attackRange * 1.5f,
+                    (1 << LayerMask.NameToLayer("Level")) | layerMaskTarget);
 
-        //        if (hit.collider != null && layerMaskTarget == (layerMaskTarget | (1 << hit.collider.gameObject.layer)))
-        //        {
-        //            isAttacking = true;
-        //        }
+                if (hit.collider != null && layerMaskTarget == (layerMaskTarget | (1 << hit.collider.gameObject.layer)))
+                {
+                    isAttacking = true;
+                }
 
-        //        movementDirection = Vector2.zero;
-        //        return;
-        //    }
+                movementDirection = Vector2.zero;
+                return;
+            }
 
-        //    movementDirection = direction;
-        //}
-
+            movementDirection = direction;
+        }
     }
 
     protected Vector2 DirectionToTarget()
