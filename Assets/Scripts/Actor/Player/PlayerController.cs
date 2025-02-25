@@ -5,52 +5,56 @@ using UnityEngine;
 public class PlayerController : BaseController
 {
     private Player player;
-    private Rigidbody2D rigidBody;
     private Animator animator;
-
+    protected Transform shotPos;// 베이스로 옮겨야됨
 
     private Vector2 moveInput;
 
     protected override void Awake()
     {
-        player = GetComponent<Player>();
-        rigidBody = GetComponent<Rigidbody2D>();
+        player = actor as Player;
         animator = GetComponentInChildren<Animator>();
     }
 
     protected override void Start()
     {
+        base.Start();
     }
 
     // Update is called once per frame
     protected override void Update()
     {
-        Movement(InputMovement());
+        base.Update();
+        InputMovement();
     }
 
     protected override void FixedUpdate()
     {
-        rigidBody.velocity = moveInput * player.speed;
+        base.FixedUpdate();
     }
 
-    private Vector2 InputMovement()
+    private void InputMovement()
     {
-        return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+        movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+        int a = 0;
     }
 
-    protected override void Movement(Vector2 _inputDir)
+    protected override void Movement(Vector2 _direction)
     {
-        if (_inputDir.x > 0)
+        base.Movement(_direction);
+
+        if (_direction.x > 0)
         {
             player.GetRenderer().transform.localScale = new Vector3(1, 1, 1);
         }
-        else if (_inputDir.x < 0)
+        else if (_direction.x < 0)
         {
             player.GetRenderer().transform.localScale = new Vector3(-1, 1, 1);
         }
 
-        player.isMove = (_inputDir.x != 0 || _inputDir.y != 0);
-        animator.SetBool("IsMove", player.isMove);
+        player.SetIsMove((_direction.x != 0 || _direction.y != 0));
+        animator.SetBool("IsMove", player.GetIsMove());
+
     }
 
     protected override void Attack()
@@ -63,30 +67,9 @@ public class PlayerController : BaseController
     {
         base.UseSkills();
 
-        
-
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Archer_Attack") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        foreach (ISkillUseDelay _shootingSkill in skillManager.GetSkillList())
         {
-            animator.SetBool("IsAttack", false);
-        }
-
-        if (checkDelay <= 0)
-        {
-            checkDelay = atkDelay;
-            if (shotPos.transform.rotation.z >= -0.9f && shotPos.transform.rotation.z < 0.9f)
-            {
-                _renderer.transform.localScale = new Vector3(1, 1, 1);
-            }
-            else
-            {
-                _renderer.transform.localScale = new Vector3(-1, 1, 1);
-            }
-            animator.SetBool("IsAttack", true);
-
-            foreach (ISkillUseDelay _shottingSkill in skillManager.GetPlayerSkillList())
-            {
-                _shottingSkill.Use();
-            }
+            _shootingSkill.Use();
         }
     }
 }

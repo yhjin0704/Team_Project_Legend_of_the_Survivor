@@ -10,6 +10,12 @@ public class SkillBase : MonoBehaviour
         this.actor = _actor;
     }
 
+    protected BaseController baseController;
+    public void SetBaseController(BaseController _baseController)
+    {
+        this.baseController = _baseController;
+    }
+
     protected virtual void Awake()
     {
     }

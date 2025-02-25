@@ -22,10 +22,20 @@ public class BaseController : MonoBehaviour
 
     protected AnimationHandler animationHandler;
 
-    private Transform target;
+    // 공격 목표
+    protected Transform target;
     public Transform GetTarget()
     {
         return target;
+    }
+
+    public float shotPosDistance;
+
+    // 투사체 발사 위치
+    protected Transform shotPos;
+    public Transform GetShotPos()
+    {
+        return shotPos;
     }
 
     protected bool isAttacking;
@@ -37,6 +47,8 @@ public class BaseController : MonoBehaviour
         skillManager = GetComponent<SkillManager>();
         animationHandler = GetComponent<AnimationHandler>();
         actor = GetComponent<Actor>();
+
+        shotPos = transform.Find("ShotPos");
     }
 
     protected virtual void Start()
@@ -58,8 +70,10 @@ public class BaseController : MonoBehaviour
         }
     }
 
-    protected virtual void Movement(Vector2 direction)
+    protected virtual void Movement(Vector2 _direction)
     {
+        _rigidbody.velocity = _direction * actor.speed;
+        int a = 0;
     }
 
     //private void Rotate(Vector2 direction)
@@ -85,25 +99,21 @@ public class BaseController : MonoBehaviour
 
     protected void AttackDelay()
     {
-        if (weaponHandler == null)
-            return;
-
-        if (timeSinceLastAttack <= weaponHandler.Delay)
+        if (timeSinceLastAttack < actor.atkDelay)
         {
             timeSinceLastAttack += Time.deltaTime;
         }
 
-        if (isAttacking && timeSinceLastAttack > weaponHandler.Delay)
+        if (isAttacking && timeSinceLastAttack >= actor.atkDelay)
         {
             timeSinceLastAttack = 0;
-            Attack();
+            UseSkills();
         }
     }
 
     protected virtual void Attack()
     {
-        if (lookDirection != Vector2.zero)
-        { }
+
     }
 
     protected virtual void UseSkills()
@@ -112,6 +122,33 @@ public class BaseController : MonoBehaviour
         {
             Debug.LogError("SkillList가 null입니다.");
             return;
+        }
+    }
+
+    protected virtual void SetShotPos(Transform _targetPos)
+    {
+        if (shotPos == null)
+        {
+            return;
+        }
+
+        Vector3 direction = (_targetPos.position - transform.position).normalized;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        shotPos.rotation = Quaternion.Euler(0, 0, angle);
+
+        shotPos.position = transform.position + direction * shotPosDistance;
+        shotPos.position = transform.position + direction * shotPosDistance;
+    }
+
+    void OnDrawGizmos()
+    {
+        if (shotPos != null)
+        {
+            // 그려질 색상 설정
+            Gizmos.color = Color.red;
+            // 2D 씬에서 targetTransform의 위치에 원 그리기
+            Gizmos.DrawWireSphere(shotPos.position, 0.02f);
         }
     }
 }
