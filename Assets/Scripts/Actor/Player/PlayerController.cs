@@ -44,8 +44,6 @@ public class PlayerController : BaseController
             case EState.Attack:
                 Attack();
                 break;
-            case EState.Hit:
-                break;
             case EState.Dead:
                 break;
         }
