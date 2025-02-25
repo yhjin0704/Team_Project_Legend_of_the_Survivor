@@ -16,14 +16,16 @@ public class GameOverUI : BaseSceneUI
         ExitButton.onClick.AddListener(OnClickExitButton);
     }
 
-    public void OnClickRestartButton()
+    public void OnClickRestartButton() // 재시작 버튼 클릭 시
     {
         uIManager.ChangeState(UIState.GamePlay);
+        GameManager.Instance.ChangeScene(SceneState.Main);
     }
 
-    public void OnClickExitButton()
+    public void OnClickExitButton() // 종료 버튼 클릭 시
     {
         uIManager.ChangeState(UIState.Lobby);
+        GameManager.Instance.ChangeScene(SceneState.Lobby);
     }
 
     protected override UIState GetUIState()

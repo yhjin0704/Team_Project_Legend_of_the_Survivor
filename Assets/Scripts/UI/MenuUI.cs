@@ -30,9 +30,15 @@ public class MenuUI : BaseSceneUI
     {
         base.Init(uIManager); // 배이스UI의 Init을 실행
 
+/*
         testActorUI = GameObject.FindWithTag("Player").GetComponentInChildren<ActorUI>(); // 플레이어 태그를 찾아서 ActorUI를 찾아서 할당
 
         // 테스트 버튼을 찾아서 할당(골드, 경험치, 대미지, 스킬 선택) 추후 삭제 필요
+        testDamageButton.onClick.AddListener(OnClickTestDamage);
+        testHealButton.onClick.AddListener(OnClickTestHeal);
+        testSkillSelectButton.onClick.AddListener(() => { uIManager.SetActiveSkillSelect(new int[] { 1, 2, 3 }); });
+*/
+
         testGoldButton.onClick.AddListener(() =>
         {
             uIManager.ChangeGold(testGold);
@@ -40,11 +46,9 @@ public class MenuUI : BaseSceneUI
         testExpButton.onClick.AddListener(() => {
             uIManager.ChangeEXP(testExp, testMaxExp);
         });
-        testDamageButton.onClick.AddListener(OnClickTestDamage);
-        testHealButton.onClick.AddListener(OnClickTestHeal);
-        testSkillSelectButton.onClick.AddListener(() => { uIManager.SetActiveSkillSelect(new int[] { 1, 2, 3 }); });
         testLobbyButton.onClick.AddListener(() => { uIManager.ChangeState(UIState.Lobby); });
         testGameOverButton.onClick.AddListener(() => { uIManager.ChangeState(UIState.GameOver); });
+
         menuExitButton.onClick.AddListener(OnClickExitButton); // 메뉴나가기 버튼 할당
     }
 

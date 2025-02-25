@@ -16,9 +16,10 @@ public class LobbyUI : BaseSceneUI
         ExitButton.onClick.AddListener(OnClickExitButton);
     }
 
-    public void OnClickPlayButton()
+    public void OnClickPlayButton() // 플레이 버튼 클릭 시
     {
         uIManager.ChangeState(UIState.GamePlay);
+        GameManager.Instance.ChangeScene(SceneState.Main);
     }
 
     public void OnClickExitButton()
