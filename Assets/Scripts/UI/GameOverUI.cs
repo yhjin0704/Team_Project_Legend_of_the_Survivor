@@ -18,7 +18,7 @@ public class GameOverUI : BaseSceneUI
 
     public void OnClickRestartButton() // 재시작 버튼 클릭 시
     {
-        GameManager.Instance.ChangeScene(SceneState.Main);
+        GameManager.Instance.ChangeScene(SceneState.Play);
         uiManager.ChangeState(UIState.GamePlay);
     }
 

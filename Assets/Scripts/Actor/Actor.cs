@@ -7,7 +7,6 @@ public enum EState
     Idle,
     Move,
     Attack,
-    Hit,
     Dead
 }
 
@@ -67,9 +66,6 @@ public class Actor : MonoBehaviour
                 break;
             case EState.Attack:
                 break;
-            case EState.Hit:
-                Hit();
-                break;
             case EState.Dead:
                 Dead();
                 break;
@@ -82,13 +78,5 @@ public class Actor : MonoBehaviour
     {
         //GameObject monsterObject = GameObject.Find("Monster");
         //SetShotPos(monsterObject.transform);
-    }
-
-    protected virtual void Hit()
-    {
-    }
-
-    protected virtual void Dead()
-    {
     }
 }

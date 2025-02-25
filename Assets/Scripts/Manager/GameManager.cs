@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 public enum SceneState // UI상태를 나타내는 열거형
 {
     Lobby,
-    Main
+    Main,
+    Play
 }
 
 public class GameManager : MonoBehaviour
@@ -51,6 +52,9 @@ public class GameManager : MonoBehaviour
                 break;
             case SceneState.Main:
                 SceneManager.LoadScene("MainScene");
+                break;
+            case SceneState.Play:
+                SceneManager.LoadScene("PlayScene");
                 break;
         }
     }

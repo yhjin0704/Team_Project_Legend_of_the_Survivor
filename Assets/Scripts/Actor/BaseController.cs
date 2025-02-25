@@ -71,6 +71,9 @@ public class BaseController : MonoBehaviour
                     Invoke("UseSkills", 0.5f);
                 }
                 break;
+            case EState.Dead:
+                Dead();
+                break;
             default:
                 break;
         }
@@ -142,6 +145,21 @@ public class BaseController : MonoBehaviour
             Debug.LogError("Target이 null입니다.");
             return;
         }
+    }
+
+    protected virtual void Hit(float _damage)
+    {
+        actor.hp -= _damage;
+
+        if (actor.hp <= 0)
+        {
+            actor.hp = 0;
+            actor.SetState(EState.Dead);
+        }
+    }
+
+    protected virtual void Dead()
+    {
     }
 
     protected virtual void SetShotPos(Transform _targetPos)
