@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuUI : BaseUI
+public class MenuUI : BaseSceneUI
 {
     public ActorUI testActorUI;
 
@@ -14,6 +14,8 @@ public class MenuUI : BaseUI
     public Button testDamageButton;
     public Button testHealButton;
     public Button testSkillSelectButton;
+    public Button testLobbyButton;
+    public Button testGameOverButton;
     [SerializeField] private Button menuExitButton; // 메뉴나가기 버튼
 
     //테스트용 변수(골드, 경험치, 대미지 등) 추후 삭제 필요
@@ -41,12 +43,14 @@ public class MenuUI : BaseUI
         testDamageButton.onClick.AddListener(OnClickTestDamage);
         testHealButton.onClick.AddListener(OnClickTestHeal);
         testSkillSelectButton.onClick.AddListener(() => { uIManager.SetActiveSkillSelect(new int[] { 1, 2, 3 }); });
+        testLobbyButton.onClick.AddListener(() => { uIManager.ChangeState(UIState.Lobby); });
+        testGameOverButton.onClick.AddListener(() => { uIManager.ChangeState(UIState.GameOver); });
         menuExitButton.onClick.AddListener(OnClickExitButton); // 메뉴나가기 버튼 할당
     }
 
     private void OnClickExitButton() // 메뉴나가기 버튼 클릭시
     {
-        uIManager.SetDeactiveMenu();
+        uIManager.ChangeState(UIState.GamePlay); // 게임플레이 상태로 변경
     }
 
     private void OnClickTestDamage() // 테스트 대미지 버튼 클릭시
@@ -61,5 +65,9 @@ public class MenuUI : BaseUI
         testCurrentHP += testDamage; // 힐만큼 현재체력 증가
         testActorUI.ChangeHPBar(testCurrentHP, testMaxHP); // 체력바 갱신
         testActorUI.ShowCombatValue(testDamage, false); // 힐 텍스트 출력
+    }
+    protected override UIState GetUIState() // UI상태 반환
+    {
+        return UIState.Menu;
     }
 }

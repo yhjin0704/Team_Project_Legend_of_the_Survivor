@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkillSelectUI : BaseUI
+public class SkillSelectUI : BaseSceneUI
 {
     [SerializeField] private Button skillButton1;
     [SerializeField] private Button skillButton2;
@@ -54,5 +54,10 @@ public class SkillSelectUI : BaseUI
         {
             this.testSkillIndexs[i] = testSkillIndexs[i];
         }
+    }
+
+    protected override UIState GetUIState()
+    {
+        return UIState.SkillSelect;
     }
 }
