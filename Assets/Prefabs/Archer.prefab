@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb36328fe8a473479314fc498e60fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSkillUseActor: 1
   shotPosDistance: 0.1
 --- !u!114 &8779956054728961805
 MonoBehaviour:
