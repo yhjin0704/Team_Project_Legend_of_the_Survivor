@@ -7,8 +7,7 @@ public class BaseController : MonoBehaviour
 {
     protected Rigidbody2D _rigidbody;
 
-    [SerializeField] private SpriteRenderer characterRenderer;
-    [SerializeField] private Transform weaponPivot;
+    protected SkillManager skillManager;
 
     protected Vector2 movementDirection = Vector2.zero;
     public Vector2 MovementDirection { get { return movementDirection; } }
@@ -16,28 +15,28 @@ public class BaseController : MonoBehaviour
     protected Vector2 lookDirection = Vector2.zero;
     public Vector2 LookDirection { get { return lookDirection; } }
 
-    private Vector2 knockback = Vector2.zero;
-    private float knockbackDuration = 0.0f;
+    protected Vector2 knockback = Vector2.zero;
+    protected float knockbackDuration = 0.0f;
+
+    protected Actor actor;
+
     protected AnimationHandler animationHandler;
 
-    protected StatHandler statHandler;
-
-    [SerializeField] public WeaponHandler WeaponPrefab;
-    protected WeaponHandler weaponHandler;
+    private Transform target;
+    public Transform GetTarget()
+    {
+        return target;
+    }
 
     protected bool isAttacking;
-    private float timeSinceLastAttack = float.MaxValue;
+    protected float timeSinceLastAttack = float.MaxValue;
 
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        skillManager = GetComponent<SkillManager>();
         animationHandler = GetComponent<AnimationHandler>();
-        statHandler = GetComponent<StatHandler>();
-
-        if (WeaponPrefab != null)
-            weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
-        else
-            weaponHandler = GetComponentInChildren<WeaponHandler>();
+        actor = GetComponent<Actor>();
     }
 
     protected virtual void Start()
@@ -47,9 +46,7 @@ public class BaseController : MonoBehaviour
 
     protected virtual void Update()
     {
-        HandleAction();
-        Rotate(lookDirection);
-        HandleAttackDelay();
+        AttackDelay();
     }
 
     protected virtual void FixedUpdate()
@@ -61,38 +58,24 @@ public class BaseController : MonoBehaviour
         }
     }
 
-    protected virtual void HandleAction()
+    protected virtual void Movement(Vector2 direction)
     {
-
     }
 
-    private void Movement(Vector2 direction)
-    {
-        direction = direction * statHandler.Speed;
-        if (knockbackDuration > 0.0f)
-        {
-            direction *= 0.2f;
-            direction += knockback;
-        }
+    //private void Rotate(Vector2 direction)
+    //{
+    //    float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+    //    bool isLeft = Mathf.Abs(rotZ) > 90f;
 
-        _rigidbody.velocity = direction;
-        animationHandler.Move(direction);
-    }
+    //    characterRenderer.flipX = isLeft;
 
-    private void Rotate(Vector2 direction)
-    {
-        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bool isLeft = Mathf.Abs(rotZ) > 90f;
+    //    if (weaponPivot != null)
+    //    {
+    //        weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ);
+    //    }
 
-        characterRenderer.flipX = isLeft;
-
-        if (weaponPivot != null)
-        {
-            weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ);
-        }
-
-        weaponHandler?.Rotate(isLeft);
-    }
+    //    weaponHandler?.Rotate(isLeft);
+    //}
 
     public void ApplyKnockback(Transform other, float power, float duration)
     {
@@ -100,7 +83,7 @@ public class BaseController : MonoBehaviour
         knockback = -(other.position - transform.position).normalized * power;
     }
 
-    private void HandleAttackDelay()
+    protected void AttackDelay()
     {
         if (weaponHandler == null)
             return;
@@ -120,6 +103,15 @@ public class BaseController : MonoBehaviour
     protected virtual void Attack()
     {
         if (lookDirection != Vector2.zero)
-            weaponHandler?.Attack();
+        { }
+    }
+
+    protected virtual void UseSkills()
+    {
+        if (skillManager.GetSkillList() == null)
+        {
+            Debug.LogError("SkillList가 null입니다.");
+            return;
+        }
     }
 }

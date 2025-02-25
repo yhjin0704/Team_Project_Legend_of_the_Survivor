@@ -15,12 +15,25 @@ public class EnemyController : BaseController
         this.target = target;
     }
 
+    protected override void Movement(Vector2 direction)
+    {
+        direction = direction * actor.speed;
+        if (knockbackDuration > 0.0f)
+        {
+            direction *= 0.2f;
+            direction += knockback;
+        }
+
+        _rigidbody.velocity = direction;
+        animationHandler.Move(direction);
+    }
+
     protected float DistanceToTarget()
     {
         return Vector3.Distance(transform.position, target.position);
     }
 
-    protected override void HandleAction()
+    protected void HandleAction()
     {
         base.HandleAction();
 
