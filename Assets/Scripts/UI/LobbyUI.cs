@@ -9,17 +9,17 @@ public class LobbyUI : BaseSceneUI
     [SerializeField] private Button playButton;
     [SerializeField] private Button ExitButton;
 
-    public override void Init(UIManager uIManager)
+    public override void Init(UIManager uiManager)
     {
-        base.Init(uIManager);
+        base.Init(uiManager);
         playButton.onClick.AddListener(OnClickPlayButton);
         ExitButton.onClick.AddListener(OnClickExitButton);
     }
 
     public void OnClickPlayButton() // 플레이 버튼 클릭 시
     {
-        uIManager.ChangeState(UIState.GamePlay);
         GameManager.Instance.ChangeScene(SceneState.Main);
+        uiManager.ChangeState(UIState.GamePlay);
     }
 
     public void OnClickExitButton()

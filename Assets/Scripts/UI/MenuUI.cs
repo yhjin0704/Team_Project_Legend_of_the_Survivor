@@ -26,9 +26,9 @@ public class MenuUI : BaseSceneUI
     public float testCurrentHP = 100;
     public int testDamage = 5;
 
-    public override void Init(UIManager uIManager)
+    public override void Init(UIManager uiManager)
     {
-        base.Init(uIManager); // 배이스UI의 Init을 실행
+        base.Init(uiManager); // 배이스UI의 Init을 실행
 
 /*
         testActorUI = GameObject.FindWithTag("Player").GetComponentInChildren<ActorUI>(); // 플레이어 태그를 찾아서 ActorUI를 찾아서 할당
@@ -41,20 +41,20 @@ public class MenuUI : BaseSceneUI
 
         testGoldButton.onClick.AddListener(() =>
         {
-            uIManager.ChangeGold(testGold);
+            uiManager.ChangeGold(testGold);
         });
         testExpButton.onClick.AddListener(() => {
-            uIManager.ChangeEXP(testExp, testMaxExp);
+            uiManager.ChangeEXP(testExp, testMaxExp);
         });
-        testLobbyButton.onClick.AddListener(() => { uIManager.ChangeState(UIState.Lobby); });
-        testGameOverButton.onClick.AddListener(() => { uIManager.ChangeState(UIState.GameOver); });
+        testLobbyButton.onClick.AddListener(() => { uiManager.ChangeState(UIState.Lobby); });
+        testGameOverButton.onClick.AddListener(() => { uiManager.ChangeState(UIState.GameOver); });
 
         menuExitButton.onClick.AddListener(OnClickExitButton); // 메뉴나가기 버튼 할당
     }
 
     private void OnClickExitButton() // 메뉴나가기 버튼 클릭시
     {
-        uIManager.ChangeState(UIState.GamePlay); // 게임플레이 상태로 변경
+        uiManager.ChangeState(UIState.GamePlay); // 게임플레이 상태로 변경
     }
 
     private void OnClickTestDamage() // 테스트 대미지 버튼 클릭시
