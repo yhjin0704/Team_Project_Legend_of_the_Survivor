@@ -23,10 +23,6 @@ public class YH_TestPlayer : Player
     protected override void Update()
     {
         base.Update();
-        if (isMove == false)
-        {
-            Attak();
-        }
 
         if (checkDelay > 0.5f && isMove == true)
         {
@@ -42,15 +38,4 @@ public class YH_TestPlayer : Player
     {
         base.FixedUpdate();
     }
-
-    protected override void Attak()
-    {
-        base.Attak();
-
-        UseSkills();
-
-       
-    }
-
-    
 }

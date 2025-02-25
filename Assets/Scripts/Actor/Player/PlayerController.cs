@@ -11,43 +11,52 @@ public class PlayerController : BaseController
 
     private Vector2 moveInput;
 
-    void Awake()
+    protected override void Awake()
     {
         player = GetComponent<Player>();
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
     }
 
-    void Start()
+    protected override void Start()
     {
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        Move();
+        Movement(InputMovement());
     }
 
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
         rigidBody.velocity = moveInput * player.speed;
     }
 
-    private void Move()
+    private Vector2 InputMovement()
     {
-        moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+        return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+    }
 
-        if (moveInput.x > 0)
+    protected override void Movement(Vector2 _inputDir)
+    {
+        if (_inputDir.x > 0)
         {
             player.GetRenderer().transform.localScale = new Vector3(1, 1, 1);
         }
-        else if (moveInput.x < 0)
+        else if (_inputDir.x < 0)
         {
             player.GetRenderer().transform.localScale = new Vector3(-1, 1, 1);
         }
 
-        player.isMove = (moveInput.x != 0 || moveInput.y != 0);
+        player.isMove = (_inputDir.x != 0 || _inputDir.y != 0);
         animator.SetBool("IsMove", player.isMove);
+    }
+
+    protected override void Attack()
+    {
+        if (lookDirection != Vector2.zero)
+        { }
     }
 
     protected override void UseSkills()

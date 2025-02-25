@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShottingSkill : ProjectileSkill, ISkillUseDelay
+public class ShootingSkill : ProjectileSkill, ISkillUseDelay
 {
     // Start is called before the first frame update
     protected override void Start()
@@ -17,7 +17,7 @@ public class ShottingSkill : ProjectileSkill, ISkillUseDelay
     }
 }
 
-public class StraightShotting : ShottingSkill
+public class StraightShotting : ShootingSkill
 {
     protected override void Start()
     {
@@ -37,7 +37,7 @@ public class StraightShotting : ShottingSkill
     }
 }
 
-public class SpreadShotting : ShottingSkill
+public class SpreadShotting : ShootingSkill
 {
     //protected override void Start()
     //{
