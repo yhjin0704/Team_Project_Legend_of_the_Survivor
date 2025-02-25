@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7126696235968860198}
+  - component: {fileID: 3291370598097430201}
   - component: {fileID: 5617562157310383591}
   - component: {fileID: 69575386199754473}
-  - component: {fileID: 3462671188502586962}
-  - component: {fileID: 1864437467425539622}
-  - component: {fileID: 5192150009711958025}
+  - component: {fileID: 4602650154465286393}
+  - component: {fileID: 9201240106118676453}
+  - component: {fileID: 5639500772749428434}
   m_Layer: 6
   m_Name: Orc
   m_TagString: Untagged
@@ -35,8 +36,25 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4435475485423901538}
+  - {fileID: 8568763610641775571}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3291370598097430201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241997740830865549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4133d2a611916c46b1e19c2821679ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterRenderer: {fileID: 4287731578444584977}
+  weaponPivot: {fileID: 8568763610641775571}
+  WeaponPrefab: {fileID: 0}
+  followRange: 15
 --- !u!61 &5617562157310383591
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -80,7 +98,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 1}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &69575386199754473
 Rigidbody2D:
@@ -109,7 +127,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3462671188502586962
+--- !u!114 &4602650154465286393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,11 +136,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1241997740830865549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68e0fce495070c04fb5331c654bd413a, type: 3}
+  m_Script: {fileID: 11500000, guid: 93d8b971f9a29034ca0c6ffadb74f8b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healthChangeDelay: 0.5
---- !u!114 &1864437467425539622
+--- !u!114 &9201240106118676453
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,10 +149,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1241997740830865549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56d3b3d0790bfdf4c805a12cfa370a5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 97d77099882e81749ab7b2e07daf8af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5192150009711958025
+--- !u!114 &5639500772749428434
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,11 +161,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1241997740830865549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62f68f1d5e06d4c468731cdb24e39ad9, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a70b740432cab44ca4c6691d50fd8da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  speed: 2
+  speed: 3
 --- !u!1 &1342321363346578229
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,6 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4435475485423901538}
   - component: {fileID: 4287731578444584977}
+  - component: {fileID: 2899260874566952977}
   m_Layer: 6
   m_Name: MainSprite
   m_TagString: Untagged
@@ -221,7 +240,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 428268797, guid: 5f225556b9090174e9355baec1441cba, type: 3}
+  m_Sprite: {fileID: -7757136, guid: 38abf5219a626ec4e93d88b91bc7253f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -232,3 +251,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2899260874566952977
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342321363346578229}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fa9067b3af57c9942bc0466e94d4e725, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &3075161968778539923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8568763610641775571}
+  m_Layer: 6
+  m_Name: WeaponPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8568763610641775571
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3075161968778539923}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7126696235968860198}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

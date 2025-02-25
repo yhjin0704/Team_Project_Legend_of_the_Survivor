@@ -32,7 +32,7 @@ public class StraightShotting : ShottingSkill
             return;
         }
 
-        bullet = Instantiate(actor.defaultBulletPrefab, actor.transform.position, actor.transform.rotation);
-
+        bullet = Instantiate(actor.defaultBulletPrefab, actor.GetShotPos().position, actor.GetShotPos().rotation);
+        bullet.GetComponent<Bullet>().SetDir(actor.GetShotPos().right);
     }
 }

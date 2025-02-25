@@ -11,11 +11,14 @@ public class Actor : MonoBehaviour
     public float atkDelay = 3;
     public int gold = 0;
     public bool IsAlive = true;
+    public bool isMove = false;
 
     public GameObject defaultBulletPrefab;
 
+    protected Animator animator;
+
     // 공격 목표
-    private Transform target;
+    protected Transform target;
     public Transform GetTarget()
     {
         return target;
@@ -32,12 +35,13 @@ public class Actor : MonoBehaviour
     
     protected virtual void Awake()
     {
-     
+        animator = GetComponentInChildren<Animator>();
+
+        shotPos = transform.Find("ShotPos");
     }
 
     protected virtual void Start()
     {
-        shotPos = transform;
     }
 
     // Update is called once per frame
@@ -68,11 +72,9 @@ public class Actor : MonoBehaviour
     {
         Vector3 direction = (_targetPos.position - transform.position).normalized;
 
-        // ShotPos가 Target을 향하도록 회전
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         shotPos.rotation = Quaternion.Euler(0, 0, angle);
 
-        // ShotPos 위치를 Player 기준으로 일정 거리 유지
         shotPos.position = transform.position + direction * shotPosDistance;
         shotPos.position = transform.position + direction * shotPosDistance;
     }
