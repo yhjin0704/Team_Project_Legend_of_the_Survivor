@@ -9,10 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7126696235968860198}
+  - component: {fileID: 3291370598097430201}
   - component: {fileID: 5617562157310383591}
   - component: {fileID: 69575386199754473}
+  - component: {fileID: 4602650154465286393}
   - component: {fileID: 9201240106118676453}
-  - component: {fileID: 3291370598097430201}
+  - component: {fileID: 5639500772749428434}
   m_Layer: 6
   m_Name: Orc
   m_TagString: Untagged
@@ -36,6 +38,19 @@ Transform:
   - {fileID: 4435475485423901538}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3291370598097430201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241997740830865549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4133d2a611916c46b1e19c2821679ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followRange: 15
 --- !u!61 &5617562157310383591
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -108,6 +123,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4602650154465286393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241997740830865549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93d8b971f9a29034ca0c6ffadb74f8b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthChangeDelay: 0.5
 --- !u!114 &9201240106118676453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d77099882e81749ab7b2e07daf8af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3291370598097430201
+--- !u!114 &5639500772749428434
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,10 +157,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1241997740830865549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4133d2a611916c46b1e19c2821679ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a70b740432cab44ca4c6691d50fd8da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followRange: 15
+  health: 10
+  speed: 3
 --- !u!1 &1342321363346578229
 GameObject:
   m_ObjectHideFlags: 0
