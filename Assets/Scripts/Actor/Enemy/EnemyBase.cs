@@ -5,9 +5,6 @@ using UnityEngine;
 public class EnemyBase : Actor
 {
 
-    [SerializeField] private Transform weaponPivot;
-    [SerializeField] public WeaponHandler WeaponPrefab;
-
     // Start is called before the first frame update
     protected override void Start()
     {

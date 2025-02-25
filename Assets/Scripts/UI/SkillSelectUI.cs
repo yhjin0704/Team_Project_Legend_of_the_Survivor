@@ -3,37 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkillSelectUI : BaseUI
+public class SkillSelectUI : BaseSceneUI
 {
     [SerializeField] private Button skillButton1;
     [SerializeField] private Button skillButton2;
     [SerializeField] private Button skillButton3;
     int[] testSkillIndexs;
 
-    public override void Init(UIManager uIManager)
+    public override void Init(UIManager uiManager)
     {
-        base.Init(uIManager);
+        base.Init(uiManager);
         skillButton1.onClick.AddListener(() =>
         {
             Debug.Log(testSkillIndexs[0] + "test");
-            uIManager.SetDeactiveSkillSelect();
+            uiManager.SetDeactiveSkillSelect();
         });
         skillButton2.onClick.AddListener(() =>
         {
             Debug.Log(testSkillIndexs[1] + "test");
-            uIManager.SetDeactiveSkillSelect();
+            uiManager.SetDeactiveSkillSelect();
         });
         skillButton3.onClick.AddListener(() => 
         {
             Debug.Log(testSkillIndexs[2] + "test"); 
-            uIManager.SetDeactiveSkillSelect(); 
+            uiManager.SetDeactiveSkillSelect(); 
         });
         testSkillIndexs = new int[3];
     }
 
     public void OnClickSkillButton()
     {
-        uIManager.SetDeactiveSkillSelect();
+        uiManager.SetDeactiveSkillSelect();
     }
 
     public void RandomSkill(int[] testSkillIndexs)
@@ -54,5 +54,10 @@ public class SkillSelectUI : BaseUI
         {
             this.testSkillIndexs[i] = testSkillIndexs[i];
         }
+    }
+
+    protected override UIState GetUIState()
+    {
+        return UIState.SkillSelect;
     }
 }
