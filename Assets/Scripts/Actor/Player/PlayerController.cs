@@ -21,7 +21,7 @@ public class PlayerController : BaseController
         base.Start();
 
         //TestCode
-        target = GameObject.Find("Monster").transform;
+        target = GameObject.Find("orc").transform;
     }
 
     // Update is called once per frame
@@ -34,6 +34,7 @@ public class PlayerController : BaseController
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+        Movement(movementDirection);
     }
 
     private void InputMovement()
@@ -57,6 +58,8 @@ public class PlayerController : BaseController
         player.SetIsMove((_direction.x != 0 || _direction.y != 0));
         animator.SetBool("IsMove", player.GetIsMove());
 
+        _rigidbody.velocity = _direction * actor.speed;
+        MoveCheck();
     }
 
     protected override void Attack()
@@ -68,6 +71,12 @@ public class PlayerController : BaseController
     protected override void UseSkills()
     {
         base.UseSkills();
+
+        if (target == null)
+        {
+            Debug.LogError("Target이 null입니다.");
+            return;
+        }
 
         SetShotPos(target);
 

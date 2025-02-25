@@ -18,6 +18,8 @@ public class BaseController : MonoBehaviour
     protected Vector2 knockback = Vector2.zero;
     protected float knockbackDuration = 0.0f;
 
+    [SerializeField] protected bool isSkillUseActor = false;
+
     protected Actor actor;
 
     protected AnimationHandler animationHandler;
@@ -58,15 +60,17 @@ public class BaseController : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (!actor.GetIsMove())
+        if (isSkillUseActor)
         {
-            AttackDelay();
+            if (!actor.GetIsMove())
+            {
+                AttackDelay();
+            }
         }
     }
 
     protected virtual void FixedUpdate()
     {
-        Movement(movementDirection);
         if (knockbackDuration > 0.0f)
         {
             knockbackDuration -= Time.deltaTime;
@@ -75,11 +79,9 @@ public class BaseController : MonoBehaviour
 
     protected virtual void Movement(Vector2 _direction)
     {
-        _rigidbody.velocity = _direction * actor.speed;
-        MoveCheck();
     }
 
-    private void MoveCheck()
+    protected void MoveCheck()
     {
         if (movementDirection != Vector2.zero)
         {
@@ -139,7 +141,7 @@ public class BaseController : MonoBehaviour
             return;
         }
 
-        if(target == null)
+        if (target == null)
         {
             Debug.LogError("Target이 null입니다.");
             return;
