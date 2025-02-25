@@ -10,30 +10,30 @@ public class SkillSelectUI : BaseSceneUI
     [SerializeField] private Button skillButton3;
     int[] testSkillIndexs;
 
-    public override void Init(UIManager uIManager)
+    public override void Init(UIManager uiManager)
     {
-        base.Init(uIManager);
+        base.Init(uiManager);
         skillButton1.onClick.AddListener(() =>
         {
             Debug.Log(testSkillIndexs[0] + "test");
-            uIManager.SetDeactiveSkillSelect();
+            uiManager.SetDeactiveSkillSelect();
         });
         skillButton2.onClick.AddListener(() =>
         {
             Debug.Log(testSkillIndexs[1] + "test");
-            uIManager.SetDeactiveSkillSelect();
+            uiManager.SetDeactiveSkillSelect();
         });
         skillButton3.onClick.AddListener(() => 
         {
             Debug.Log(testSkillIndexs[2] + "test"); 
-            uIManager.SetDeactiveSkillSelect(); 
+            uiManager.SetDeactiveSkillSelect(); 
         });
         testSkillIndexs = new int[3];
     }
 
     public void OnClickSkillButton()
     {
-        uIManager.SetDeactiveSkillSelect();
+        uiManager.SetDeactiveSkillSelect();
     }
 
     public void RandomSkill(int[] testSkillIndexs)
