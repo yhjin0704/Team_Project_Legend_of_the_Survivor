@@ -58,7 +58,10 @@ public class BaseController : MonoBehaviour
 
     protected virtual void Update()
     {
-        AttackDelay();
+        if (!actor.GetIsMove())
+        {
+            AttackDelay();
+        }
     }
 
     protected virtual void FixedUpdate()
@@ -73,7 +76,19 @@ public class BaseController : MonoBehaviour
     protected virtual void Movement(Vector2 _direction)
     {
         _rigidbody.velocity = _direction * actor.speed;
-        int a = 0;
+        MoveCheck();
+    }
+
+    private void MoveCheck()
+    {
+        if (movementDirection != Vector2.zero)
+        {
+            actor.SetIsMove(true);
+        }
+        else
+        {
+            actor.SetIsMove(false);
+        }
     }
 
     //private void Rotate(Vector2 direction)
@@ -104,7 +119,7 @@ public class BaseController : MonoBehaviour
             timeSinceLastAttack += Time.deltaTime;
         }
 
-        if (isAttacking && timeSinceLastAttack >= actor.atkDelay)
+        if (timeSinceLastAttack >= actor.atkDelay)
         {
             timeSinceLastAttack = 0;
             UseSkills();
@@ -121,6 +136,12 @@ public class BaseController : MonoBehaviour
         if (skillManager.GetSkillList() == null)
         {
             Debug.LogError("SkillList가 null입니다.");
+            return;
+        }
+
+        if(target == null)
+        {
+            Debug.LogError("Target이 null입니다.");
             return;
         }
     }

@@ -6,12 +6,12 @@ public class PlayerController : BaseController
 {
     private Player player;
     private Animator animator;
-    protected Transform shotPos;// 베이스로 옮겨야됨
 
     private Vector2 moveInput;
 
     protected override void Awake()
     {
+        base.Awake();
         player = actor as Player;
         animator = GetComponentInChildren<Animator>();
     }
@@ -19,6 +19,9 @@ public class PlayerController : BaseController
     protected override void Start()
     {
         base.Start();
+
+        //TestCode
+        target = GameObject.Find("Monster").transform;
     }
 
     // Update is called once per frame
@@ -36,7 +39,6 @@ public class PlayerController : BaseController
     private void InputMovement()
     {
         movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
-        int a = 0;
     }
 
     protected override void Movement(Vector2 _direction)
@@ -66,6 +68,8 @@ public class PlayerController : BaseController
     protected override void UseSkills()
     {
         base.UseSkills();
+
+        SetShotPos(target);
 
         foreach (ISkillUseDelay _shootingSkill in skillManager.GetSkillList())
         {
