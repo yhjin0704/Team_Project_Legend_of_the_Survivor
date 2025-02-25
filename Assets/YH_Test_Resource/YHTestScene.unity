@@ -150,6 +150,25 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &786257654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786257642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 457f4012eed16d14f8dad632945f90d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterRenderer: {fileID: 0}
+  hp: 100
+  speed: 3
+  atk: 1
+  atkDelay: 3
+  IsAlive: 1
+  defaultBulletPrefab: {fileID: 0}
 --- !u!1 &918952389
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,6 +598,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1241997740830865549, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 786257654}
     - targetCorrespondingSourceObject: {fileID: 1241997740830865549, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
       insertIndex: -1
       addedObject: {fileID: 786257648}

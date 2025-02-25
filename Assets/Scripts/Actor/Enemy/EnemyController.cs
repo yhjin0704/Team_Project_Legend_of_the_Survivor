@@ -20,13 +20,14 @@ public class EnemyController : BaseController
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-        target = GameObject.Find("Archer").transform;
+        GameObject playerGB = GameObject.Find("Archer");
+        target = playerGB.transform;
     }
 
     protected override void Update()
     {
         base.Update();
-        agent.SetDestination(GetTarget().position);
+        agent.SetDestination(target.position);
         if (agent.pathPending == false && agent.remainingDistance <= agent.stoppingDistance)
         {
             agent.velocity = Vector3.zero;

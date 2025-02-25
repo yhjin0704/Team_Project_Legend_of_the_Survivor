@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -60,13 +61,20 @@ public class BaseController : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (isSkillUseActor)
+        AttackDelay();
+
+        switch (actor.GetState())
         {
-            if (!actor.GetIsMove())
-            {
-                AttackDelay();
-            }
+            case EState.Attack:
+                if (isSkillUseActor)
+                {
+                    Invoke("UseSkills", 0.5f);
+                }
+                break;
+            default:
+                break;
         }
+
     }
 
     protected virtual void FixedUpdate()
@@ -79,18 +87,6 @@ public class BaseController : MonoBehaviour
 
     protected virtual void Movement(Vector2 _direction)
     {
-    }
-
-    protected void MoveCheck()
-    {
-        if (movementDirection != Vector2.zero)
-        {
-            actor.SetIsMove(true);
-        }
-        else
-        {
-            actor.SetIsMove(false);
-        }
     }
 
     //private void Rotate(Vector2 direction)
@@ -124,7 +120,7 @@ public class BaseController : MonoBehaviour
         if (timeSinceLastAttack >= actor.atkDelay)
         {
             timeSinceLastAttack = 0;
-            UseSkills();
+            actor.SetState(EState.Attack);
         }
     }
 
