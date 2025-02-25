@@ -6,6 +6,7 @@ public class Player : Actor
 {
     public int level = 1;
 
+    public int gold = 0;
     protected override void Awake()
     {
         base.Awake();

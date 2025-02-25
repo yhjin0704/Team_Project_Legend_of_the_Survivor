@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillBase : MonoBehaviour
+public class SkillBase
 {
     protected Actor actor;
     public void SetActor(Actor _actor)
@@ -10,24 +10,10 @@ public class SkillBase : MonoBehaviour
         this.actor = _actor;
     }
 
-    protected virtual void Awake()
+    protected BaseController baseController;
+    public void SetBaseController(BaseController _baseController)
     {
-    }
-
-    protected virtual void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    protected virtual void Update()
-    {
-        
-    }
-
-    protected virtual void fixedUpdate()
-    {
-
+        this.baseController = _baseController;
     }
 
     public virtual void Use()

@@ -2,51 +2,78 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : BaseController
 {
     private Player player;
-    private Rigidbody2D rigidBody;
     private Animator animator;
-
 
     private Vector2 moveInput;
 
-    void Awake()
+    protected override void Awake()
     {
-        player = GetComponent<Player>();
-        rigidBody = GetComponent<Rigidbody2D>();
+        base.Awake();
+        player = actor as Player;
         animator = GetComponentInChildren<Animator>();
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
+        //TestCode
+        target = GameObject.Find("Monster").transform;
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        Move();
+        base.Update();
+        InputMovement();
     }
 
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
-        rigidBody.velocity = moveInput * player.speed;
+        base.FixedUpdate();
     }
 
-    private void Move()
+    private void InputMovement()
     {
-        moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+        movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+    }
 
-        if (moveInput.x > 0)
+    protected override void Movement(Vector2 _direction)
+    {
+        base.Movement(_direction);
+
+        if (_direction.x > 0)
         {
             player.GetRenderer().transform.localScale = new Vector3(1, 1, 1);
         }
-        else if (moveInput.x < 0)
+        else if (_direction.x < 0)
         {
             player.GetRenderer().transform.localScale = new Vector3(-1, 1, 1);
         }
 
-        player.isMove = (moveInput.x != 0 || moveInput.y != 0);
-        animator.SetBool("IsMove", player.isMove);
+        player.SetIsMove((_direction.x != 0 || _direction.y != 0));
+        animator.SetBool("IsMove", player.GetIsMove());
+
+    }
+
+    protected override void Attack()
+    {
+        if (lookDirection != Vector2.zero)
+        { }
+    }
+
+    protected override void UseSkills()
+    {
+        base.UseSkills();
+
+        SetShotPos(target);
+
+        foreach (ISkillUseDelay _shootingSkill in skillManager.GetSkillList())
+        {
+            _shootingSkill.Use();
+        }
     }
 }

@@ -1,10 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class ClosestDistance : MonoBehaviour
+public class ClosestDistance : PlayerController
 {
-    public transform player; // ÇÃ·¹ÀÌ¾î transform
-    public list<monster> listmonsters = new list<monster>(); // ¸ó½ºÅÍ ¸®½ºÆ®
+    public transform player; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ transform
+    public list<monster> listmonsters = new list<monster>(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
     private monster target;
 
     void updateclosestmonster()
