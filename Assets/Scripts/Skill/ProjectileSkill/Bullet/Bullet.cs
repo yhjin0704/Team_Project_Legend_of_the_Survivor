@@ -8,16 +8,16 @@ public class Bullet : MonoBehaviour
 
     private Vector2 dir;
 
-    private Rigidbody2D rigidbody;
+    private Rigidbody2D _rigidbody;
 
     protected virtual void Awake()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     protected virtual void Start()
     {
-        rigidbody.velocity = dir * speed;
+        _rigidbody.velocity = dir * speed;
     }
 
     // Update is called once per frame

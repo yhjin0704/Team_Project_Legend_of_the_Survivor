@@ -6,6 +6,7 @@ using UnityEngine;
 public class SkillManager : MonoBehaviour
 {
     protected Actor actor;
+    protected BaseController baseController;
 
     protected List<SkillBase> SkillList = new List<SkillBase>();
     public List<SkillBase> GetSkillList()
@@ -16,6 +17,7 @@ public class SkillManager : MonoBehaviour
     protected virtual void Awake()
     {
         actor = GetComponent<Actor>();
+        baseController = GetComponent<BaseController>();
     }
 
     protected virtual void Start()
@@ -35,7 +37,10 @@ public class SkillManager : MonoBehaviour
         {
             Debug.LogError("PlayerSkillList가 null입니다.");
         }
+
         _skill.SetActor(actor);
+        _skill.SetBaseController(baseController);
+
         SkillList.Add(_skill);
 
         // 스킬 리스트에 들어갈 때 한번 OnOff되면 되는 스킬들
