@@ -36,3 +36,25 @@ public class StraightShotting : ShottingSkill
         bullet.GetComponent<Bullet>().SetDir(actor.GetShotPos().right);
     }
 }
+
+public class SpreadShotting : ShottingSkill
+{
+    //protected override void Start()
+    //{
+    //    base.Start();
+    //}
+    //public override void Use()
+    //{
+    //    if (actor == null)
+    //    {
+    //        Debug.LogError("Actor가 null입니다.");
+    //        return;
+    //    }
+    //    bullet = Instantiate(actor.defaultBulletPrefab, actor.GetShotPos().position, actor.GetShotPos().rotation);
+    //    bullet.GetComponent<Bullet>().SetDir(actor.GetShotPos().right);
+    //    bullet = Instantiate(actor.defaultBulletPrefab, actor.GetShotPos().position, actor.GetShotPos().rotation);
+    //    //bullet.GetComponent<Bullet>().SetDir(actor.GetShotPos().right + actor.GetShotPos().up);
+    //    bullet = Instantiate(actor.defaultBulletPrefab, actor.GetShotPos().position, actor.GetShotPos().rotation);
+    //    //bullet.GetComponent<Bullet>().SetDir(actor.GetShotPos().right - actor.GetShotPos().up);
+    //}
+}

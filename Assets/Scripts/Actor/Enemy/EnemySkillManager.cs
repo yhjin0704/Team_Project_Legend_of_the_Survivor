@@ -2,9 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterBase : Actor
+public class EnemySkillManager : SkillManager
 {
-    // Start is called before the first frame update
+    protected override void Awake()
+    {
+        base.Awake();
+
+        StraightShotting straightShotting = new StraightShotting();
+        AddSkill(straightShotting);
+    }
+
     protected override void Start()
     {
         base.Start();
