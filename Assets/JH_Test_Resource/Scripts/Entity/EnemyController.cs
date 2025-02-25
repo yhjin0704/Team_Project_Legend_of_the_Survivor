@@ -24,11 +24,11 @@ public class EnemyController : BaseController
     {
         base.HandleAction();
 
-        /*if (weaponHandler == null || target == null)
+        if (weaponHandler == null || target == null)
         {
             if (!movementDirection.Equals(Vector2.zero)) movementDirection = Vector2.zero;
             return;
-        }*/
+        }
 
         float distance = DistanceToTarget();
         Vector2 direction = DirectionToTarget();
@@ -38,7 +38,7 @@ public class EnemyController : BaseController
         {
             lookDirection = direction;
 
-            /*if (distance <= weaponHandler.AttackRange)
+            if (distance <= weaponHandler.AttackRange)
             {
                 int layerMaskTarget = weaponHandler.target;
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, weaponHandler.AttackRange * 1.5f,
@@ -51,14 +51,16 @@ public class EnemyController : BaseController
 
                 movementDirection = Vector2.zero;
                 return;
-            }*/
+            }
 
             movementDirection = direction;
         }
+
     }
 
     protected Vector2 DirectionToTarget()
     {
         return (target.position - transform.position).normalized;
     }
+
 }
