@@ -4,26 +4,11 @@ using UnityEngine;
 
 public class ShootingSkill : ProjectileSkill, ISkillUseDelay
 {
-    // Start is called before the first frame update
-    protected override void Start()
-    {
-        base.Start();
-    }
 
-    // Update is called once per frame
-    protected override void Update()
-    {
-        base.Update();
-    }
 }
 
 public class StraightShotting : ShootingSkill
 {
-    protected override void Start()
-    {
-        base.Start();
-    }
-
     public override void Use()
     {
         if (actor == null)
@@ -32,7 +17,7 @@ public class StraightShotting : ShootingSkill
             return;
         }
 
-        bullet = Instantiate(actor.defaultBulletPrefab, 
+        bullet = GameObject.Instantiate(actor.defaultBulletPrefab, 
             baseController.GetShotPos().position, 
             baseController.GetShotPos().rotation);
         bullet.GetComponent<Bullet>().SetDir(baseController.GetShotPos().right);
@@ -41,10 +26,6 @@ public class StraightShotting : ShootingSkill
 
 public class SpreadShotting : ShootingSkill
 {
-    //protected override void Start()
-    //{
-    //    base.Start();
-    //}
     //public override void Use()
     //{
     //    if (actor == null)
