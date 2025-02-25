@@ -2,10 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBase : Actor
+public class EnemySkillManager : SkillManager
 {
+    protected override void Awake()
+    {
+        base.Awake();
 
-    // Start is called before the first frame update
+        StraightShotting straightShotting = new StraightShotting();
+        AddSkill(straightShotting);
+    }
+
     protected override void Start()
     {
         base.Start();

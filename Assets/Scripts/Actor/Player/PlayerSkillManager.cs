@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Actor
+public class PlayerSkillManager : SkillManager
 {
-    public int level = 1;
-
-    public int gold = 0;
     protected override void Awake()
     {
         base.Awake();
+
+        StraightShotting straightShotting = new StraightShotting();
+        AddSkill(straightShotting);
     }
 
     protected override void Start()
@@ -17,14 +17,10 @@ public class Player : Actor
         base.Start();
     }
 
+    // Update is called once per frame
     protected override void Update()
     {
         base.Update();
     }
 
-    protected override void FixedUpdate()
-    {
-        base.FixedUpdate();
-    }
 }
-

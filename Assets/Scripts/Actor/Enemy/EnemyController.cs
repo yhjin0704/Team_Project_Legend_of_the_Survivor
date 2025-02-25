@@ -4,13 +4,28 @@ using UnityEngine;
 
 public class EnemyController : BaseController
 {
+    private EnemyManager enemyManager;
     private Transform target;
 
     [SerializeField] private float followRange = 15f;
 
-    public void Init(Transform target)
+    public void Init(EnemyManager enemyManager, Transform target)
     {
+        this.enemyManager = enemyManager;
         this.target = target;
+    }
+
+    protected override void Movement(Vector2 direction)
+    {
+        direction = direction * actor.speed;
+        if (knockbackDuration > 0.0f)
+        {
+            direction *= 0.2f;
+            direction += knockback;
+        }
+
+        _rigidbody.velocity = direction;
+        animationHandler.Move(direction);
     }
 
     protected float DistanceToTarget()
@@ -18,8 +33,10 @@ public class EnemyController : BaseController
         return Vector3.Distance(transform.position, target.position);
     }
 
-    protected override void HandleAction()
+    protected void HandleAction()
     {
+        //base.HandleAction();
+
         //if (weaponHandler == null || target == null)
         //{
         //    if (!movementDirection.Equals(Vector2.zero)) movementDirection = Vector2.zero;
