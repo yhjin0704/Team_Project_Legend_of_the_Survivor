@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class YH_TestPlayer : Player
@@ -24,8 +25,19 @@ public class YH_TestPlayer : Player
     protected override void Update()
     {
         base.Update();
+        if (isMove == false)
+        {
+            Attak();
+        }
 
-        Attak();
+        if (checkDelay > 0.5f && isMove == true)
+        {
+            checkDelay -= Time.deltaTime;
+        }
+        else if (checkDelay > 0.0f && isMove == false)
+        {
+            checkDelay -= Time.deltaTime;
+        }
     }
 
     protected override void FixedUpdate()
@@ -39,10 +51,7 @@ public class YH_TestPlayer : Player
 
         UseSkills();
 
-        if (checkDelay > 0)
-        {
-            checkDelay -= Time.deltaTime;
-        }
+       
     }
 
     protected void UseSkills()
@@ -53,12 +62,27 @@ public class YH_TestPlayer : Player
             return;
         }
 
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Archer_Attack") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        {
+            animator.SetBool("IsAttack", false);
+        }
+
         if (checkDelay <= 0)
         {
+            checkDelay = atkDelay;
+            if (shotPos.transform.rotation.z >= -0.9f && shotPos.transform.rotation.z < 0.9f)
+            {
+                _renderer.transform.localScale = new Vector3(1, 1, 1);
+            }
+            else
+            {
+                _renderer.transform.localScale = new Vector3(-1, 1, 1);
+            }
+            animator.SetBool("IsAttack", true);
+
             foreach (ISkillUseDelay _shottingSkill in skillManager.GetPlayerSkillList())
             {
                 _shottingSkill.Use();
-                checkDelay = atkDelay;
             }
         }
     }
