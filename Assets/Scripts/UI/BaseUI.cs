@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BaseUI : MonoBehaviour
 {
-    protected UIManager uIManager;
+    protected UIManager uiManager;
 
-    public virtual void Init(UIManager uIManager)
+    public virtual void Init(UIManager uiManager)
     {
-        this.uIManager = uIManager;
+        this.uiManager = uiManager;
     }
 }

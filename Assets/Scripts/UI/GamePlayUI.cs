@@ -11,15 +11,15 @@ public class GamePlayUI : BaseSceneUI
     [SerializeField] private Slider expSlider;
     [SerializeField] private Button menuButton;
 
-    public override void Init(UIManager uIManager)
+    public override void Init(UIManager uiManager)
     {
-        base.Init(uIManager); // 배이스UI의 Init을 실행
+        base.Init(uiManager); // 배이스UI의 Init을 실행
         menuButton.onClick.AddListener(OnClickMenuButton); // 메뉴버튼 할당
     }
 
     public void OnClickMenuButton() // 메뉴버튼 클릭시
     {
-        uIManager.SetActiveMenu();
+        uiManager.SetActiveMenu();
         menuButton.gameObject.SetActive(false);
     }
 
