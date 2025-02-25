@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class EnemyController : BaseController
 {
+    [SerializeField] private Transform target;
     [SerializeField] private float followRange = 15f;
+    [SerializeField] private float attackRange = 1f;
+
+
 
     protected override void Movement(Vector2 direction)
     {
@@ -26,7 +30,7 @@ public class EnemyController : BaseController
 
     protected void HandleAction()
     {
-        if (GetTarget() == null)
+        if (target == null)
         {
             if (!movementDirection.Equals(Vector2.zero)) movementDirection = Vector2.zero;
             return;
@@ -42,7 +46,7 @@ public class EnemyController : BaseController
 
             if (distance <= attackRange)
             {
-                int layerMaskTarget = GetTarget().gameObject.layer;
+                int layerMaskTarget = target.gameObject.layer;
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, attackRange * 1.5f,
                     (1 << LayerMask.NameToLayer("Level")) | layerMaskTarget);
 
