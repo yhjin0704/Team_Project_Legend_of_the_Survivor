@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class PlayerBullet : Bullet
 {
-    private Renderer renderer;
+    private Renderer _renderer;
 
     protected override void Awake()
     {
         base.Awake();
-        renderer = GetComponent<Renderer>();
+        _renderer = GetComponent<Renderer>();
     }
 
     protected override void Start()

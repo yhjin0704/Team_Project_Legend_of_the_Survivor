@@ -1,38 +1,38 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class ClosestDistance : MonoBehaviour
+public class ClosestDistance : PlayerController
 {
-    //public Transform player; // ÇÃ·¹ÀÌ¾î Transform
-    //public List<Monster> listMonsters = new List<Monster>(); // ¸ó½ºÅÍ ¸®½ºÆ®
-    //private Monster Target;
+    public transform player; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ transform
+    public list<monster> listmonsters = new list<monster>(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
+    private monster target;
 
-    //void UpdateClosestMonster()
-    //{
-    //    if (listMonsters == null || listMonsters.Count == 0)
-    //    {
-    //        Target = null;
-    //        return;
-    //    }
+    void updateclosestmonster()
+    {
+        if (listmonsters == null || listmonsters.count == 0)
+        {
+            target = null;
+            return;
+        }
 
-    //    float minDistance = Mathf.Infinity;
-    //    Monster closestMonster = null;
+        float mindistance = mathf.infinity;
+        monster closestmonster = null;
 
-    //    foreach (Monster monster in listMonsters)
-    //    {
-    //        float distance = Vector2.Distance(player.position, monster.transform.position);
-    //        if (distance < minDistance)
-    //        {
-    //            minDistance = distance;
-    //            closestMonster = monster;
-    //        }
-    //    }
+        foreach (monster monster in listmonsters)
+        {
+            float distance = vector2.distance(player.position, monster.transform.position);
+            if (distance < mindistance)
+            {
+                mindistance = distance;
+                closestmonster = monster;
+            }
+        }
 
-//        Target = closestMonster;
-//    }
+        target = closestmonster;
+    }
 
-//    private void Start()
-//    {
-//        UpdateClosestMonster();
-//    }
+    private void start()
+    {
+        updateclosestmonster();
+    }
 }
