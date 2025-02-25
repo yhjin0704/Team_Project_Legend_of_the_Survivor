@@ -20,6 +20,12 @@ public class Actor : MonoBehaviour
 
     protected Animator animator;
 
+    protected Transform _renderer;
+    public Transform GetRenderer()
+    {
+        return _renderer;
+    }
+
     // 공격 목표
     protected Transform target;
     public Transform GetTarget()
@@ -40,6 +46,7 @@ public class Actor : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
 
+        _renderer = transform.Find("Renderer");
         shotPos = transform.Find("ShotPos");
     }
 
