@@ -20,6 +20,7 @@ public class LobbyUI : BaseSceneUI
     {
         GameManager.Instance.ChangeScene(SceneState.Main);
         uiManager.ChangeState(UIState.GamePlay);
+        uiManager.StartCoroutine(uiManager.Loading()); // 로딩 코루틴 실행
     }
 
     public void OnClickExitButton()

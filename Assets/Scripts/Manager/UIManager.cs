@@ -9,7 +9,8 @@ public enum UIState // UI상태를 나타내는 열거형
     GamePlay,
     GameOver,
     Menu,
-    SkillSelect
+    SkillSelect,
+    Loading
 }
 
 public class UIManager : MonoBehaviour // UI를 관리하는 클래스
@@ -21,6 +22,7 @@ public class UIManager : MonoBehaviour // UI를 관리하는 클래스
     [SerializeField] private LobbyUI lobbyUI;
     [SerializeField] private MenuUI menuUI;
     [SerializeField] private SkillSelectUI skillSelectUI;
+    [SerializeField] private LoadingUI loadingUI;
 
 
     // 현재 UI 상태를 저장할 변수 선언
@@ -38,6 +40,8 @@ public class UIManager : MonoBehaviour // UI를 관리하는 클래스
         skillSelectUI.Init(this); // skillSelectUI의 Init 함수 호출
         menuUI = GetComponentInChildren<MenuUI>(true); // 자식 오브젝트 중 MenuUI 컴포넌트를 찾아서 menuUI에 저장
         menuUI.Init(this); // menuUI의 Init 함수 호출
+        loadingUI = GetComponentInChildren<LoadingUI>(true); // 자식 오브젝트 중 LoadingUI 컴포넌트를 찾아서 loadingUI에 저장
+        loadingUI.Init(this); // loadingUI의 Init 함수 호출
         ChangeState(UIState.Lobby); // UI 상태를 로비로 
     }
 
@@ -65,6 +69,14 @@ public class UIManager : MonoBehaviour // UI를 관리하는 클래스
     public void ChangeEXP(float currentEXP, float maxEXP) // 경험치 변경 함수
     {
         gamePlayUI.UpdateEXPSlider(currentEXP / maxEXP);
+    }
+
+    //코루틴으로 로딩 화면을 띄우는 함수
+    public IEnumerator Loading()
+    {
+        loadingUI.SetActive(UIState.Loading);
+        yield return new WaitForSeconds(0.3f);
+        loadingUI.SetActive(currentState);
     }
 
     public void ChangeState(UIState state) // UI 상태 변경 함수
