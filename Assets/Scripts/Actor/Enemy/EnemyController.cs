@@ -5,8 +5,11 @@ using UnityEngine.AI; // 내가 추가
 
 public class EnemyController : BaseController
 {
-    //여기부터
     NavMeshAgent agent;
+    SpriteRenderer spriteRenderer;
+
+    [SerializeField]
+    private float attackRange = 1f;
 
     protected override void Start()
     {
@@ -15,6 +18,7 @@ public class EnemyController : BaseController
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         target = GameObject.Find("Archer").transform;
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     protected override void Update()
@@ -25,8 +29,18 @@ public class EnemyController : BaseController
         {
             agent.velocity = Vector3.zero;
         }
+        animationHandler.Move(agent.velocity);
+
+        if (DistanceToTarget() <= attackRange)
+        {
+            isAttacking = true;
+        }
     }
-    //여기까지 내가 추가
+
+    private void LateUpdate()
+    {
+        spriteRenderer.flipX = target.position.x < transform.position.x;
+    }
 
     protected float DistanceToTarget()
     {

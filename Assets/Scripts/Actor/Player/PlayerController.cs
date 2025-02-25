@@ -21,7 +21,7 @@ public class PlayerController : BaseController
         base.Start();
 
         //TestCode
-        target = GameObject.Find("orc").transform;
+        target = GameObject.Find("Orc").transform;
     }
 
     // Update is called once per frame
