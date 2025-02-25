@@ -23,15 +23,6 @@ public class YH_TestPlayer : Player
     protected override void Update()
     {
         base.Update();
-
-        if (checkDelay > 0.5f && isMove == true)
-        {
-            checkDelay -= Time.deltaTime;
-        }
-        else if (checkDelay > 0.0f && isMove == false)
-        {
-            checkDelay -= Time.deltaTime;
-        }
     }
 
     protected override void FixedUpdate()

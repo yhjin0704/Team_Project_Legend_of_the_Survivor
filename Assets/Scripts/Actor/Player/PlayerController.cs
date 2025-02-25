@@ -20,8 +20,6 @@ public class PlayerController : BaseController
     {
         base.Start();
 
-        //TestCode
-        target = GameObject.Find("Orc").transform;
     }
 
     // Update is called once per frame
@@ -34,12 +32,40 @@ public class PlayerController : BaseController
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        Movement(movementDirection);
+
+        switch(actor.GetState())
+        {
+            case EState.Idle:
+                _rigidbody.velocity = Vector2.zero;
+                break;
+            case EState.Move:
+                Movement(movementDirection);
+                break;
+            case EState.Attack:
+                Attack();
+                break;
+            case EState.Hit:
+                break;
+            case EState.Dead:
+                break;
+        }
+        //TestCode
+        EnemyController enemyControllerIns = FindObjectOfType<EnemyController>();
+
+        target = enemyControllerIns.gameObject.transform;
     }
 
     private void InputMovement()
     {
         movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+        if (movementDirection != Vector2.zero)
+        {
+            player.SetState(EState.Move);
+        }
+        else
+        {
+            player.SetState(EState.Idle);
+        }
     }
 
     protected override void Movement(Vector2 _direction)
@@ -54,18 +80,13 @@ public class PlayerController : BaseController
         {
             player.GetRenderer().transform.localScale = new Vector3(-1, 1, 1);
         }
-
-        player.SetIsMove((_direction.x != 0 || _direction.y != 0));
-        animator.SetBool("IsMove", player.GetIsMove());
-
+        
         _rigidbody.velocity = _direction * actor.speed;
-        MoveCheck();
     }
 
     protected override void Attack()
     {
-        if (lookDirection != Vector2.zero)
-        { }
+        base.Attack();
     }
 
     protected override void UseSkills()
@@ -74,7 +95,7 @@ public class PlayerController : BaseController
 
         if (target == null)
         {
-            Debug.LogError("TargetÀÌ nullÀÔ´Ï´Ù.");
+            Debug.LogError("Targetï¿½ï¿½ nullï¿½Ô´Ï´ï¿½.");
             return;
         }
 
