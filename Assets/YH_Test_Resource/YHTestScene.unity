@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 457f4012eed16d14f8dad632945f90d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterRenderer: {fileID: 0}
+  characterRenderer: {fileID: 1580609832}
   hp: 100
   speed: 3
   atk: 1
@@ -173,6 +173,11 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1106739217612074471, guid: e9e0dd1c49f2e244281b4b7c7a2b5fd1, type: 3}
   m_PrefabInstance: {fileID: 1837021426}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1580609832 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4287731578444584977, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
+  m_PrefabInstance: {fileID: 2059251814}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1821085839
 GameObject:
@@ -465,6 +470,22 @@ PrefabInstance:
     - target: {fileID: 1241997740830865549, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
       propertyPath: m_Name
       value: Orc
+      objectReference: {fileID: 0}
+    - target: {fileID: 4287731578444584977, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
+      propertyPath: m_Size.x
+      value: 6.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4287731578444584977, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
+      propertyPath: m_Size.y
+      value: 6.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4287731578444584977, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -609593731, guid: b180e271e3425cb4d9995c126162270a, type: 3}
+    - target: {fileID: 4287731578444584977, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7126696235968860198, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
       propertyPath: m_LocalScale.x
