@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Actor : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer characterRenderer;
+    public SpriteRenderer characterRenderer;
 
     protected AnimationHandler animationHandler;
 
