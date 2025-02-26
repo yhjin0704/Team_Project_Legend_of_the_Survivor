@@ -13,7 +13,7 @@ public class EnemyController : BaseController
     [SerializeField]
     private float attackDelay = 1f;
     private float currentTime = 0f;
-    private bool isDamage = false;
+    private bool isHit = false;
     [SerializeField]
     private int coinCount;
     [SerializeField]
@@ -32,9 +32,9 @@ public class EnemyController : BaseController
 
     protected override void Update()
     {
-        if (isAttacking || isDamage)
+        if (isAttacking || isHit)
         {
-            if (isAttacking && isDamage)
+            if (isAttacking && isHit)
             {
                 currentTime = 0f;
                 isAttacking = false;
@@ -46,7 +46,7 @@ public class EnemyController : BaseController
             {
                 currentTime = 0f;
                 isAttacking = false;
-                isDamage = false;
+                isHit = false;
                 animationHandler.AttackEnd();
                 animationHandler.InvincibilityEnd();
             }
@@ -61,7 +61,7 @@ public class EnemyController : BaseController
         }
         animationHandler.Move(agent.velocity);
 
-        if (DistanceToTarget() <= attackRange && !isDamage)
+        if (DistanceToTarget() <= attackRange && !isHit)
         {
             Attack();
         }
@@ -103,7 +103,7 @@ public class EnemyController : BaseController
     {
         base.Dead();
 
-        isDamage = true;
+        isHit = true;
         animationHandler.Dead();
         for (int i = 0; i < coinCount; i++)
         {
@@ -117,6 +117,6 @@ public class EnemyController : BaseController
     {
         base.Hit(_damage);
 
-        isDamage = true;
+        isHit = true;
     }
 }
