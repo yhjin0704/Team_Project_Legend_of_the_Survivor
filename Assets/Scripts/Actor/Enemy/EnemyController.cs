@@ -101,7 +101,7 @@ public class EnemyController : BaseController
     {
         base.Dead();
 
-        isDamage = true;
+        isHit = true;
         for (int i = 0; i < coinCount; i++)
         {
             float vec = Random.Range(-1f, 1f);
