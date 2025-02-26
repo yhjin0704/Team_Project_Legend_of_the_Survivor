@@ -40,8 +40,8 @@ public class UIManager : MonoBehaviour // UI를 관리하는 클래스
         skillSelectUI.Init(this); // skillSelectUI의 Init 함수 호출
         menuUI = GetComponentInChildren<MenuUI>(true); // 자식 오브젝트 중 MenuUI 컴포넌트를 찾아서 menuUI에 저장
         menuUI.Init(this); // menuUI의 Init 함수 호출
-        loadingUI = GetComponentInChildren<LoadingUI>(true); // 자식 오브젝트 중 LoadingUI 컴포넌트를 찾아서 loadingUI에 저장
-        loadingUI.Init(this); // loadingUI의 Init 함수 호출
+        //loadingUI = GetComponentInChildren<LoadingUI>(true); // 자식 오브젝트 중 LoadingUI 컴포넌트를 찾아서 loadingUI에 저장
+        //loadingUI.Init(this); // loadingUI의 Init 함수 호출
         ChangeState(UIState.Lobby); // UI 상태를 로비로 
     }
 

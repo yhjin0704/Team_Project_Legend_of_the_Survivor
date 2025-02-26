@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SceneUI
   - UIManager
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX
