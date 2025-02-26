@@ -147,7 +147,7 @@ public class BaseController : MonoBehaviour
         }
     }
 
-    protected virtual void Hit(float _damage)
+    public virtual void Hit(float _damage)
     {
         actor.hp -= _damage;
 
@@ -156,10 +156,12 @@ public class BaseController : MonoBehaviour
             actor.hp = 0;
             actor.SetState(EState.Dead);
         }
+        gameObject.GetComponentInChildren<ActorUI>().ShowCombatValue((int)_damage, true);
     }
 
     protected virtual void Dead()
     {
+        actor.GetComponent<Collider2D>().enabled = false;
     }
 
     protected virtual void SetShotPos(Transform _targetPos)

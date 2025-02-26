@@ -17,10 +17,13 @@ public class StraightShotting : ShootingSkill
             return;
         }
 
-        bullet = GameObject.Instantiate(actor.defaultBulletPrefab, 
+        damage = actor.atk * skillMagnification;
+
+        GameObject bullet = GameObject.Instantiate(actor.defaultBulletPrefab, 
             baseController.GetShotPos().position, 
             baseController.GetShotPos().rotation);
         bullet.GetComponent<Bullet>().SetDir(baseController.GetShotPos().right);
+        bullet.GetComponent<Bullet>().SetDamage(damage);
     }
 }
 
