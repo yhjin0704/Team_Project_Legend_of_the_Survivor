@@ -14,6 +14,8 @@ public class EnemyController : BaseController
     private float attackDelay = 1f;
     private float currentTime = 0f;
     private bool isDamage = false;
+    [SerializeField]
+    private int coin;
 
     protected override void Start()
     {
@@ -97,6 +99,10 @@ public class EnemyController : BaseController
                     actor.hp = 0;
                     isDamage = true;
                     animationHandler.Dead();
+                    for (int i = 0; i < coin; i++)
+                    {
+                        // 코인 생성
+                    }
                     actor.IsAlive = false;
                 }
                 else
