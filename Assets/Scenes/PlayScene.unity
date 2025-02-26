@@ -235,6 +235,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton
       objectReference: {fileID: 0}
+    - target: {fileID: 3291370598097430201, guid: 1fc79634c87444f40af37d82458684b1, type: 3}
+      propertyPath: coinCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291370598097430201, guid: 1fc79634c87444f40af37d82458684b1, type: 3}
+      propertyPath: coinPrefab
+      value: 
+      objectReference: {fileID: 2456746063334075949, guid: 6297283c69788f04b81162811dbb5b42, type: 3}
+    - target: {fileID: 3819488573264837918, guid: 1fc79634c87444f40af37d82458684b1, type: 3}
+      propertyPath: hp
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7126696235968860198, guid: 1fc79634c87444f40af37d82458684b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.06
@@ -439,6 +451,18 @@ PrefabInstance:
     - target: {fileID: 1241997740830865549, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
       propertyPath: m_Name
       value: Orc
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291370598097430201, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
+      propertyPath: coinCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291370598097430201, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
+      propertyPath: coinPrefab
+      value: 
+      objectReference: {fileID: 2456746063334075949, guid: 6297283c69788f04b81162811dbb5b42, type: 3}
+    - target: {fileID: 3819488573264837918, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
+      propertyPath: hp
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7126696235968860198, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
       propertyPath: m_LocalPosition.x

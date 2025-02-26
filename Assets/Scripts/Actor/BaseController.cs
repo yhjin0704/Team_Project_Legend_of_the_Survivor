@@ -149,8 +149,13 @@ public class BaseController : MonoBehaviour
 
     public virtual void Hit(float _damage)
     {
+        if (actor.GetState() == EState.Hit ||
+            actor.GetState() == EState.Dead)
+        {
+            return;
+        }
         actor.hp -= _damage;
-
+        actor.SetState(EState.Hit);
         if (actor.hp <= 0)
         {
             actor.hp = 0;
@@ -162,6 +167,8 @@ public class BaseController : MonoBehaviour
 
     protected virtual void Dead()
     {
+        actor.hp = 0;
+        actor.SetState(EState.Dead);
         actor.GetComponent<Collider2D>().enabled = false;
     }
 
