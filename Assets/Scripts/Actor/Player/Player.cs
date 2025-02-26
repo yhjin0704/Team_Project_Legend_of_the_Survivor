@@ -7,9 +7,14 @@ public class Player : Actor
     public int level = 1;
 
     public int gold = 0;
+
+    Transform takeGoldRange;
+
     protected override void Awake()
     {
         base.Awake();
+
+        takeGoldRange = transform.Find("TakeGoldRange");
     }
 
     protected override void Start()

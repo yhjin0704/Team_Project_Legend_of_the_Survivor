@@ -93,7 +93,7 @@ public class PlayerController : BaseController
 
         if (target == null)
         {
-            Debug.LogError("Target�� null�Դϴ�.");
+            Debug.LogError("Target이 null입니다.");
             return;
         }
 
