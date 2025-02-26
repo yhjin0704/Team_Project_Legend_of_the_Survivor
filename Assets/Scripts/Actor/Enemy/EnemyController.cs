@@ -10,6 +10,8 @@ public class EnemyController : BaseController
 
     [SerializeField]
     private float attackRange = 1f;
+    private float attackDelay = 1f;
+    private float currentTime = 0f;
 
     protected override void Start()
     {
@@ -24,6 +26,19 @@ public class EnemyController : BaseController
 
     protected override void Update()
     {
+        if (isAttacking)
+        {
+            currentTime += Time.deltaTime;
+            if (currentTime > attackDelay)
+            {
+                currentTime = 0f;
+                isAttacking = false;
+                animationHandler.AttackEnd();
+            }
+
+            return;
+        }
+
         base.Update();
         agent.SetDestination(target.position);
         if (agent.pathPending == false && agent.remainingDistance <= agent.stoppingDistance)
@@ -34,8 +49,15 @@ public class EnemyController : BaseController
 
         if (DistanceToTarget() <= attackRange)
         {
-            isAttacking = true;
+            Attack();
         }
+    }
+
+    protected override void Attack()
+    {
+        base.Attack();
+        isAttacking = true;
+        animationHandler.Attack();
     }
 
     private void LateUpdate()
