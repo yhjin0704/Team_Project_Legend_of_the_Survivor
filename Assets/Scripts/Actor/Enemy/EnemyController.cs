@@ -69,6 +69,8 @@ public class EnemyController : BaseController
         base.Attack();
         isAttacking = true;
         animationHandler.Attack();
+
+        //target.GetComponent<PlayerController>().Damage();
     }
 
     private void LateUpdate()
