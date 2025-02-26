@@ -16,6 +16,8 @@ public class SpawnManager : MonoBehaviour
     private List<Vector3> usedSpawnPositions = new List<Vector3>(); // 사용된 스폰 위치를 저장할 리스트
     private List<Vector3> availablePositions; // 사용 가능한 스폰 위치를 저장할 리스트
 
+    //플레이어 근처 소환 X 수정필요
+
     private void Awake()
     {
         spawnMonsterTilemap = GameObject.FindWithTag("MonsterSpawnArea").GetComponent<Tilemap>(); // 타일맵 할당
