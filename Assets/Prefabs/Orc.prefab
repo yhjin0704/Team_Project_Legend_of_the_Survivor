@@ -155,7 +155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSkillUseActor: 0
   shotPosDistance: 0
-  attackRange: 5
+  attackRange: 4.6
+  attackDelay: 1
 --- !u!195 &2544724352020858603
 NavMeshAgent:
   m_ObjectHideFlags: 0

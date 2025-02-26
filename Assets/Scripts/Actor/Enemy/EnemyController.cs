@@ -10,6 +10,7 @@ public class EnemyController : BaseController
 
     [SerializeField]
     private float attackRange = 1f;
+    [SerializeField]
     private float attackDelay = 1f;
     private float currentTime = 0f;
 
@@ -28,6 +29,7 @@ public class EnemyController : BaseController
     {
         if (isAttacking)
         {
+            agent.velocity = Vector3.zero;
             currentTime += Time.deltaTime;
             if (currentTime > attackDelay)
             {
@@ -35,7 +37,6 @@ public class EnemyController : BaseController
                 isAttacking = false;
                 animationHandler.AttackEnd();
             }
-
             return;
         }
 
@@ -73,5 +74,27 @@ public class EnemyController : BaseController
     protected Vector2 DirectionToTarget()
     {
         return (target.position - transform.position).normalized;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("PlayerBullet"))
+        {
+            if (actor.IsAlive)
+            {
+                actor.hp--;
+
+                if (actor.hp <= 0)
+                {
+                    actor.hp = 0;
+                    animationHandler.Dead();
+                    actor.IsAlive = false;
+                }
+                else
+                {
+                    animationHandler.Damage();
+                }
+            }
+        }
     }
 }
