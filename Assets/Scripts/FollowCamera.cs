@@ -15,9 +15,6 @@ public class FollowCamera : MonoBehaviour
     {
         if (Target == null)
             return;
-
-        OffsetX = transform.position.x - Target.position.x;
-        OffsetY = transform.position.y - Target.position.y;
     }
 
     void Update()
@@ -27,8 +24,8 @@ public class FollowCamera : MonoBehaviour
 
         Vector3 pos = transform.position;
 
-        pos.x = Target.position.x + OffsetX;
-        pos.y = Target.position.y + OffsetY;
+        pos.x = Target.position.x;
+        pos.y = Target.position.y;
 
         //pos.x = Mathf.Clamp(pos.x, minX, maxX);
         //pos.y = Mathf.Clamp(pos.y, minY, maxY);

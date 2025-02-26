@@ -19,6 +19,7 @@ public class EnemyController : BaseController
         agent.updateUpAxis = false;
         GameObject playerGB = GameObject.Find("Archer");
         target = playerGB.transform;
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     protected override void Update()
