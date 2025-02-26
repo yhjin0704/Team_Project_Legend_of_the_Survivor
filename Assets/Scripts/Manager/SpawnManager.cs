@@ -18,8 +18,8 @@ public class SpawnManager : MonoBehaviour
 
     private void Awake()
     {
-        spawnMonsterTilemap = GameObject.Find("MonsterSpawnArea").GetComponent<Tilemap>(); // 타일맵 할당
-        spawnPlayerPosition = GameObject.Find("PlayerSpawnArea").transform; // 플레이어 위치 할당
+        spawnMonsterTilemap = GameObject.FindWithTag("MonsterSpawnArea").GetComponent<Tilemap>(); // 타일맵 할당
+        spawnPlayerPosition = GameObject.FindWithTag("PlayerSpawnArea").transform; // 플레이어 위치 할당
     }
 
     private void Start()

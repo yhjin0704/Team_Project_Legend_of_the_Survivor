@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]private SceneState currentSceneState; // 현재 씬 상태를 저장할 변수
 
+    public bool IsGameOver { get; private set; } // 게임 오버 상태를 저장할 변수
+
     private void Awake()
     {
         // 싱글톤 할당
@@ -57,5 +59,11 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene("PlayScene");
                 break;
         }
+    }
+
+    public void GameOver()
+    {
+        IsGameOver = true;
+        uiManager.ChangeState(UIState.GameOver);
     }
 }

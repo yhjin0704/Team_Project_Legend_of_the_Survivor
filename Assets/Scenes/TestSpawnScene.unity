@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 866057634}
   m_Layer: 0
   m_Name: MonsterSpawnArea
-  m_TagString: Untagged
+  m_TagString: MonsterSpawnArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1943,7 +1943,7 @@ GameObject:
   - component: {fileID: 1883456529}
   m_Layer: 0
   m_Name: PlayerSpawnArea
-  m_TagString: Untagged
+  m_TagString: PlayerSpawnArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
