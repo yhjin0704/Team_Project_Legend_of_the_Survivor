@@ -8469,7 +8469,7 @@ GameObject:
   - component: {fileID: 3354525649331416109}
   m_Layer: 0
   m_Name: Map
-  m_TagString: Untagged
+  m_TagString: EnemySpawnArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8518,11 +8518,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d91d6382a81e36439d08af1f7db0ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 4433673406668647355, guid: e9e0dd1c49f2e244281b4b7c7a2b5fd1, type: 3}
-  monsterPrefabs:
-  - {fileID: 1241997740830865549, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
-  spawnMonsterTilemap: {fileID: 0}
-  spawnPlayerPosition: {fileID: 0}
 --- !u!1 &9188763508621293526
 GameObject:
   m_ObjectHideFlags: 0
