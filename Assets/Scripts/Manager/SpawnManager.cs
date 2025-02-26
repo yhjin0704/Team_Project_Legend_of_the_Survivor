@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -34,15 +35,27 @@ public class SpawnManager : MonoBehaviour
         SpawnPlayer(); // 캐릭터 스폰
 
         int clearStageLevel = gameManager.ClearStage; // 현재 스테이지
-        if (clearStageLevel % 2 == 0) // 짝수 스테이지일 때
+        int enemyCount = enemyPrefabs.Count(); // 몬스터 개수
+        if (clearStageLevel == 0)
         {
-            SpawnEnemy(0, 1 + clearStageLevel / 2); // 몬스터 스폰
-            SpawnEnemy(1, 1 + clearStageLevel / 2); // 몬스터 스폰
+            for (int i = 0; i < enemyCount; i++)
+            {
+                SpawnEnemy(i, 1); // 몬스터 스폰
+            }
+        }
+        else if (clearStageLevel % 2 == 0) // 짝수 스테이지일 때
+        {
+            for(int i = 0; i < enemyCount / 2; i++)
+            {
+                SpawnEnemy(i, 1 + clearStageLevel / 2); // 몬스터 스폰
+            }
         }
         else
         {
-            SpawnEnemy(0, 1 + clearStageLevel / 2); // 몬스터 스폰
-            SpawnEnemy(1, 2 + clearStageLevel / 2); // 몬스터 스폰
+            for (int i = enemyCount - 1 ; i >= enemyCount / 2; i--)
+            {
+                SpawnEnemy(i, 2 + clearStageLevel / 2); // 몬스터 스폰
+            }
         }
     }
 
