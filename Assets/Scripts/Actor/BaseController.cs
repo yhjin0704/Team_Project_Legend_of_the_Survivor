@@ -66,10 +66,14 @@ public class BaseController : MonoBehaviour
         switch (actor.GetState())
         {
             case EState.Attack:
-                if (isSkillUseActor)
+                if (isSkillUseActor && _rigidbody.velocity == Vector2.zero)
                 {
+                    timeSinceLastAttack = 0;
+                    Attack();
                     Invoke("UseSkills", 0.5f);
                 }
+                break;
+            case EState.Hit:
                 break;
             case EState.Dead:
                 Dead();
@@ -92,21 +96,6 @@ public class BaseController : MonoBehaviour
     {
     }
 
-    //private void Rotate(Vector2 direction)
-    //{
-    //    float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-    //    bool isLeft = Mathf.Abs(rotZ) > 90f;
-
-    //    characterRenderer.flipX = isLeft;
-
-    //    if (weaponPivot != null)
-    //    {
-    //        weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ);
-    //    }
-
-    //    weaponHandler?.Rotate(isLeft);
-    //}
-
     public void ApplyKnockback(Transform other, float power, float duration)
     {
         knockbackDuration = duration;
@@ -119,17 +108,16 @@ public class BaseController : MonoBehaviour
         {
             timeSinceLastAttack += Time.deltaTime;
         }
-
-        if (timeSinceLastAttack >= actor.atkDelay)
+        else
         {
-            timeSinceLastAttack = 0;
             actor.SetState(EState.Attack);
         }
     }
 
     protected virtual void Attack()
     {
-
+        isAttacking = true;
+        animationHandler.Attack();
     }
 
     protected virtual void UseSkills()
@@ -156,6 +144,9 @@ public class BaseController : MonoBehaviour
         }
         actor.hp -= _damage;
         actor.SetState(EState.Hit);
+
+        StartCoroutine(HitTime(0.5f));
+
         if (actor.hp <= 0)
         {
             actor.hp = 0;
@@ -169,6 +160,7 @@ public class BaseController : MonoBehaviour
     {
         actor.hp = 0;
         actor.SetState(EState.Dead);
+        animationHandler.Dead();
         actor.GetComponent<Collider2D>().enabled = false;
     }
 
@@ -197,5 +189,11 @@ public class BaseController : MonoBehaviour
             // 2D ������ targetTransform�� ��ġ�� �� �׸���
             Gizmos.DrawWireSphere(shotPos.position, 0.02f);
         }
+    }
+
+    IEnumerator HitTime(float _delay)
+    {
+        yield return new WaitForSeconds(_delay);
+        actor.SetState(EState.Idle);
     }
 }
