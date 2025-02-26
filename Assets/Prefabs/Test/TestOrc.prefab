@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 7126696235968860198}
   - component: {fileID: 5617562157310383591}
   - component: {fileID: 69575386199754473}
-  - component: {fileID: 3819488573264837918}
   - component: {fileID: 9201240106118676453}
   - component: {fileID: 3291370598097430201}
-  - component: {fileID: 7403182447007247748}
+  - component: {fileID: -2454312073178732946}
+  - component: {fileID: 8089877924397205960}
   m_Layer: 6
-  m_Name: Orc
-  m_TagString: Enemy
+  m_Name: TestOrc
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,25 +110,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3819488573264837918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241997740830865549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 457f4012eed16d14f8dad632945f90d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterRenderer: {fileID: 0}
-  hp: 100
-  speed: 3
-  atk: 1
-  atkDelay: 3
-  IsAlive: 1
-  defaultBulletPrefab: {fileID: 0}
 --- !u!114 &9201240106118676453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,9 +136,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSkillUseActor: 0
   shotPosDistance: 0
-  attackRange: 4.6
-  attackDelay: 1
---- !u!195 &2544724352020858603
+  attackRange: 1
+--- !u!114 &-2454312073178732946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241997740830865549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 457f4012eed16d14f8dad632945f90d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterRenderer: {fileID: 0}
+  hp: 100
+  speed: 3
+  atk: 1
+  atkDelay: 3
+  IsAlive: 1
+  defaultBulletPrefab: {fileID: 0}
+--- !u!195 &8089877924397205960
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,13 +166,13 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1
-  m_Acceleration: 1
+  m_Speed: 1.5
+  m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.1
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 0
+  m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0

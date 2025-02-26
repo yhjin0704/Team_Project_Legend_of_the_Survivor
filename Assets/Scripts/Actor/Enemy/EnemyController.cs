@@ -10,6 +10,12 @@ public class EnemyController : BaseController
 
     [SerializeField]
     private float attackRange = 1f;
+    [SerializeField]
+    private float attackDelay = 1f;
+    private float currentTime = 0f;
+    private bool isDamage = false;
+    [SerializeField]
+    private int coin;
 
     protected override void Start()
     {
@@ -24,6 +30,26 @@ public class EnemyController : BaseController
 
     protected override void Update()
     {
+        if (isAttacking || isDamage)
+        {
+            if (isAttacking && isDamage)
+            {
+                currentTime = 0f;
+                isAttacking = false;
+            }
+            agent.velocity = Vector3.zero;
+            currentTime += Time.deltaTime;
+            if (currentTime > attackDelay)
+            {
+                currentTime = 0f;
+                isAttacking = false;
+                isDamage = false;
+                animationHandler.AttackEnd();
+                animationHandler.InvincibilityEnd();
+            }
+            return;
+        }
+
         base.Update();
         agent.SetDestination(target.position);
         if (agent.pathPending == false && agent.remainingDistance <= agent.stoppingDistance)
@@ -32,10 +58,17 @@ public class EnemyController : BaseController
         }
         animationHandler.Move(agent.velocity);
 
-        if (DistanceToTarget() <= attackRange)
+        if (DistanceToTarget() <= attackRange && !isDamage)
         {
-            isAttacking = true;
+            Attack();
         }
+    }
+
+    protected override void Attack()
+    {
+        base.Attack();
+        isAttacking = true;
+        animationHandler.Attack();
     }
 
     private void LateUpdate()
@@ -51,5 +84,35 @@ public class EnemyController : BaseController
     protected Vector2 DirectionToTarget()
     {
         return (target.position - transform.position).normalized;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("PlayerBullet"))
+        {
+            if (actor.IsAlive && !isDamage)
+            {
+                actor.hp--;
+
+                if (actor.hp <= 0)
+                {
+                    actor.hp = 0;
+                    isDamage = true;
+                    animationHandler.Dead();
+                    for (int i = 0; i < coin; i++)
+                    {
+                        // 코인 생성
+                    }
+                    actor.IsAlive = false;
+                }
+                else
+                {
+                    isDamage = true;
+                    animationHandler.Damage();
+                }
+
+                Destroy(collision.gameObject);
+            }
+        }
     }
 }
