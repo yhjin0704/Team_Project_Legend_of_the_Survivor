@@ -33,7 +33,7 @@ public class SpawnManager : MonoBehaviour
         availablePositions = new List<Vector3>(spawnPositions);
         SpawnPlayer(); // 캐릭터 스폰
 
-        int clearStageLevel = gameManager.ClearStage + 1; // 현재 스테이지
+        int clearStageLevel = gameManager.ClearStage; // 현재 스테이지
         if (clearStageLevel % 2 == 0) // 짝수 스테이지일 때
         {
             SpawnEnemy(0, 1 + clearStageLevel / 2); // 몬스터 스폰
