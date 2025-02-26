@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
         EnemyPrefabs = Resources.LoadAll<GameObject>("Prefabs/Enemy"); // 몬스터 할당
 
         currentSceneState = SceneState.Lobby; // 초기 씬 상태는 로비
+        ClearStage = 0; // 클리어한 스테이지 초기화
     }
 
     public void AddOnAllEnemiesDefeated(Action action) // 모든 적을 물리친 후 발생할 이벤트 추가 함수
