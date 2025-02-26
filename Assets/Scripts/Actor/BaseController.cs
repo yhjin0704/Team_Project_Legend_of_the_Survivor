@@ -66,10 +66,14 @@ public class BaseController : MonoBehaviour
         switch (actor.GetState())
         {
             case EState.Attack:
-                if (isSkillUseActor)
+                if (isSkillUseActor && _rigidbody.velocity == Vector2.zero)
                 {
+                    timeSinceLastAttack = 0;
+                    Attack();
                     Invoke("UseSkills", 0.5f);
                 }
+                break;
+            case EState.Hit:
                 break;
             case EState.Dead:
                 Dead();
@@ -104,10 +108,8 @@ public class BaseController : MonoBehaviour
         {
             timeSinceLastAttack += Time.deltaTime;
         }
-
-        if (timeSinceLastAttack >= actor.atkDelay)
+        else
         {
-            timeSinceLastAttack = 0;
             actor.SetState(EState.Attack);
         }
     }
@@ -142,6 +144,9 @@ public class BaseController : MonoBehaviour
         }
         actor.hp -= _damage;
         actor.SetState(EState.Hit);
+
+        StartCoroutine(HitTime(0.5f));
+
         if (actor.hp <= 0)
         {
             actor.hp = 0;
@@ -184,5 +189,11 @@ public class BaseController : MonoBehaviour
             // 2D ������ targetTransform�� ��ġ�� �� �׸���
             Gizmos.DrawWireSphere(shotPos.position, 0.02f);
         }
+    }
+
+    IEnumerator HitTime(float _delay)
+    {
+        yield return new WaitForSeconds(_delay);
+        actor.SetState(EState.Idle);
     }
 }
