@@ -21,12 +21,15 @@ public class TakeGoldRange : MonoBehaviour
     {
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D _collision)
     {
-        if (collision.CompareTag("Coin"))
+        if (_collision.CompareTag("Coin"))
         {
             player.gold += 1;
-            Destroy(collision.gameObject);
+
+            _collision.gameObject.GetComponent<Collider2D>().enabled = false;
+
+            _collision.gameObject.GetComponent<Animator>().Play("Coin_Destroy");
         }
     }
 }
