@@ -5,12 +5,13 @@ using UnityEngine.Tilemaps;
 
 public class SpawnManager : MonoBehaviour
 {
-
-    private GameObject playerPrefab; // 플레이어를 할당할 변수
-    private GameObject[] enemyPrefabs; // 몬스터를 할당할 변수
+    private GameObject playerPrefab; // 플레이어 프리팹을 할당할 변수
+    private GameObject[] enemyPrefabs; // 몬스터 프리팹을 할당할 변수
 
     private Tilemap spawnMonsterTilemap; // 타일맵을 할당할 변수
     private Transform spawnPlayerPosition; // 플레이어의 위치를 할당할 변수
+
+    GameManager gameManager = GameManager.Instance;
 
     private List<Vector3> spawnPositions = new List<Vector3>(); // 몬스터 스폰 위치를 저장할 리스트
     private List<Vector3> usedSpawnPositions = new List<Vector3>(); // 사용된 스폰 위치를 저장할 리스트
@@ -21,8 +22,8 @@ public class SpawnManager : MonoBehaviour
 
     private void Awake()
     {
-        playerPrefab = Resources.Load<GameObject>("Prefabs/Player/Archer"); // 플레이어 할당
-        enemyPrefabs = Resources.LoadAll<GameObject>("Prefabs/Enemy"); // 몬스터 할당
+        playerPrefab = gameManager.PlayerPrefab; // 플레이어 할당
+        enemyPrefabs = gameManager.EnemyPrefabs; // 몬스터 할당
         spawnMonsterTilemap = GameObject.FindWithTag("EnemySpawnArea").GetComponent<Tilemap>(); // 타일맵 할당
         spawnPlayerPosition = GameObject.FindWithTag("PlayerSpawnArea").transform; // 플레이어 위치 할당
     }

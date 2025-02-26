@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     private UIManager uiManager; // UIManager를 할당할 변수
 
     private SceneState currentSceneState; // 현재 씬 상태를 저장할 변수
+    public GameObject PlayerPrefab { get; private set; } // 플레이어를 할당할 변수
+    public GameObject[] EnemyPrefabs { get; private set; } // 몬스터를 할당할 변수
 
     private List<Enemy> enemies = new List<Enemy>(); // 적 리스트
     private event Action OnAllEnemiesDefeated; // 모든 적을 물리친 후 발생할 이벤트
@@ -39,6 +41,10 @@ public class GameManager : MonoBehaviour
 
         // UIManager 할당
         uiManager = GetComponentInChildren<UIManager>();
+
+        PlayerPrefab = Resources.Load<GameObject>("Prefabs/Player/Archer"); // 플레이어 할당
+        EnemyPrefabs = Resources.LoadAll<GameObject>("Prefabs/Enemy"); // 몬스터 할당
+
         currentSceneState = SceneState.Lobby; // 초기 씬 상태는 로비
     }
 
