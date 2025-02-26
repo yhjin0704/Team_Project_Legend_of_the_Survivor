@@ -4,17 +4,21 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - SceneUI
-  - UIManager
+  - Wall
+  - Enemy
+  - PlayerBullet
+  - Coin
+  - MonsterSpawnArea
+  - PlayerSpawnArea
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Enemy
-  - 
+  - Wall
   - 
   - 
   - 

@@ -40,4 +40,9 @@ public class AnimationHandler : MonoBehaviour
     {
         animator.SetBool(IsDamage, false);
     }
+
+    public void Dead()
+    {
+        animator.SetBool(IsDeath, false);
+    }
 }

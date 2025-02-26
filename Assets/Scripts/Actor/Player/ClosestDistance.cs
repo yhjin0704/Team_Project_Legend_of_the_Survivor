@@ -27,12 +27,12 @@ public class ClosestDistance : PlayerController
     //            closestmonster = monster;
     //        }
     //    }
-
+    
     //    target = closestmonster;
     //}
 
-    private void start()
-    {
-        //updateclosestmonster();
-    }
+    //private void start()
+    //{
+    //    updateclosestmonster();
+    //}
 }

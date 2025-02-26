@@ -7,7 +7,6 @@ public enum EState
     Idle,
     Move,
     Attack,
-    Hit,
     Dead
 }
 
@@ -55,40 +54,11 @@ public class Actor : MonoBehaviour
     {
     }
 
-    // Update is called once per frame
     protected virtual void Update()
     {
-
-        switch (state)
-        {
-            case EState.Idle:
-                break;
-            case EState.Move:
-                break;
-            case EState.Attack:
-                break;
-            case EState.Hit:
-                Hit();
-                break;
-            case EState.Dead:
-                Dead();
-                break;
-            default:
-                break;
-        }
     }
 
     protected virtual void FixedUpdate()
-    {
-        //GameObject monsterObject = GameObject.Find("Monster");
-        //SetShotPos(monsterObject.transform);
-    }
-
-    protected virtual void Hit()
-    {
-    }
-
-    protected virtual void Dead()
     {
     }
 }

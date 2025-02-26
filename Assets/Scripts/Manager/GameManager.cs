@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 public enum SceneState // UI상태를 나타내는 열거형
 {
     Lobby,
-    Main
+    Main,
+    Play
 }
 
 public class GameManager : MonoBehaviour
@@ -15,6 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]private UIManager uiManager; // UIManager를 할당할 변수
 
     [SerializeField]private SceneState currentSceneState; // 현재 씬 상태를 저장할 변수
+
+    public bool IsGameOver { get; private set; } // 게임 오버 상태를 저장할 변수
 
     private void Awake()
     {
@@ -52,6 +55,15 @@ public class GameManager : MonoBehaviour
             case SceneState.Main:
                 SceneManager.LoadScene("MainScene");
                 break;
+            case SceneState.Play:
+                SceneManager.LoadScene("PlayScene");
+                break;
         }
+    }
+
+    public void GameOver()
+    {
+        IsGameOver = true;
+        uiManager.ChangeState(UIState.GameOver);
     }
 }

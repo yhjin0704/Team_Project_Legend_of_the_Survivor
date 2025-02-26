@@ -44,8 +44,6 @@ public class PlayerController : BaseController
             case EState.Attack:
                 Attack();
                 break;
-            case EState.Hit:
-                break;
             case EState.Dead:
                 break;
         }
@@ -95,7 +93,7 @@ public class PlayerController : BaseController
 
         if (target == null)
         {
-            Debug.LogError("Target�� null�Դϴ�.");
+            Debug.LogError("Target이 null입니다.");
             return;
         }
 
