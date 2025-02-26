@@ -9,8 +9,6 @@ public class AnimationHandler : MonoBehaviour
     private static readonly int IsDamage = Animator.StringToHash("IsDamage");
     private static readonly int OnDead = Animator.StringToHash("OnDead");
 
-    private static readonly int AnimState = Animator.StringToHash("AnimState");
-
     protected Animator animator;
     protected Actor actor;
 
@@ -22,35 +20,15 @@ public class AnimationHandler : MonoBehaviour
 
     protected virtual void Update()
     {
-        ChangeAnimation();
-    }
-
-    public void ChangeAnimation()
-    {
-        switch (actor.GetState())
-        {
-            case EState.Idle:
-            default:
-                animator.SetInteger(AnimState, (int)EState.Idle);
-                break;
-            case EState.Move:
-                animator.SetInteger(AnimState, (int)EState.Move);
-                break;
-            case EState.Attack:
-                animator.SetInteger(AnimState, (int)EState.Attack);
-                break;
-            case EState.Hit:
-                animator.SetInteger(AnimState, (int)EState.Hit);
-                break;
-            case EState.Dead:
-                animator.SetInteger(AnimState, (int)EState.Dead);
-                break;
-        }
     }
 
     public void Move(Vector2 obj)
     {
         animator.SetBool(IsMoving, obj.magnitude > .5f);
+    }
+    public void Move(bool _boolValue)
+    {
+        animator.SetBool(IsMoving, _boolValue);
     }
 
     public void Attack()
