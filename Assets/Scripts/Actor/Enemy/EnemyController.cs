@@ -13,6 +13,7 @@ public class EnemyController : BaseController
     [SerializeField]
     private float attackDelay = 1f;
     private float currentTime = 0f;
+    private bool isDamage = false;
 
     protected override void Start()
     {
@@ -27,15 +28,22 @@ public class EnemyController : BaseController
 
     protected override void Update()
     {
-        if (isAttacking)
+        if (isAttacking || isDamage)
         {
+            if (isAttacking && isDamage)
+            {
+                currentTime = 0f;
+                isAttacking = false;
+            }
             agent.velocity = Vector3.zero;
             currentTime += Time.deltaTime;
             if (currentTime > attackDelay)
             {
                 currentTime = 0f;
                 isAttacking = false;
+                isDamage = false;
                 animationHandler.AttackEnd();
+                animationHandler.InvincibilityEnd();
             }
             return;
         }
@@ -48,7 +56,7 @@ public class EnemyController : BaseController
         }
         animationHandler.Move(agent.velocity);
 
-        if (DistanceToTarget() <= attackRange)
+        if (DistanceToTarget() <= attackRange && !isDamage)
         {
             Attack();
         }
@@ -80,20 +88,24 @@ public class EnemyController : BaseController
     {
         if (collision.CompareTag("PlayerBullet"))
         {
-            if (actor.IsAlive)
+            if (actor.IsAlive && !isDamage)
             {
                 actor.hp--;
 
                 if (actor.hp <= 0)
                 {
                     actor.hp = 0;
+                    isDamage = true;
                     animationHandler.Dead();
                     actor.IsAlive = false;
                 }
                 else
                 {
+                    isDamage = true;
                     animationHandler.Damage();
                 }
+
+                Destroy(collision.gameObject);
             }
         }
     }
