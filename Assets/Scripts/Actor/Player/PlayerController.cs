@@ -45,6 +45,7 @@ public class PlayerController : BaseController
             case EState.Move:
             case EState.Hit:
                 Movement(movementDirection);
+                animationHandler.Move(_rigidbody.velocity);
                 break;
             case EState.Attack:
                 Attack();
@@ -83,11 +84,6 @@ public class PlayerController : BaseController
         }
         
         _rigidbody.velocity = _direction * actor.speed;
-    }
-
-    protected override void Attack()
-    {
-        base.Attack();
     }
 
     protected override void UseSkills()

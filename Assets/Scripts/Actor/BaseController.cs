@@ -92,21 +92,6 @@ public class BaseController : MonoBehaviour
     {
     }
 
-    //private void Rotate(Vector2 direction)
-    //{
-    //    float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-    //    bool isLeft = Mathf.Abs(rotZ) > 90f;
-
-    //    characterRenderer.flipX = isLeft;
-
-    //    if (weaponPivot != null)
-    //    {
-    //        weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ);
-    //    }
-
-    //    weaponHandler?.Rotate(isLeft);
-    //}
-
     public void ApplyKnockback(Transform other, float power, float duration)
     {
         knockbackDuration = duration;
@@ -129,7 +114,8 @@ public class BaseController : MonoBehaviour
 
     protected virtual void Attack()
     {
-
+        isAttacking = true;
+        animationHandler.Attack();
     }
 
     protected virtual void UseSkills()
@@ -169,6 +155,7 @@ public class BaseController : MonoBehaviour
     {
         actor.hp = 0;
         actor.SetState(EState.Dead);
+        animationHandler.Dead();
         actor.GetComponent<Collider2D>().enabled = false;
     }
 

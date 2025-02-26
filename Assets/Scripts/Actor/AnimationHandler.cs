@@ -22,7 +22,6 @@ public class AnimationHandler : MonoBehaviour
 
     protected virtual void Update()
     {
-        ChangeAnimation();
     }
 
     public void ChangeAnimation()

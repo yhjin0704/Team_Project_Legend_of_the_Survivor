@@ -70,8 +70,6 @@ public class EnemyController : BaseController
     protected override void Attack()
     {
         base.Attack();
-        isAttacking = true;
-        animationHandler.Attack();
 
         //target.GetComponent<PlayerController>().Damage();
     }
@@ -104,7 +102,6 @@ public class EnemyController : BaseController
         base.Dead();
 
         isDamage = true;
-        animationHandler.Dead();
         for (int i = 0; i < coinCount; i++)
         {
             float vec = Random.Range(-1f, 1f);
