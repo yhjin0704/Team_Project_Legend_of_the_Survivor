@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 69575386199754473}
   - component: {fileID: 9201240106118676453}
   - component: {fileID: 3291370598097430201}
+  - component: {fileID: 7403182447007247748}
   m_Layer: 6
   m_Name: Orc
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,7 +133,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4133d2a611916c46b1e19c2821679ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followRange: 15
+  isSkillUseActor: 0
+  shotPosDistance: 0
+  attackRange: 1
+--- !u!114 &7403182447007247748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241997740830865549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15e51475322e2db409f4fd052eb4fe55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterRenderer: {fileID: 0}
+  hp: 100
+  speed: 3
+  atk: 1
+  atkDelay: 3
+  IsAlive: 1
+  defaultBulletPrefab: {fileID: 0}
 --- !u!1 &1342321363346578229
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +237,7 @@ SpriteRenderer:
   m_Size: {x: 6.25, y: 6.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &2899260874566952977
