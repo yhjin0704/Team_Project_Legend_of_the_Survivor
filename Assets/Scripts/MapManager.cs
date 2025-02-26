@@ -4,82 +4,11 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-    public int currentMap;            // ÇöÀç ¸Ê
-    public GameObject playerPrefab;   // ÇÃ·¹ÀÌ¾î ÇÁ¸®ÆÕ
-    public GameObject monsterPrefab;  // ¸ó½ºÅÍ ÇÁ¸®ÆÕ
-    public int minEnemies = 4;        // ¸ó½ºÅÍ ÃÖ¼Ò ¼ö 
-    public int maxEnemies = 8;        // ¸ó½ºÅÍ ÃÖ°í ¼ö
-    public float spawnRadius = 5f;    // ÇÃ·¹ÀÌ¾î ½ºÆù À§Ä¡¿¡¼­ ¸ó½ºÅÍ ½ºÆù ºÒ°¡ °Å¸®
-    public LayerMask obstacleLayer;   // Àå¾Ö¹° ·¹ÀÌ¾î
-
-    private Dictionary<int, Vector2> playerSpawnPoints = new Dictionary<int, Vector2>(); // ¸Êº° ÇÃ·¹ÀÌ¾î ½ºÆù À§Ä¡
+    public int currentMap;            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+    public int minEnemies = 4;        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ ï¿½ï¿½ 
+    public int maxEnemies = 8;        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½
 
     private void Start()
     {
-        InitializePlayerSpawnPoints();
-        SpawnPlayer();
-        SpawnMonsters();
-    }
-
-    // ¸Êº° ÇÃ·¹ÀÌ¾î ½ºÆù À§Ä¡ ¼³Á¤
-    void InitializePlayerSpawnPoints()
-    {
-        playerSpawnPoints[1] = new Vector2(0, 0);
-        playerSpawnPoints[2] = new Vector2(-8, -4);
-        playerSpawnPoints[3] = new Vector2(0, 4);
-    }
-
-    void SpawnPlayer()
-    {
-        if (playerPrefab != null && playerSpawnPoints.ContainsKey(currentMap))
-        {
-            Vector2 spawnPosition = playerSpawnPoints[currentMap];
-            Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
-        }
-        else
-        {
-            Debug.LogError("ÇÃ·¹ÀÌ¾î ½ºÆù À§Ä¡¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù!");
-        }
-    }
-
-    void SpawnMonsters()
-    {
-        int spawned = 0;
-        while (spawned < maxEnemies)
-        {
-            Vector2 spawnPos = GetValidSpawnPosition();
-            if (spawnPos != Vector2.zero)
-            {
-                Instantiate(monsterPrefab, spawnPos, Quaternion.identity);
-                spawned++;
-            }
-        }
-    }
-
-    Vector2 GetValidSpawnPosition()
-    {
-        for (int i = 0; i < 10; i++) // 10¹ø ½Ãµµ
-        {
-            Vector2 randomPos = GetRandomPosition();
-
-            // ÇÃ·¹ÀÌ¾î ½ºÆù ÁöÁ¡°ú ³Ê¹« °¡±î¿îÁö Ã¼Å©
-            if (Vector2.Distance(randomPos, playerSpawnPoints[currentMap]) < spawnRadius)
-                continue;
-
-            // Àå¾Ö¹°°ú °ãÄ¡´ÂÁö Ã¼Å©
-            Collider2D hit = Physics2D.OverlapCircle(randomPos, 0.5f, obstacleLayer);
-            if (hit == null)
-            {
-                return randomPos;
-            }
-        }
-        return Vector2.zero; // À¯È¿ÇÑ À§Ä¡¸¦ Ã£Áö ¸øÇÔ
-    }
-
-    Vector2 GetRandomPosition()
-    {
-        float x = Random.Range(-9f, 9f); // ¸Ê Å©±â¿¡ ¸Â°Ô Á¶Á¤
-        float y = Random.Range(-4f, 4f);
-        return new Vector2(x, y);
     }
 }
