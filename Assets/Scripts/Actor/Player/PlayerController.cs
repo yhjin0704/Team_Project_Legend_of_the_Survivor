@@ -39,15 +39,15 @@ public class PlayerController : BaseController
         switch(actor.GetState())
         {
             case EState.Idle:
+            case EState.Dead:
                 _rigidbody.velocity = Vector2.zero;
                 break;
             case EState.Move:
+            case EState.Hit:
                 Movement(movementDirection);
                 break;
             case EState.Attack:
                 Attack();
-                break;
-            case EState.Dead:
                 break;
         }
         //TestCode
