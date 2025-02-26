@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3819488573264837918}
   - component: {fileID: 9201240106118676453}
   - component: {fileID: 3291370598097430201}
-  - component: {fileID: 7403182447007247748}
+  - component: {fileID: 2544724352020858603}
   m_Layer: 6
   m_Name: Orc
   m_TagString: Enemy
@@ -157,6 +157,7 @@ MonoBehaviour:
   shotPosDistance: 0
   attackRange: 4.6
   attackDelay: 1
+  coin: 0
 --- !u!195 &2544724352020858603
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -253,7 +254,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 428268797, guid: 5f225556b9090174e9355baec1441cba, type: 3}
+  m_Sprite: {fileID: -609593731, guid: b180e271e3425cb4d9995c126162270a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -261,7 +262,7 @@ SpriteRenderer:
   m_Size: {x: 6.25, y: 6.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &2899260874566952977
