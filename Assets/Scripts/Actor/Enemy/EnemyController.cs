@@ -15,7 +15,9 @@ public class EnemyController : BaseController
     private float currentTime = 0f;
     private bool isDamage = false;
     [SerializeField]
-    private int coin;
+    private int coinCount;
+    [SerializeField]
+    GameObject coinPrefab;
 
     protected override void Start()
     {
@@ -38,6 +40,7 @@ public class EnemyController : BaseController
                 isAttacking = false;
             }
             agent.velocity = Vector3.zero;
+
             currentTime += Time.deltaTime;
             if (currentTime > attackDelay)
             {
@@ -90,31 +93,30 @@ public class EnemyController : BaseController
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("PlayerBullet"))
+        if (collision.CompareTag("Player"))
         {
-            if (actor.IsAlive && !isDamage)
-            {
-                actor.hp--;
-
-                if (actor.hp <= 0)
-                {
-                    actor.hp = 0;
-                    isDamage = true;
-                    animationHandler.Dead();
-                    for (int i = 0; i < coin; i++)
-                    {
-                        // 코인 생성
-                    }
-                    actor.IsAlive = false;
-                }
-                else
-                {
-                    isDamage = true;
-                    animationHandler.Damage();
-                }
-
-                Destroy(collision.gameObject);
-            }
+            collision.GetComponent<BaseController>().Hit(actor.atk);
         }
+    }
+
+    protected override void Dead()
+    {
+        base.Dead();
+
+        isDamage = true;
+        animationHandler.Dead();
+        for (int i = 0; i < coinCount; i++)
+        {
+            float vec = Random.Range(-1f, 1f);
+            Instantiate(coinPrefab, transform.position + new Vector3(vec, vec, 0), Quaternion.identity);
+        }
+        Destroy(gameObject, 1f);
+    }
+
+    public override void Hit(float _damage)
+    {
+        base.Hit(_damage);
+
+        isDamage = true;
     }
 }

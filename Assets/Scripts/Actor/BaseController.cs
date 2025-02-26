@@ -25,7 +25,7 @@ public class BaseController : MonoBehaviour
 
     protected AnimationHandler animationHandler;
 
-    // °ø°Ý ¸ñÇ¥
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥
     protected Transform target;
     public Transform GetTarget()
     {
@@ -34,7 +34,7 @@ public class BaseController : MonoBehaviour
 
     public float shotPosDistance;
 
-    // Åõ»çÃ¼ ¹ß»ç À§Ä¡
+    // ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ß»ï¿½ ï¿½ï¿½Ä¡
     protected Transform shotPos;
     public Transform GetShotPos()
     {
@@ -136,27 +136,26 @@ public class BaseController : MonoBehaviour
     {
         if (skillManager.GetSkillList() == null)
         {
-            Debug.LogError("SkillList°¡ nullÀÔ´Ï´Ù.");
+            Debug.LogError("SkillListï¿½ï¿½ nullï¿½Ô´Ï´ï¿½.");
             return;
         }
 
         if (target == null)
         {
-            Debug.LogError("TargetÀÌ nullÀÔ´Ï´Ù.");
+            Debug.LogError("Targetï¿½ï¿½ nullï¿½Ô´Ï´ï¿½.");
             return;
         }
     }
 
     public virtual void Hit(float _damage)
     {
-        if (actor.GetState() == EState.Hit)
+        if (actor.GetState() == EState.Hit ||
+            actor.GetState() == EState.Dead)
         {
             return;
         }
-
         actor.hp -= _damage;
         actor.SetState(EState.Hit);
-
         if (actor.hp <= 0)
         {
             actor.hp = 0;
@@ -168,6 +167,8 @@ public class BaseController : MonoBehaviour
 
     protected virtual void Dead()
     {
+        actor.hp = 0;
+        actor.SetState(EState.Dead);
         actor.GetComponent<Collider2D>().enabled = false;
     }
 
@@ -191,9 +192,9 @@ public class BaseController : MonoBehaviour
     {
         if (shotPos != null)
         {
-            // ±×·ÁÁú »ö»ó ¼³Á¤
+            // ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             Gizmos.color = Color.red;
-            // 2D ¾À¿¡¼­ targetTransformÀÇ À§Ä¡¿¡ ¿ø ±×¸®±â
+            // 2D ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ targetTransformï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
             Gizmos.DrawWireSphere(shotPos.position, 0.02f);
         }
     }
