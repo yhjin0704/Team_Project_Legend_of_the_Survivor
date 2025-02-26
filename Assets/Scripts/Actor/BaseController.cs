@@ -149,7 +149,13 @@ public class BaseController : MonoBehaviour
 
     public virtual void Hit(float _damage)
     {
+        if (actor.GetState() == EState.Hit)
+        {
+            return;
+        }
+
         actor.hp -= _damage;
+        actor.SetState(EState.Hit);
 
         if (actor.hp <= 0)
         {
