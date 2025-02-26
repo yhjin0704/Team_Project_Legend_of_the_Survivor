@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-    public int currentMap;            // ÇöÀç ¸Ê
-    public int minEnemies = 4;        // ¸ó½ºÅÍ ÃÖ¼Ò ¼ö 
-    public int maxEnemies = 8;        // ¸ó½ºÅÍ ÃÖ°í ¼ö
+    public int currentMap;            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+    public int minEnemies = 4;        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ ï¿½ï¿½ 
+    public int maxEnemies = 8;        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½
 
     private void Start()
     {
