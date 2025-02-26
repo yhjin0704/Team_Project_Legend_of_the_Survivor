@@ -72,15 +72,15 @@ public class PlayerController : BaseController
     {
         base.Movement(_direction);
 
-        if (_direction.x > 0)
-        {
-            player.GetRenderer().transform.localScale = new Vector3(1, 1, 1);
-        }
-        else if (_direction.x < 0)
-        {
-            player.GetRenderer().transform.localScale = new Vector3(-1, 1, 1);
-        }
-        
+        //if (_direction.x > 0)
+        //{
+        //    player.GetRenderer().transform.localScale = new Vector3(1, 1, 1);
+        //}
+        //else if (_direction.x < 0)
+        //{
+        //    player.GetRenderer().transform.localScale = new Vector3(-1, 1, 1);
+        //}
+
         _rigidbody.velocity = _direction * actor.speed;
     }
 
