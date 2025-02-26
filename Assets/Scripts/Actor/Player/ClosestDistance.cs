@@ -1,38 +1,51 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Microsoft.Win32.SafeHandles;
 
 public class ClosestDistance : PlayerController
 {
-    //public transform player; // �÷��̾� transform
-    //public list<monster> listmonsters = new list<monster>(); // ���� ����Ʈ
-    //private monster target;
+    public Transform player; // 플레이어의 Transform
+    public List<GameObject> listMonsters = new List<GameObject>();
+    private GameObject target; // 가장 가까운 몬스터
 
-    //void updateclosestmonster()
-    //{
-    //    if (listmonsters == null || listmonsters.count == 0)
-    //    {
-    //        target = null;
-    //        return;
-    //    }
+    void UpdateClosestMonster()
+    {
+        if (listMonsters == null || listMonsters.Count == 0)
+        {
+            target = null;
+            return;
+        }
 
-    //    float mindistance = mathf.infinity;
-    //    monster closestmonster = null;
+        float minDistance = Mathf.Infinity;
+        GameObject closestMonster = null;
 
-    //    foreach (monster monster in listmonsters)
-    //    {
-    //        float distance = vector2.distance(player.position, monster.transform.position);
-    //        if (distance < mindistance)
-    //        {
-    //            mindistance = distance;
-    //            closestmonster = monster;
-    //        }
-    //    }
+        foreach (GameObject monster in listMonsters)
+        {
+            float distance = Vector2.Distance(player.position, monster.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closestMonster = monster;
+            }
+        }
 
-    //    target = closestmonster;
-    //}
+        target = closestMonster;
+    }
 
-    //private void start()
-    //{
-    //    updateclosestmonster();
-    //}
+    public void LookColsestMonster()
+    {
+        
+    }
+
+    private void start()
+    {
+        UpdateClosestMonster();
+    }
+
+    private void Update()
+    {
+        UpdateClosestMonster();
+
+ 
+    }
 }
