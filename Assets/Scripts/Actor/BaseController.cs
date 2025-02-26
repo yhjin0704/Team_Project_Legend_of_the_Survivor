@@ -157,6 +157,7 @@ public class BaseController : MonoBehaviour
             actor.SetState(EState.Dead);
         }
         gameObject.GetComponentInChildren<ActorUI>().ShowCombatValue((int)_damage, true);
+        gameObject.GetComponentInChildren<ActorUI>().ChangeHPBar(actor.hp, actor.GetMaxHp());
     }
 
     protected virtual void Dead()

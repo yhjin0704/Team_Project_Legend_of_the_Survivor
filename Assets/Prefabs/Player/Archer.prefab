@@ -208,7 +208,7 @@ MonoBehaviour:
   characterRenderer: {fileID: 8726219597992717354}
   hp: 100
   speed: 3
-  atk: 1
+  atk: 10
   atkDelay: 3
   IsAlive: 1
   defaultBulletPrefab: {fileID: 1468526609800095872, guid: e28bdba90f9845642aa96fa842731585, type: 3}
