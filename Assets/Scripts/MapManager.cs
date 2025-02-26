@@ -1,87 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviour
 {
-    public int currentMap;            // 현재 맵
-    public GameObject playerPrefab;   // 플레이어 프리팹
-    public GameObject monsterPrefab;  // 몬스터 프리팹
-    public int minEnemies = 4;        // 몬스터 최소 수 
-    public int maxEnemies = 8;        // 몬스터 최고 수
-    public float spawnRadius = 5f;    // 플레이어 스폰 위치에서 몬스터 스폰 불가 거리
-    public LayerMask obstacleLayer;   // 장애물 레이어
-    
-    public List<Transform> floorPositions;  // 포탈이 생성될 바닥 위치들
+    public GameObject portalPrefab;     // 생성할 포탈 프리팹
+    private Collider2D portalCollider;
+    private SpriteRenderer portalRenderer;
 
-    private Dictionary<int, Vector2> playerSpawnPoints = new Dictionary<int, Vector2>(); // 맵별 플레이어 스폰 위치
-
-    private void Start()
+    private void Awake()
     {
-        InitializePlayerSpawnPoints();
-        SpawnPlayer();
-        SpawnMonsters();
+        portalCollider = GetComponent<Collider2D>();
+        portalRenderer = GetComponent<SpriteRenderer>();
+
+        SetPortalActive(false); // 시작 시 포탈 비활성화
     }
 
-    // 맵별 플레이어 스폰 위치 설정
-    void InitializePlayerSpawnPoints()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        playerSpawnPoints[1] = new Vector2(0, 0);
-        playerSpawnPoints[2] = new Vector2(-8, -4);
-        playerSpawnPoints[3] = new Vector2(0, 4);
-    }
-
-    void SpawnPlayer()
-    {
-        if (playerPrefab != null && playerSpawnPoints.ContainsKey(currentMap))
+        if (other.CompareTag("Player"))
         {
-            Vector2 spawnPosition = playerSpawnPoints[currentMap];
-            Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
-        }
-        else
-        {
-            Debug.LogError("플레이어 스폰 위치를 찾을 수 없습니다!");
+            LoadNextRoom();
         }
     }
 
-    void SpawnMonsters()
+    // 포탈 활성화/비활성화 함수
+    public void SetPortalActive(bool isActive)
     {
-        int spawned = 0;
-        while (spawned < maxEnemies)
+        portalCollider.enabled = isActive;
+        portalRenderer.enabled = isActive;
+    }
+
+    // 다음 방(씬) 로드
+    private void LoadNextRoom()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex + 1);
+    }
+
+    void Update()
+    {
+        if (AllEnemiesDefeated() == null)
         {
-            Vector2 spawnPos = GetValidSpawnPosition();
-            if (spawnPos != Vector2.zero)
-            {
-                Instantiate(monsterPrefab, spawnPos, Quaternion.identity);
-                spawned++;
-            }
+            SpawnPortal();
         }
     }
 
-    Vector2 GetValidSpawnPosition()
+    // 모든 적이 죽었는지 확인하는 함수
+    private bool AllEnemiesDefeated()
     {
-        for (int i = 0; i < 10; i++) // 10번 시도
-        {
-            Vector2 randomPos = GetRandomPosition();
-
-            // 플레이어 스폰 지점과 너무 가까운지 체크
-            if (Vector2.Distance(randomPos, playerSpawnPoints[currentMap]) < spawnRadius)
-                continue;
-
-            // 장애물과 겹치는지 체크
-            Collider2D hit = Physics2D.OverlapCircle(randomPos, 0.5f, obstacleLayer);
-            if (hit == null)
-            {
-                return randomPos;
-            }
-        }
-        return Vector2.zero; // 유효한 위치를 찾지 못함
+        return GameObject.FindGameObjectsWithTag("Enemy").Length == 0;
     }
 
-    Vector2 GetRandomPosition()
+    // 포탈 생성 함수
+    private void SpawnPortal()
     {
-        float x = Random.Range(-9f, 9f); // 맵 크기에 맞게 조정
-        float y = Random.Range(-4f, 4f);
-        return new Vector2(x, y);
+        Vector2 spawnPosition = new Vector2(-9, -4);                                                // 바닥에 포탈 생성 (위치 조정 가능)
+        GameObject portalObject = Instantiate(portalPrefab, spawnPosition, Quaternion.identity);
+        portalObject.GetComponent<SpawnManager>();
+        SetPortalActive(true); // 포탈 활성화
     }
 }
