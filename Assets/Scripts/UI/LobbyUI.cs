@@ -18,7 +18,7 @@ public class LobbyUI : BaseSceneUI
 
     public void OnClickPlayButton() // 플레이 버튼 클릭 시
     {
-        GameManager.Instance.ChangeScene(SceneState.Main);
+        GameManager.Instance.ChangeScene(SceneState.Play);
         uiManager.ChangeState(UIState.GamePlay);
         uiManager.StartCoroutine(uiManager.Loading()); // 로딩 코루틴 실행
     }
