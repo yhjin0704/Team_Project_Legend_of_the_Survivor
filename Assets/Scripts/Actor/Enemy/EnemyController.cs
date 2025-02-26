@@ -119,4 +119,19 @@ public class EnemyController : BaseController
 
         isHit = true;
     }
+
+    protected override void UseSkills()
+    {
+        base.UseSkills();
+
+        if (target == null)
+        {
+            Debug.LogError("Target이 null입니다.");
+            return;
+        }
+
+        SetShotPos(target);
+
+        skillManager.GetSkillList()[0].Use();
+    }
 }
