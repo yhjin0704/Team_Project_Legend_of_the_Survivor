@@ -11,6 +11,8 @@ public class MapManager : MonoBehaviour
     public int maxEnemies = 8;        // 몬스터 최고 수
     public float spawnRadius = 5f;    // 플레이어 스폰 위치에서 몬스터 스폰 불가 거리
     public LayerMask obstacleLayer;   // 장애물 레이어
+    
+    public List<Transform> floorPositions;  // 포탈이 생성될 바닥 위치들
 
     private Dictionary<int, Vector2> playerSpawnPoints = new Dictionary<int, Vector2>(); // 맵별 플레이어 스폰 위치
 
