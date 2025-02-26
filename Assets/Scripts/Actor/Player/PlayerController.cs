@@ -9,9 +9,12 @@ public class PlayerController : BaseController
 
     private Vector2 moveInput;
 
+    GameManager gameManager = GameManager.Instance;
+
     protected override void Awake()
     {
         base.Awake();
+
         player = actor as Player;
         animator = GetComponentInChildren<Animator>();
     }
@@ -103,5 +106,12 @@ public class PlayerController : BaseController
         {
             _shootingSkill.Use();
         }
+    }
+
+    protected override void Dead()
+    {
+        base.Dead();
+
+        gameManager.GameOver();
     }
 }
