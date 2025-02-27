@@ -33,12 +33,18 @@ public class EnemyController : BaseController
     private int curPatternCount = 0;
     private int maxPatternCount = 50;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        GameManager.Instance.RegisterEnemy(this);
         GameObject playerGB = GameObject.Find("Archer");
         target = playerGB.transform;
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -238,6 +244,7 @@ public class EnemyController : BaseController
             float vec2 = Random.Range(-1f, 1f);
             Instantiate(potionPrefab, transform.position + new Vector3(vec, vec2, 0), Quaternion.identity);
         }
+        GameManager.Instance.UnregisterEnemy(this);
         Destroy(gameObject, 2f);
     }
 
