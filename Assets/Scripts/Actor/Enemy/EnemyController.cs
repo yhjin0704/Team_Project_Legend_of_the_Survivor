@@ -78,6 +78,17 @@ public class EnemyController : BaseController
         }
     }
 
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+
+        //Vector3 dir = target.position - actor.transform.position;
+        //RaycastHit2D ray = Physics2D.Raycast(actor.transform.position, dir, dir.magnitude, 1 << LayerMask.NameToLayer("Wall"));
+        //if (ray.collider != null)
+        //{
+        //}
+    }
+
     private void StopPlayer()
     {
         agent.velocity = Vector3.zero;
