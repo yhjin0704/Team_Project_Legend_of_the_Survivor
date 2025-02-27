@@ -26,6 +26,8 @@ public class EnemyController : BaseController
     private bool isHit = false;
     [SerializeField] private int coinCount;
     [SerializeField] GameObject coinPrefab;
+    [SerializeField] private int potionCount;
+    [SerializeField] GameObject potionPrefab;
 
     [SerializeField] GameObject bullet;
 
@@ -234,7 +236,14 @@ public class EnemyController : BaseController
         for (int i = 0; i < coinCount; i++)
         {
             float vec = Random.Range(-1f, 1f);
-            Instantiate(coinPrefab, transform.position + new Vector3(vec, vec, 0), Quaternion.identity);
+            float vec2 = Random.Range(-1f, 1f);
+            Instantiate(coinPrefab, transform.position + new Vector3(vec, vec2, 0), Quaternion.identity);
+        }
+        for (int i = 0; i < potionCount; i++)
+        {
+            float vec = Random.Range(-1f, 1f);
+            float vec2 = Random.Range(-1f, 1f);
+            Instantiate(potionPrefab, transform.position + new Vector3(vec, vec2, 0), Quaternion.identity);
         }
         GameManager.Instance.UnregisterEnemy(this);
         Destroy(gameObject, 2f);

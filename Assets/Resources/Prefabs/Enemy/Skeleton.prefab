@@ -161,6 +161,8 @@ MonoBehaviour:
   attackDelay: 3
   coinCount: 3
   coinPrefab: {fileID: 2456746063334075949, guid: 6297283c69788f04b81162811dbb5b42, type: 3}
+  potionCount: 1
+  potionPrefab: {fileID: 951283346793885083, guid: 5939b8b527bf8de4cb8a0f5aeb790a66, type: 3}
   bullet: {fileID: 1468526609800095872, guid: f2a446e513c664d4099694cfd54fe2d3, type: 3}
 --- !u!195 &2544724352020858603
 NavMeshAgent:
