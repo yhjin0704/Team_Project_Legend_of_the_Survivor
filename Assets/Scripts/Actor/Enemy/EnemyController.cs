@@ -109,7 +109,7 @@ public class EnemyController : BaseController
     {
         base.Attack();
 
-        SoundManager.instance.PlaySfx(SoundManager.Sfx.Arrow);
+        //SoundManager.instance.PlaySfx(SoundManager.Sfx.Arrow);
 
         isAttacking = true;
         animationHandler.Attack();

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : Actor
 {
     public int level = 1;
-
+    public int exp = 0;
     public int gold = 0;
 
     Transform takeItemRange;
@@ -37,6 +37,15 @@ public class Player : Actor
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+    }
+
+    public void CheckLevelUp()
+    {
+        if (exp >= (level*2) + 8)
+        {
+            exp -= (level * 2) + 8;
+            level++;
+        }
     }
 }
 

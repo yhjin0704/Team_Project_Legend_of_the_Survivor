@@ -127,42 +127,42 @@ public class PlayerController : BaseController
 
     void UpdateMonsterList()
     {
-        List<GameObject> monsters = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+        List<GameObject> AtkableObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
 
-        for (int i = monsters.Count - 1; i >= 0; i--)
+        for (int i = AtkableObjects.Count - 1; i >= 0; i--)
         {
-            Vector3 dir = monsters[i].transform.position - player.transform.position;
+            Vector3 dir = AtkableObjects[i].transform.position - player.transform.position;
 
             RaycastHit2D ray = Physics2D.Raycast(player.transform.position, dir, dir.magnitude, 1 << LayerMask.NameToLayer("Wall"));
 
             if (ray.collider != null)
             {
-                monsters.RemoveAt(i);
+                AtkableObjects.RemoveAt(i);
             }
         }
 
-        if (monsters == null || monsters.Count == 0)
+        if (AtkableObjects == null || AtkableObjects.Count == 0)
         {
             closestMonster = null;
             target = null;  // 몬스터가 없으면 target을 null로 설정
             return;
         }
 
-        while (monsters.Count > 1)
+        while (AtkableObjects.Count > 1)
         {
-            float distance1 = Vector3.Distance(player.transform.position, monsters[0].transform.position);
-            float distance2 = Vector3.Distance(player.transform.position, monsters[1].transform.position);
+            float distance1 = Vector3.Distance(player.transform.position, AtkableObjects[0].transform.position);
+            float distance2 = Vector3.Distance(player.transform.position, AtkableObjects[1].transform.position);
 
             if (distance1 < distance2)
             {
-                monsters.RemoveAt(1);
+                AtkableObjects.RemoveAt(1);
             }
             else
             {
-                monsters.RemoveAt(0);
+                AtkableObjects.RemoveAt(0);
             }
         }
-        closestMonster = monsters[0];
+        closestMonster = AtkableObjects[0];
 
         target = closestMonster.transform;
     }

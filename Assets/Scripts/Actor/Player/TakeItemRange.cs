@@ -23,4 +23,16 @@ public class TakeItemRange : MonoBehaviour
     private void Start()
     {
     }
+
+    private void OnTriggerEnter2D(Collider2D _collision)
+    {
+        if (_collision.CompareTag("Coin"))
+        {
+            player.gold += 1;
+            player.exp += 1;
+            player.CheckLevelUp();
+
+            GameManager.Instance.UIManagerProperty.ChangeGold(player.gold);
+        }
+    }
 }
