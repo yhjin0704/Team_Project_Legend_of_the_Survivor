@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton
       objectReference: {fileID: 0}
+    - target: {fileID: 1241997740830865549, guid: 1fc79634c87444f40af37d82458684b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7126696235968860198, guid: 1fc79634c87444f40af37d82458684b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.79
@@ -244,6 +248,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Archer
       objectReference: {fileID: 0}
+    - target: {fileID: 4433673406668647355, guid: e9e0dd1c49f2e244281b4b7c7a2b5fd1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7871861034148084618, guid: e9e0dd1c49f2e244281b4b7c7a2b5fd1, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -277,6 +285,10 @@ PrefabInstance:
     - target: {fileID: 1241997740830865549, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
       propertyPath: m_Name
       value: Orc
+      objectReference: {fileID: 0}
+    - target: {fileID: 1241997740830865549, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7126696235968860198, guid: fe2e1eaec1652064c994eade519cfb91, type: 3}
       propertyPath: m_LocalPosition.x
