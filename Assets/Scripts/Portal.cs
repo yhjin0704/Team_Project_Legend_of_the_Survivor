@@ -13,18 +13,21 @@ public class Portal : MonoBehaviour
     {
         portalCollider = GetComponent<Collider2D>();
         portalRenderer = GetComponent<TilemapRenderer>();
-        GameManager.Instance.AddOnAllEnemiesDefeated(() => SetPortalActive(true));
-        SetPortalActive(false);
+        GameManager.Instance.AddOnAllEnemiesDefeated(SetActivePortalActive);
+        portalCollider.enabled = false;
+        portalRenderer.enabled = false;
     }
-    public void SetPortalActive(bool isActive)
+    public void SetActivePortalActive()
     {
-        portalCollider.enabled = isActive;
-        portalRenderer.enabled = isActive;
+        portalCollider.enabled = true;
+        portalRenderer.enabled = true;
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
+            GameManager.Instance.RemoveOnAllEnemiesDefeated(SetActivePortalActive);
             GameManager.Instance.ChangeScene(SceneState.Play);
         }
     }
