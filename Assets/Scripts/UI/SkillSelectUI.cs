@@ -55,15 +55,15 @@ public class SkillSelectUI : BaseSceneUI
         switch (selectNum)
         {
             case 0:
-                return "MaxHP 30 increase";
+                return "MaxHP  +30";
             case 1:
-                return "ATK 5 increase";
+                return "ATK  +5";
             case 2:
-                return "ATKDelay 0.1 decrease";
+                return "ATKDelay  -0.1";
             case 3:
-                return "speed 1 increase";
+                return "Speed  +1";
             case 4:
-                return "50 heal";
+                return "Heal  +50";
             case 5:
                 if (!gameManager.isSpreadShotting)
                 {
