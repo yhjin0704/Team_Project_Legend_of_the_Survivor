@@ -3899,7 +3899,7 @@ Tilemap:
       - {fileID: 21300000, guid: 421426eae75bcb74eb29722e80361989, type: 3}
       - {fileID: 21300000, guid: de94f968a00e4e347b1a3f87e4cc99ea, type: 3}
       - {fileID: 21300000, guid: de94f968a00e4e347b1a3f87e4cc99ea, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 1
       m_Flags: 0
   - first: {x: 3, y: -3, z: 0}
@@ -4241,7 +4241,7 @@ Tilemap:
       - {fileID: 21300000, guid: 421426eae75bcb74eb29722e80361989, type: 3}
       - {fileID: 21300000, guid: de94f968a00e4e347b1a3f87e4cc99ea, type: 3}
       - {fileID: 21300000, guid: de94f968a00e4e347b1a3f87e4cc99ea, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 1
       m_Flags: 0
   - first: {x: -1, y: 2, z: 0}
@@ -4515,6 +4515,7 @@ GameObject:
   - component: {fileID: 5679432702392660250}
   - component: {fileID: 997259588141804404}
   - component: {fileID: 662154469835866342}
+  - component: {fileID: 44639169144262468}
   m_Layer: 0
   m_Name: Portal3
   m_TagString: Untagged
@@ -4703,6 +4704,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &44639169144262468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5143647377932635207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 776ba036be390174fb964b1074cb8864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  portalPrefab: {fileID: 0}
 --- !u!1 &5235478785873572973
 GameObject:
   m_ObjectHideFlags: 0
