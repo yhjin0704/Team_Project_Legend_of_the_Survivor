@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random; // ���� �߰�
@@ -27,6 +28,9 @@ public class EnemyController : BaseController
 
     [SerializeField] GameObject bullet;
 
+    private int curPatternCount = 0;
+    private int maxPatternCount = 50;
+
     protected override void Start()
     {
         base.Start();
@@ -42,22 +46,8 @@ public class EnemyController : BaseController
     {
         if (isAttacking || isHit)
         {
-            if (isAttacking && isHit)
-            {
-                currentTime = 0f;
-                isAttacking = false;
-            }
-            agent.velocity = Vector3.zero;
+            StopPlayer();
 
-            currentTime += Time.deltaTime;
-            if (currentTime > attackDelay)
-            {
-                currentTime = 0f;
-                isAttacking = false;
-                isHit = false;
-                animationHandler.AttackEnd();
-                animationHandler.InvincibilityEnd();
-            }
             return;
         }
 
@@ -71,6 +61,31 @@ public class EnemyController : BaseController
         if (DistanceToTarget() <= attackRange && !isHit)
         {
             Attack();
+        }
+    }
+
+    private void StopPlayer()
+    {
+        agent.velocity = Vector3.zero;
+        if (isHit)
+        {
+            currentTime += Time.deltaTime;
+            if (currentTime > 1)
+            {
+                currentTime = 0f;
+                isHit = false;
+                animationHandler.InvincibilityEnd();
+            }
+        }
+        else if (isAttacking)
+        {
+            currentTime += Time.deltaTime;
+            if (currentTime > attackDelay)
+            {
+                currentTime = 0f;
+                isAttacking = false;
+                animationHandler.AttackEnd();
+            }
         }
     }
 
@@ -94,7 +109,6 @@ public class EnemyController : BaseController
         else if (enemy_Type == Enemy_Type.Boss)
         {
             int index = Random.Range(0, 4);
-            index = 1;
             switch (index)
             {
                 case 0:
@@ -110,7 +124,11 @@ public class EnemyController : BaseController
                     AroundAttack();
                     break;
             }
+            curPatternCount = 0;
         }
+
+        isAttacking = true;
+        animationHandler.Attack();
     }
 
     private void NormalAttack()
@@ -132,8 +150,10 @@ public class EnemyController : BaseController
             Vector3 vec = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
             GameObject obj = Instantiate(bullet, vec, Quaternion.identity);
             Vector2 direction = (target.position - transform.position).normalized;
+
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             obj.transform.rotation = Quaternion.Euler(0, 0, angle);
+
             obj.GetComponent<Bullet>().SetDamage(actor.atk);
             obj.GetComponent<Bullet>().SetDir(direction);
         }
@@ -141,12 +161,38 @@ public class EnemyController : BaseController
 
     private void ArcAttack()
     {
+        GameObject obj = Instantiate(bullet, transform.position, Quaternion.identity);
+        Vector2 direction = new Vector2(Mathf.Cos(Mathf.PI * 2 * curPatternCount / maxPatternCount),
+            Mathf.Sin(Mathf.PI * 2 * curPatternCount / maxPatternCount)).normalized;
 
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        obj.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        obj.GetComponent<Bullet>().SetDamage(actor.atk);
+        obj.GetComponent<Bullet>().SetDir(direction);
+
+        curPatternCount++;
+
+        if (curPatternCount < maxPatternCount)
+            Invoke("ArcAttack", 0.15f);
     }
 
     private void AroundAttack()
     {
+        int roundNum = 40;
 
+        for (int i = 0; i < roundNum; i++)
+        {
+            GameObject obj = Instantiate(bullet, transform.position, Quaternion.identity);
+            Vector2 direction = new Vector2(Mathf.Cos(Mathf.PI * 2 * i / roundNum),
+                                            Mathf.Sin(Mathf.PI * 2 * i / roundNum)).normalized;
+
+            Vector3 rot = (Vector3.forward * 360 * i / roundNum) + (Vector3.forward * 90);
+            obj.transform.Rotate(rot);
+
+            obj.GetComponent<Bullet>().SetDamage(actor.atk);
+            obj.GetComponent<Bullet>().SetDir(direction);
+        }
     }
 
     private void LateUpdate()

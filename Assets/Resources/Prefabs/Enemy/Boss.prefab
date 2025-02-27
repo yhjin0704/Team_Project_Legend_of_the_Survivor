@@ -157,7 +157,7 @@ MonoBehaviour:
   shotPosDistance: 0
   enemy_Type: 2
   attackRange: 7
-  attackDelay: 3
+  attackDelay: 5
   coinCount: 10
   coinPrefab: {fileID: 2456746063334075949, guid: 6297283c69788f04b81162811dbb5b42, type: 3}
   bullet: {fileID: 1468526609800095872, guid: f2a446e513c664d4099694cfd54fe2d3, type: 3}
