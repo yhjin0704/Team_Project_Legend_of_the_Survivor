@@ -126,9 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddaff8591d3912a4e8138d20c15798ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potionPrefabs: []
-  potionCount: 0
-  dropChance: 0
+  potionPrefabs:
+  - {fileID: 951283346793885083, guid: 5939b8b527bf8de4cb8a0f5aeb790a66, type: 3}
+  potionCount: 1
+  dropChance: 1
   health: 0
   tilemap: {fileID: 0}
 --- !u!61 &3743806033210091422

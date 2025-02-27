@@ -248,14 +248,26 @@ public class EnemyController : BaseController
         actor.IsAlive = false;
         for (int i = 0; i < coinCount; i++)
         {
-            float vec = Random.Range(-1f, 1f);
-            float vec2 = Random.Range(-1f, 1f);
+            float vec;
+            float vec2;
+            do
+            {
+                vec = Random.Range(-1f, 1f);
+                vec2 = Random.Range(-1f, 1f);
+            } 
+            while (!GameManager.Instance.IsOnTilemap(transform.position + new Vector3(vec, vec2, 0)));
             Instantiate(coinPrefab, transform.position + new Vector3(vec, vec2, 0), Quaternion.identity);
         }
         for (int i = 0; i < potionCount; i++)
         {
-            float vec = Random.Range(-1f, 1f);
-            float vec2 = Random.Range(-1f, 1f);
+            float vec;
+            float vec2;
+            do
+            {
+                vec = Random.Range(-1f, 1f);
+                vec2 = Random.Range(-1f, 1f);
+            }
+            while (!GameManager.Instance.IsOnTilemap(transform.position + new Vector3(vec, vec2, 0)));
             Instantiate(potionPrefab, transform.position + new Vector3(vec, vec2, 0), Quaternion.identity);
         }
         GameManager.Instance.UnregisterEnemy(this);

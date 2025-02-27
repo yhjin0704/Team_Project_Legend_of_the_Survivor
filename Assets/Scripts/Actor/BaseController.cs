@@ -142,7 +142,7 @@ public class BaseController : MonoBehaviour
         actor.hp -= _damage;
 
         isHit = true;
-        actor.GetComponent<Collider2D>().enabled = false;
+
         animationHandler.Damage();
         StartCoroutine(HitTime(0.5f));
 
@@ -211,6 +211,5 @@ public class BaseController : MonoBehaviour
         
         isHit = false;
         animationHandler.InvincibilityEnd();
-        actor.GetComponent<Collider2D>().enabled = true;
     }
 }
