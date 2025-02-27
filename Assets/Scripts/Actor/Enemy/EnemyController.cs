@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random; // ���� �߰�
@@ -20,12 +21,16 @@ public class EnemyController : BaseController
 
     [SerializeField] private float attackRange = 1f;
     [SerializeField] private float attackDelay = 1f;
-    private float currentTime = 0f;
+    private float attackTime = 0f;
+    private float hitTime = 0f;
     private bool isHit = false;
     [SerializeField] private int coinCount;
     [SerializeField] GameObject coinPrefab;
 
     [SerializeField] GameObject bullet;
+
+    private int curPatternCount = 0;
+    private int maxPatternCount = 50;
 
     protected override void Start()
     {
@@ -40,24 +45,16 @@ public class EnemyController : BaseController
 
     protected override void Update()
     {
+        if (!actor.IsAlive)
+        {
+            agent.velocity = Vector3.zero;
+            return;
+        }
+
         if (isAttacking || isHit)
         {
-            if (isAttacking && isHit)
-            {
-                currentTime = 0f;
-                isAttacking = false;
-            }
-            agent.velocity = Vector3.zero;
+            StopPlayer();
 
-            currentTime += Time.deltaTime;
-            if (currentTime > attackDelay)
-            {
-                currentTime = 0f;
-                isAttacking = false;
-                isHit = false;
-                animationHandler.AttackEnd();
-                animationHandler.InvincibilityEnd();
-            }
             return;
         }
 
@@ -74,9 +71,38 @@ public class EnemyController : BaseController
         }
     }
 
+    private void StopPlayer()
+    {
+        agent.velocity = Vector3.zero;
+
+        if (isHit)
+        {
+            hitTime += Time.deltaTime;
+            if (hitTime > 1)
+            {
+                hitTime = 0f;
+                isHit = false;
+                animationHandler.InvincibilityEnd();
+            }
+        }
+        if (isAttacking)
+        {
+            attackTime += Time.deltaTime;
+            if (attackTime > attackDelay)
+            {
+                attackTime = 0f;
+                isAttacking = false;
+                animationHandler.AttackEnd();
+            }
+        }
+    }
+
     protected override void Attack()
     {
         base.Attack();
+
+        isAttacking = true;
+        animationHandler.Attack();
 
         if (enemy_Type == Enemy_Type.Close)
             target.GetComponent<BaseController>().Hit(actor.atk);
@@ -94,7 +120,6 @@ public class EnemyController : BaseController
         else if (enemy_Type == Enemy_Type.Boss)
         {
             int index = Random.Range(0, 4);
-            index = 1;
             switch (index)
             {
                 case 0:
@@ -110,6 +135,7 @@ public class EnemyController : BaseController
                     AroundAttack();
                     break;
             }
+            curPatternCount = 0;
         }
     }
 
@@ -132,8 +158,10 @@ public class EnemyController : BaseController
             Vector3 vec = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
             GameObject obj = Instantiate(bullet, vec, Quaternion.identity);
             Vector2 direction = (target.position - transform.position).normalized;
+
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             obj.transform.rotation = Quaternion.Euler(0, 0, angle);
+
             obj.GetComponent<Bullet>().SetDamage(actor.atk);
             obj.GetComponent<Bullet>().SetDir(direction);
         }
@@ -141,12 +169,40 @@ public class EnemyController : BaseController
 
     private void ArcAttack()
     {
+        if (!actor.IsAlive) return;
 
+        GameObject obj = Instantiate(bullet, transform.position, Quaternion.identity);
+        Vector2 direction = new Vector2(Mathf.Cos(Mathf.PI * 2 * curPatternCount / maxPatternCount),
+            Mathf.Sin(Mathf.PI * 2 * curPatternCount / maxPatternCount)).normalized;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        obj.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        obj.GetComponent<Bullet>().SetDamage(actor.atk);
+        obj.GetComponent<Bullet>().SetDir(direction);
+
+        curPatternCount++;
+
+        if (curPatternCount < maxPatternCount)
+            Invoke("ArcAttack", 0.15f);
     }
 
     private void AroundAttack()
     {
+        int roundNum = 40;
 
+        for (int i = 0; i < roundNum; i++)
+        {
+            GameObject obj = Instantiate(bullet, transform.position, Quaternion.identity);
+            Vector2 direction = new Vector2(Mathf.Cos(Mathf.PI * 2 * i / roundNum),
+                                            Mathf.Sin(Mathf.PI * 2 * i / roundNum)).normalized;
+
+            Vector3 rot = (Vector3.forward * 360 * i / roundNum) + (Vector3.forward * 90);
+            obj.transform.Rotate(rot);
+
+            obj.GetComponent<Bullet>().SetDamage(actor.atk);
+            obj.GetComponent<Bullet>().SetDir(direction);
+        }
     }
 
     private void LateUpdate()
@@ -168,13 +224,13 @@ public class EnemyController : BaseController
     {
         base.Dead();
 
-        isHit = true;
+        actor.IsAlive = false;
         for (int i = 0; i < coinCount; i++)
         {
             float vec = Random.Range(-1f, 1f);
             Instantiate(coinPrefab, transform.position + new Vector3(vec, vec, 0), Quaternion.identity);
         }
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 2f);
     }
 
     public override void Hit(float _damage)
@@ -186,9 +242,7 @@ public class EnemyController : BaseController
         actor.hp -= _damage;
         if (actor.hp <= 0)
         {
-            actor.hp = 0;
-            actor.IsAlive = false;
-            animationHandler.Dead();
+            Dead();
         }
         else
         {
