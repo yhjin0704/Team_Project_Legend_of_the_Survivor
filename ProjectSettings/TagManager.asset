@@ -6,10 +6,14 @@ TagManager:
   tags:
   - Wall
   - Enemy
+  - PlayerBullet
   - Coin
   - PlayerSpawnArea
   - EnemySpawnArea
   - MonsterSpawnArea
+  - SceneUI
+  - Potion
+  - PlayerRange
   layers:
   - Default
   - TransparentFX

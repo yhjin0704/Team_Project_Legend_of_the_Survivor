@@ -36,8 +36,8 @@ public class MenuUI : BaseSceneUI
         // 테스트 버튼을 찾아서 할당(골드, 경험치, 대미지, 스킬 선택) 추후 삭제 필요
         testDamageButton.onClick.AddListener(OnClickTestDamage);
         testHealButton.onClick.AddListener(OnClickTestHeal);
-        testSkillSelectButton.onClick.AddListener(() => { uIManager.SetActiveSkillSelect(new int[] { 1, 2, 3 }); });
 */
+        testSkillSelectButton.onClick.AddListener(() => { uiManager.SetActiveSkillSelect(); });
 
         testGoldButton.onClick.AddListener(() =>
         {

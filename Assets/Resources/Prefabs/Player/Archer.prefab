@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5182050114129389964}
   - component: {fileID: 1441100429085009831}
   m_Layer: 3
-  m_Name: TakeGoldRange
-  m_TagString: Untagged
+  m_Name: TakeItemRange
+  m_TagString: PlayerRange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 811037e3565150c4ebb157f8adad352c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: 2
+  Range: 0.5
 --- !u!1 &4433673406668647355
 GameObject:
   m_ObjectHideFlags: 0
