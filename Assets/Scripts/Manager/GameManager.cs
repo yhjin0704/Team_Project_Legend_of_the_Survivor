@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
     public bool isSpreadShotting;
     public bool isSideShotting;
     public bool isBackShotting;
-    public bool isDoubleShotting;
 
     private List<EnemyController> enemies = new List<EnemyController>(); // 적 리스트
     private event Action OnAllEnemiesDefeated; // 모든 적을 물리친 후 발생할 이벤트
@@ -68,7 +67,6 @@ public class GameManager : MonoBehaviour
         isSpreadShotting = false;
         isSideShotting = false;
         isBackShotting = false;
-        isDoubleShotting = false;
     }
 
     public void SelectSkill(int selectNum)
@@ -94,14 +92,17 @@ public class GameManager : MonoBehaviour
                 if (!isSpreadShotting)
                 {
                     PlayerSkillManagerProperty.AddSkill(new SpreadShotting());
+                    isSpreadShotting = true;
                 }
                 else if (!isSideShotting)
                 {
                     PlayerSkillManagerProperty.AddSkill(new SideShotting());
+                    isSideShotting = true;
                 }
                 else if (!isBackShotting)
                 {
                     PlayerSkillManagerProperty.AddSkill(new BackShotting());
+                    isBackShotting = true;
                 }
                 else
                 {
@@ -112,10 +113,12 @@ public class GameManager : MonoBehaviour
                 if (!isSideShotting)
                 {
                     PlayerSkillManagerProperty.AddSkill(new SideShotting());
+                    isSideShotting = true;
                 }
                 else if (!isBackShotting)
                 {
                     PlayerSkillManagerProperty.AddSkill(new BackShotting());
+                    isBackShotting = true;
                 }
                 else
                 {
@@ -126,6 +129,7 @@ public class GameManager : MonoBehaviour
                 if (!isBackShotting)
                 {
                     PlayerSkillManagerProperty.AddSkill(new SideShotting());
+                    isBackShotting = true;
                 }
                 else
                 {
@@ -175,7 +179,6 @@ public class GameManager : MonoBehaviour
         isSpreadShotting = false;
         isSideShotting = false;
         isBackShotting = false;
-        isDoubleShotting = false;
         ClearStage = 0; // 클리어한 스테이지 초기화
         RemoveOnAllEnemiesDefeated(PortalProperty.SetActivePortalActive);
     }

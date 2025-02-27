@@ -109,6 +109,7 @@ public class SpawnManager : MonoBehaviour
             gameManager.PlayerGameObject = GameObject.FindGameObjectWithTag("Player");
             gameManager.PlayerSkillManagerProperty = gameManager.PlayerGameObject.GetComponent<PlayerSkillManager>();
             gameManager.PlayerControllerProperty = gameManager.PlayerGameObject.GetComponent<PlayerController>();
+            gameManager.PlayerControllerProperty.isDoubleShot = false;
         }
         else
         {

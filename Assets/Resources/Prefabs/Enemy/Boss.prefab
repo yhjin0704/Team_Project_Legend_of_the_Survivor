@@ -129,7 +129,7 @@ MonoBehaviour:
   atk: 1
   atkDelay: 1
   IsAlive: 1
-  defaultBulletPrefab: {fileID: 1468526609800095872, guid: f2a446e513c664d4099694cfd54fe2d3, type: 3}
+  defaultBulletPrefab: {fileID: 0}
 --- !u!114 &9201240106118676453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSkillUseActor: 0
   shotPosDistance: 0
-  enemy_Type: 0
+  enemy_Type: 2
   attackRange: 7
   attackDelay: 3
   coinCount: 10
