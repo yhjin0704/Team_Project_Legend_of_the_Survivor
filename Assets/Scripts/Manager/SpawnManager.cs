@@ -9,9 +9,12 @@ public class SpawnManager : MonoBehaviour
 {
     private GameObject playerPrefab; // 플레이어 프리팹을 할당할 변수
     private GameObject[] enemyPrefabs; // 몬스터 프리팹을 할당할 변수
+    public GameObject potPrefab; // 항아리 프리팹
 
-    private Tilemap SpawnEnemyTilemap; // 타일맵을 할당할 변수
+    private Tilemap SpawnEnemyTilemap; // 적 소환 타일맵을 할당할 변수
+    public Tilemap SpawnPotTilemap; // 항아리 소환 타일맵을 할당할 변수
     private Transform spawnPlayerPosition; // 플레이어의 위치를 할당할 변수
+
 
     GameManager gameManager;
 
@@ -90,7 +93,8 @@ public class SpawnManager : MonoBehaviour
             int ableIIndex = UnityEngine.Random.Range(0, availablePositions.Count);
             Vector3 spawnPos = availablePositions[ableIIndex];
 
-            Instantiate(enemyPrefabs[index], spawnPos, Quaternion.identity);
+            GameObject enemy = Instantiate(enemyPrefabs[index], spawnPos, Quaternion.identity);
+            enemy.transform.rotation = Quaternion.Euler(0, 0, 0);
             availablePositions.RemoveAt(ableIIndex);
         }
     }
@@ -103,6 +107,27 @@ public class SpawnManager : MonoBehaviour
         gameManager.PlayerSkillManagerProperty = gameManager.PlayerGameObject.GetComponent<PlayerSkillManager>();
         gameManager.MainCamera = Camera.main.GetComponent<FollowCamera>();
         gameManager.MainCamera.SetTarget();
+    }
+
+    void SpawnPots()
+    {
+        BoundsInt bounds = SpawnPotTilemap.cellBounds;
+        TileBase[] allTiles = SpawnPotTilemap.GetTilesBlock(bounds);
+
+        for (int x = bounds.xMin; x < bounds.xMax; x++)
+        {
+            for (int y = bounds.yMin; y < bounds.yMax; y++)
+            {
+                Vector3Int cellPosition = new Vector3Int(x, y, 0);
+                TileBase tile = SpawnPotTilemap.GetTile(cellPosition);
+
+                if (tile != null) // 타일이 존재하면
+                {
+                    Vector3 worldPosition = SpawnPotTilemap.GetCellCenterWorld(cellPosition); // 월드 위치 변환
+                    Instantiate(potPrefab, worldPosition, Quaternion.identity);
+                }
+            }
+        }
     }
 }
 
