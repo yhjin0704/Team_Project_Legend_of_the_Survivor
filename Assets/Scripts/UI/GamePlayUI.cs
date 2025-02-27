@@ -15,6 +15,8 @@ public class GamePlayUI : BaseSceneUI
     {
         base.Init(uiManager); // 배이스UI의 Init을 실행
         menuButton.onClick.AddListener(OnClickMenuButton); // 메뉴버튼 할당
+        expSlider.value = 0; // 경험치 실린더 초기화
+        goldText.text = "0"; // 골드 텍스트 초기화
     }
 
     public void OnClickMenuButton() // 메뉴버튼 클릭시

@@ -199,7 +199,23 @@ public class GameManager : MonoBehaviour
         isSideShotting = false;
         isBackShotting = false;
         isDoubleShotting = false;
+        ClearStage = 0; // 클리어한 스테이지 초기화
         UIManagerProperty.ChangeState(UIState.GameOver);
+    }
+
+    public void RestartGame() // 게임 재시작 메서드
+    {
+        if (PlayerGameObject != null)
+        {
+            Destroy(PlayerGameObject.gameObject); // 플레이어 게임 오브젝트 삭제
+        }
+        IsGameOver = false;
+        isSpreadShotting = false;
+        isSideShotting = false;
+        isBackShotting = false;
+        isDoubleShotting = false;
+        ClearStage = 0; // 클리어한 스테이지 초기화
+        ChangeScene(SceneState.Lobby);
     }
 
     public bool IsOnTilemap(Vector3 position)

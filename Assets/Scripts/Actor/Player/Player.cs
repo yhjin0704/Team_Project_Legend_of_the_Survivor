@@ -49,6 +49,8 @@ public class Player : Actor
             level++;
 
             maxExp = (level * 2) + 8;
+
+            GameManager.Instance.UIManagerProperty.SetActiveSkillSelect();
         }
     }
 }
