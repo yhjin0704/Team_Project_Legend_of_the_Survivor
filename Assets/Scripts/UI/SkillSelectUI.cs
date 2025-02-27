@@ -13,15 +13,15 @@ public class SkillSelectUI : BaseSceneUI
     [SerializeField] private TextMeshProUGUI skillName2;
     [SerializeField] private TextMeshProUGUI skillName3;
 
-
+    private const int MAXSKILLCOUNT = 9;
     GameManager gameManager;
-    int[] testSkillIndexs;
+    int[] selectSkillIndexs;
 
     public override void Init(UIManager uiManager)
     {
         base.Init(uiManager);
         gameManager = GameManager.Instance;
-        testSkillIndexs = new int[3];
+        selectSkillIndexs = new int[3];
         skillButton1.onClick.AddListener(OnSelectSkillButton1);
         skillButton2.onClick.AddListener(OnSelectSkillButton2);
         skillButton3.onClick.AddListener(OnSelectSkillButto3);
@@ -29,25 +29,25 @@ public class SkillSelectUI : BaseSceneUI
 
     public void OnSelectSkillButton1()
     {
-        gameManager.SelectSkill(testSkillIndexs[0]);
+        gameManager.SelectSkill(selectSkillIndexs[0]);
         uiManager.SetDeactiveSkillSelect();
     }
     public void OnSelectSkillButton2()
     {
-        gameManager.SelectSkill(testSkillIndexs[1]);
+        gameManager.SelectSkill(selectSkillIndexs[1]);
         uiManager.SetDeactiveSkillSelect();
     }
     public void OnSelectSkillButto3()
     {
-        gameManager.SelectSkill(testSkillIndexs[2]);
+        gameManager.SelectSkill(selectSkillIndexs[2]);
         uiManager.SetDeactiveSkillSelect();
     }
 
     public void SetSkillText()
     {
-        skillName1.text = SkillText(testSkillIndexs[0]);
-        skillName2.text = SkillText(testSkillIndexs[1]);
-        skillName3.text = SkillText(testSkillIndexs[2]);
+        skillName1.text = SkillText(selectSkillIndexs[0]);
+        skillName2.text = SkillText(selectSkillIndexs[1]);
+        skillName3.text = SkillText(selectSkillIndexs[2]);
     }
 
     public string SkillText(int selectNum)
@@ -56,35 +56,76 @@ public class SkillSelectUI : BaseSceneUI
         {
             case 0:
                 return "MaxHP 30 increase";
-                break;
             case 1:
                 return "ATK 5 increase";
-                break;
             case 2:
                 return "ATKDelay 0.1 decrease";
-                break;
             case 3:
                 return "speed 1 increase";
-                break;
             case 4:
                 return "50 heal";
-                break;
+            case 5:
+                if (!gameManager.isSpreadShotting)
+                {
+                    return "SpreadShotting";
+                }
+                else if (!gameManager.isSideShotting)
+                {
+                    return "SideShotting";
+                }
+                else if (!gameManager.isBackShotting)
+                {
+                    return "BackShotting";
+                }
+                else
+                {
+                    return "DoubleShotting";
+                }
+            case 6:
+                if (!gameManager.isSideShotting)
+                {
+                    return "SideShotting";
+                }
+                else if (!gameManager.isBackShotting)
+                {
+                    return "BackShotting";
+                }
+                else
+                {
+                    return "DoubleShotting";
+                }
+            case 7:
+                if (!gameManager.isBackShotting)
+                {
+                    return "BackShotting";
+                }
+                else
+                {
+                    return "DoubleShotting";
+                }
+            case 8:
+                return "DoubleShotting";
             default:
-                return "Error";
+                return "error";
         }
     }
 
     public void RandomSkill()
     {
+        int skillCount = gameManager.PlayerSkillManagerProperty.GetSkillList().Count;
+        if (gameManager.PlayerControllerProperty.isDoubleShot)
+        {
+            skillCount++;
+        }
         for (int count  = 0; count < 3;)
         {
-            int index = Random.Range(0, 5); // 0~4 사이의 랜덤 인덱스 생성
+            int index = Random.Range(0, MAXSKILLCOUNT - (skillCount - 1)); // 0~4 사이의 랜덤 인덱스 생성
 
             // 중복 체크
             bool isDuplicate = false;
             for (int i = 0; i < count; i++)
             {
-                if (testSkillIndexs[i] == index)
+                if (selectSkillIndexs[i] == index)
                 {
                     isDuplicate = true;
                     break;
@@ -94,7 +135,7 @@ public class SkillSelectUI : BaseSceneUI
             // 중복이 없으면 배열에 추가
             if (!isDuplicate)
             {
-                testSkillIndexs[count] = index;
+                selectSkillIndexs[count] = index;
                 count++;
             }
         }

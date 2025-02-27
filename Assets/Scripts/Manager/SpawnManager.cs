@@ -109,6 +109,7 @@ public class SpawnManager : MonoBehaviour
             newObject.name = "Archer";
             gameManager.PlayerGameObject = GameObject.FindGameObjectWithTag("Player");
             gameManager.PlayerSkillManagerProperty = gameManager.PlayerGameObject.GetComponent<PlayerSkillManager>();
+            gameManager.PlayerControllerProperty = gameManager.PlayerGameObject.GetComponent<PlayerController>();
         }
         gameManager.MainCamera = Camera.main.GetComponent<FollowCamera>();
         gameManager.MainCamera.SetTarget();

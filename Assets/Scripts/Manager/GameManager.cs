@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
@@ -23,9 +24,16 @@ public class GameManager : MonoBehaviour
     public GameObject PlayerPrefab { get; private set; } // 플레이어를 할당할 변수
     public GameObject PlayerGameObject { get; set; } // 플레이어 게임 오브젝트를 할당할 변수
     public PlayerSkillManager PlayerSkillManagerProperty { get; set; } // 플레이어 스킬 매니저를 할당할 변수
+    public PlayerController PlayerControllerProperty { get; set; } // 플레이어 컨트롤러를 할당할 변수
     public GameObject[] EnemyPrefabs { get; private set; } // 몬스터를 할당할 변수
     public FollowCamera MainCamera { get; set; } // 메인 카메라를 할당할 변수
     public Tilemap FloorTilemap { get; set; } // 타일맵을 할당할 변수
+
+
+    public bool isSpreadShotting;
+    public bool isSideShotting;
+    public bool isBackShotting;
+    public bool isDoubleShotting;
 
     private List<EnemyController> enemies = new List<EnemyController>(); // 적 리스트
     private event Action OnAllEnemiesDefeated; // 모든 적을 물리친 후 발생할 이벤트
@@ -55,6 +63,11 @@ public class GameManager : MonoBehaviour
 
         currentSceneState = SceneState.Lobby; // 초기 씬 상태는 로비
         ClearStage = 0; // 클리어한 스테이지 초기화
+
+        isSpreadShotting = false;
+        isSideShotting = false;
+        isBackShotting = false;
+        isDoubleShotting = false;
     }
 
     public void SelectSkill(int selectNum)
@@ -75,6 +88,53 @@ public class GameManager : MonoBehaviour
                 break;
             case 4:
                 PlayerSkillManagerProperty.SelectHeal(50);
+                break;
+            case 5:
+                if (!isSpreadShotting)
+                {
+                    PlayerSkillManagerProperty.AddSkill(new SpreadShotting());
+                }
+                else if (!isSideShotting)
+                {
+                    PlayerSkillManagerProperty.AddSkill(new SideShotting());
+                }
+                else if (!isBackShotting)
+                {
+                    PlayerSkillManagerProperty.AddSkill(new BackShotting());
+                }
+                else
+                {
+                    PlayerSkillManagerProperty.OnDoubleShotAblilty();
+                }
+                break;
+            case 6:
+                if (!isSideShotting)
+                {
+                    PlayerSkillManagerProperty.AddSkill(new SideShotting());
+                }
+                else if (!isBackShotting)
+                {
+                    PlayerSkillManagerProperty.AddSkill(new BackShotting());
+                }
+                else
+                {
+                    PlayerSkillManagerProperty.OnDoubleShotAblilty();
+                }
+                break;
+            case 7:
+                if (!isBackShotting)
+                {
+                    PlayerSkillManagerProperty.AddSkill(new SideShotting());
+                }
+                else
+                {
+                    PlayerSkillManagerProperty.OnDoubleShotAblilty();
+                }
+                break;
+            case 8:
+                PlayerSkillManagerProperty.OnDoubleShotAblilty();
+                break;
+            default:
                 break;
         }
 
@@ -134,7 +194,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(PlayerGameObject.gameObject); // 플레이어 게임 오브젝트 삭제
         }
-        IsGameOver = true;
+        IsGameOver = true; 
+        isSpreadShotting = false;
+        isSideShotting = false;
+        isBackShotting = false;
+        isDoubleShotting = false;
         UIManagerProperty.ChangeState(UIState.GameOver);
     }
 
