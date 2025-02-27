@@ -199,7 +199,7 @@ public class BaseController : MonoBehaviour
             // �׷��� ���� ����
             Gizmos.color = Color.red;
             // 2D ������ targetTransform�� ��ġ�� �� �׸���
-            Gizmos.DrawWireSphere(shotPos.position, 0.02f);
+            Gizmos.DrawWireSphere(shotPos.position, 0.05f);
         }
     }
 
