@@ -20,6 +20,22 @@ public class SoundManager : MonoBehaviour
     AudioSource[] sfxPlayers;
     int channelIndex;
 
+    public enum Bgm
+    {
+        Super,
+        Asteroid,
+        Froggy
+    }
+
+    public enum Sfx
+    {
+        Arrow,
+        Button,
+        Coin,
+        Hit,
+        Levelup
+    }
+
     private void Awake()
     {
         instance = this;
@@ -32,7 +48,7 @@ public class SoundManager : MonoBehaviour
         GameObject bgmObject = new GameObject("BgmPlayer");
         bgmObject.transform.parent = transform;
         bgmPlayer = bgmObject.AddComponent<AudioSource>();
-        bgmPlayer.playOnAwake = true;
+        bgmPlayer.playOnAwake = false;
         bgmPlayer.loop = true;
         bgmPlayer.volume = bgmVolume;
 
@@ -46,6 +62,33 @@ public class SoundManager : MonoBehaviour
             sfxPlayers[i].playOnAwake = false;
             sfxPlayers[i].loop = false;
             sfxPlayers[i].volume = sfxVolume;
+        }
+    }
+
+    public void PlayBgm(Bgm bgm)
+    {
+        bgmPlayer.clip = bgmClips[(int)bgm];
+        bgmPlayer.Play();
+    }
+
+    public void StopBgm()
+    {
+        bgmPlayer.Stop();
+    }
+
+    public void PlaySfx(Sfx sfx)
+    {
+        for (int i = 0; i < sfxPlayers.Length; i++)
+        {
+            int loopIndex = (i + channelIndex) % sfxPlayers.Length;
+
+            if (sfxPlayers[loopIndex].isPlaying)
+                continue;
+
+            channelIndex = loopIndex;
+            sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];
+            sfxPlayers[loopIndex].Play();
+            break;
         }
     }
 }

@@ -90,6 +90,7 @@ public class EnemyController : BaseController
                 hitTime = 0f;
                 isHit = false;
                 animationHandler.InvincibilityEnd();
+                actor.GetComponent<Collider2D>().enabled = true;
             }
         }
         if (isAttacking)
@@ -107,6 +108,8 @@ public class EnemyController : BaseController
     protected override void Attack()
     {
         base.Attack();
+
+        SoundManager.instance.PlaySfx(SoundManager.Sfx.Arrow);
 
         isAttacking = true;
         animationHandler.Attack();
@@ -253,6 +256,8 @@ public class EnemyController : BaseController
         if (isHit || !actor.IsAlive)
             return;
 
+        SoundManager.instance.PlaySfx(SoundManager.Sfx.Hit);
+
         isHit = true;
         actor.hp -= _damage;
         if (actor.hp <= 0)
@@ -261,6 +266,7 @@ public class EnemyController : BaseController
         }
         else
         {
+            actor.GetComponent<Collider2D>().enabled = false;
             animationHandler.Damage();
         }
         gameObject.GetComponentInChildren<ActorUI>().ShowCombatValue((int)_damage, true);
