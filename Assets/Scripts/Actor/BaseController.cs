@@ -121,13 +121,13 @@ public class BaseController : MonoBehaviour
     {
         if (skillManager.GetSkillList() == null)
         {
-            Debug.LogError("SkillList�� null�Դϴ�.");
+            Debug.Log("SkillList�� null�Դϴ�.");
             return;
         }
 
         if (target == null)
         {
-            Debug.LogError("Target�� null�Դϴ�.");
+            Debug.Log("Target�� null�Դϴ�.");
             return;
         }
     }
@@ -199,7 +199,7 @@ public class BaseController : MonoBehaviour
             // �׷��� ���� ����
             Gizmos.color = Color.red;
             // 2D ������ targetTransform�� ��ġ�� �� �׸���
-            Gizmos.DrawWireSphere(shotPos.position, 0.02f);
+            Gizmos.DrawWireSphere(shotPos.position, 0.05f);
         }
     }
 

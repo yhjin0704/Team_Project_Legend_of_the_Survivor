@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSkillUseActor: 1
-  shotPosDistance: 0.15
+  shotPosDistance: 0.5
   listMonsters: []
   isDoubleShot: 1
 --- !u!114 &8779956054728961805
