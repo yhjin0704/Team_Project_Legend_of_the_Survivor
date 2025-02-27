@@ -32,7 +32,6 @@ public class SoundManager : MonoBehaviour
         Arrow,
         Button,
         Coin,
-        Footstep,
         Hit,
         Levelup
     }
@@ -90,17 +89,6 @@ public class SoundManager : MonoBehaviour
             sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];
             sfxPlayers[loopIndex].Play();
             break;
-        }
-    }
-
-    public void StopSfx(Sfx sfx)
-    {
-        for (int i = 0; i < sfxPlayers.Length; i++)
-        {
-            if (sfxPlayers[i].clip == sfxClips[(int)sfx])
-            {
-                sfxPlayers[i].Stop();
-            }
         }
     }
 }
