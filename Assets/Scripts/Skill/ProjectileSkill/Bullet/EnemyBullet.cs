@@ -33,5 +33,9 @@ public class EnemyBullet : Bullet
             _collision.gameObject.GetComponent<BaseController>().Hit(damage);
             Destroy(gameObject);
         }
+        else if(_collision.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
