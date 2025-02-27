@@ -11,7 +11,7 @@ public class FollowCamera : MonoBehaviour
 
     //public float minX, maxX, minY, maxY;
 
-    void Start()
+    void Awake()
     {
         if (Target == null)
             return;
@@ -31,5 +31,10 @@ public class FollowCamera : MonoBehaviour
         //pos.y = Mathf.Clamp(pos.y, minY, maxY);
 
         transform.position = pos;
+    }
+
+    public void SetTarget()
+    {
+        Target = GameManager.Instance.PlayerGameObject.transform;
     }
 }

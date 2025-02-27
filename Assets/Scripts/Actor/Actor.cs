@@ -7,6 +7,7 @@ public enum EState
     Idle,
     Move,
     Attack,
+    Hit,
     Dead
 }
 
@@ -16,7 +17,17 @@ public class Actor : MonoBehaviour
 
     protected AnimationHandler animationHandler;
 
-    [Range(1, 100)] public float hp = 100;
+    public float hp = 100;
+    protected float maxHp;
+    public float GetMaxHp()
+    {
+        return maxHp;
+    }
+    public void SetMaxHp(float _maxHp)
+    {
+        maxHp = _maxHp;
+    }
+
     [Range(1f, 20f)] public float speed = 3;
     public float atk = 1;
     public float atkDelay = 3;
@@ -48,6 +59,8 @@ public class Actor : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         _renderer = transform.Find("Renderer");
+
+        maxHp = hp;
     }
 
     protected virtual void Start()

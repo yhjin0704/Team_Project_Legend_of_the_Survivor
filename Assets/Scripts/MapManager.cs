@@ -6,18 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviour
 {
-    public GameObject portalPrefab;      // »ý¼ºÇÒ Æ÷Å» ÇÁ¸®ÆÕ
+    public GameObject portalPrefab;      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private Collider2D portalCollider;
     private SpriteRenderer portalRenderer;
-    public GameObject potPrefab;        // Ç×¾Æ¸® ÇÁ¸®ÆÕ
-    public Vector2[] potPositions;      // ÀÎ½ºÆåÅÍ¿¡¼­ ¼³Á¤ÇÒ ÁÂÇ¥ ¹è¿­
+    public GameObject potPrefab;        // ï¿½×¾Æ¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public Vector2[] potPositions;      // ï¿½Î½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½è¿­
 
     private void Awake()
     {
         portalCollider = GetComponent<Collider2D>();
         portalRenderer = GetComponent<SpriteRenderer>();
 
-        SetPortalActive(false); // ½ÃÀÛ ½Ã Æ÷Å» ºñÈ°¼ºÈ­
+        SetPortalActive(false); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Å» ï¿½ï¿½È°ï¿½ï¿½È­
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -28,14 +28,14 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    // Æ÷Å» È°¼ºÈ­/ºñÈ°¼ºÈ­ ÇÔ¼ö
+    // ï¿½ï¿½Å» È°ï¿½ï¿½È­/ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½Ô¼ï¿½
     public void SetPortalActive(bool isActive)
     {
         portalCollider.enabled = isActive;
         portalRenderer.enabled = isActive;
     }
 
-    // ´ÙÀ½ ¹æ(¾À) ·Îµå
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½(ï¿½ï¿½) ï¿½Îµï¿½
     private void LoadNextRoom()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -66,18 +66,24 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    // ¸ðµç ÀûÀÌ Á×¾ú´ÂÁö È®ÀÎÇÏ´Â ÇÔ¼ö
+    // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¾ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
     private bool AllEnemiesDefeated()
     {
         return GameObject.FindGameObjectsWithTag("Enemy").Length == 0;
     }
 
-    // Æ÷Å» »ý¼º ÇÔ¼ö
+    // ï¿½ï¿½Å» ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
     private void SpawnPortal()
     {
-        Vector2 spawnPosition = new Vector2(-9, -4);                                                // ¹Ù´Ú¿¡ Æ÷Å» »ý¼º (À§Ä¡ Á¶Á¤ °¡´É)
+        Vector2 spawnPosition = new Vector2(-9, -4);                                                // ï¿½Ù´Ú¿ï¿½ ï¿½ï¿½Å» ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
         GameObject portalObject = Instantiate(portalPrefab, spawnPosition, Quaternion.identity);
         portalObject.GetComponent<SpawnManager>();
-        SetPortalActive(true); // Æ÷Å» È°¼ºÈ­
+        SetPortalActive(true); // ï¿½ï¿½Å» È°ï¿½ï¿½È­
+    public int currentMap;            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+    public int minEnemies = 4;        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ ï¿½ï¿½ 
+    public int maxEnemies = 8;        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½
+
+    private void Start()
+    {
     }
 }

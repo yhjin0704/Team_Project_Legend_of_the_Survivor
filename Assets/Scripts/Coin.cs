@@ -16,6 +16,18 @@ public class Coin : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter2D(Collider2D _collision)
+    {
+        if (_collision.CompareTag("PlayerRange"))
+        {
+            _collision.GetComponentInParent<Player>().gold += 1;
+
+            GetComponent<Collider2D>().enabled = false;
+
+            GetComponent<Animator>().Play("Coin_Destroy");
+        }
+    }
+
     public void DestroyCoin()
     {
         Destroy(gameObject);

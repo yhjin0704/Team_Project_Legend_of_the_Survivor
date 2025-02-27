@@ -36,18 +36,26 @@ public class PlayerController : BaseController
     {
         base.FixedUpdate();
 
-        switch(actor.GetState())
+        switch (actor.GetState())
         {
             case EState.Idle:
                 _rigidbody.velocity = Vector2.zero;
+                animationHandler.Move(_rigidbody.velocity);
                 break;
             case EState.Move:
                 Movement(movementDirection);
+                animationHandler.Move(_rigidbody.velocity);
                 break;
             case EState.Attack:
-                Attack();
+                _rigidbody.velocity = Vector2.zero;
+                break;
+            case EState.Hit:
+                Movement(movementDirection);
                 break;
             case EState.Dead:
+                _rigidbody.velocity = Vector2.zero;
+                break;
+            default:
                 break;
         }
         //TestCode
@@ -81,13 +89,8 @@ public class PlayerController : BaseController
         {
             player.GetRenderer().transform.localScale = new Vector3(-1, 1, 1);
         }
-        
-        _rigidbody.velocity = _direction * actor.speed;
-    }
 
-    protected override void Attack()
-    {
-        base.Attack();
+        _rigidbody.velocity = _direction * actor.speed;
     }
 
     protected override void UseSkills()
@@ -106,6 +109,8 @@ public class PlayerController : BaseController
         {
             _shootingSkill.Use();
         }
+        isAttacking = false;
+        animationHandler.AttackEnd();
     }
 
     protected override void Dead()

@@ -8,8 +8,12 @@ TagManager:
   - Enemy
   - PlayerBullet
   - Coin
-  - MonsterSpawnArea
   - PlayerSpawnArea
+  - EnemySpawnArea
+  - MonsterSpawnArea
+  - SceneUI
+  - Potion
+  - PlayerRange
   layers:
   - Default
   - TransparentFX

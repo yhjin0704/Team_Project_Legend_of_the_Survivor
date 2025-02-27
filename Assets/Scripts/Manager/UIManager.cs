@@ -45,9 +45,10 @@ public class UIManager : MonoBehaviour // UI를 관리하는 클래스
         ChangeState(UIState.Lobby); // UI 상태를 로비로 
     }
 
-    public void SetActiveSkillSelect(int[] skills) // 스킬 선택 활성화 함수
+    public void SetActiveSkillSelect() // 스킬 선택 활성화 함수
     {
-        skillSelectUI.RandomSkill(skills);
+        skillSelectUI.RandomSkill();
+        skillSelectUI.SetSkillText();
         skillSelectUI.SetActive(UIState.SkillSelect);
     }
 
