@@ -35,6 +35,6 @@ public class FollowCamera : MonoBehaviour
 
     public void SetTarget()
     {
-        Target = GameObject.FindGameObjectWithTag("Player").transform;
+        Target = GameManager.Instance.PlayerGameObject.transform;
     }
 }

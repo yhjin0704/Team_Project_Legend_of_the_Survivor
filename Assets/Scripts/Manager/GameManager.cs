@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] Maps { get; private set; } // 맵을 할당할 변수
     public GameObject PlayerPrefab { get; private set; } // 플레이어를 할당할 변수
+    public GameObject PlayerGameObject { get; set; } // 플레이어 게임 오브젝트를 할당할 변수
+    public PlayerSkillManager PlayerSkillManagerProperty { get; set; } // 플레이어 스킬 매니저를 할당할 변수
     public GameObject[] EnemyPrefabs { get; private set; } // 몬스터를 할당할 변수
     public FollowCamera MainCamera { get; set; } // 메인 카메라를 할당할 변수
 
@@ -53,11 +55,33 @@ public class GameManager : MonoBehaviour
         ClearStage = 0; // 클리어한 스테이지 초기화
     }
 
+    public void SelectSkill(int selectNum)
+    {
+        switch (selectNum)
+        {
+            case 0:
+                PlayerSkillManagerProperty.IncreaseHp(30);
+                break;
+            case 1:
+                PlayerSkillManagerProperty.IncreaseAtk(5);
+                break;
+            case 2:
+                PlayerSkillManagerProperty.ReduceAtkDelay(0.1f);;
+                break;
+            case 3:
+                PlayerSkillManagerProperty.IncreaseSpeed(1);
+                break;
+            case 4:
+                PlayerSkillManagerProperty.SelectHeal(50);
+                break;
+        }
+
+    }
+
     public void AddOnAllEnemiesDefeated(Action action) // 모든 적을 물리친 후 발생할 이벤트 추가 함수
     {
         OnAllEnemiesDefeated += action;
     }
-
     public void RemoveOnAllEnemiesDefeated(Action action) // 모든 적을 물리친 후 발생할 이벤트 제거 함수
     {
         OnAllEnemiesDefeated -= action;
@@ -67,7 +91,6 @@ public class GameManager : MonoBehaviour
     {
         enemies.Add(enemy);
     }
-
     public void UnregisterEnemy(Enemy enemy) // 적 리스트에서 몬스터 제거 함수
     {
         ClearStage++;
