@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Pot : MonoBehaviour
 {
@@ -9,12 +10,21 @@ public class Pot : MonoBehaviour
     public float dropChance; // 포션이 나올 확률
     public int health;
     private int currentHealth;
+    public Tilemap tilemap;
+
+    private void Awake()
+    {
+        tilemap = FindObjectOfType<Tilemap>();
+    }
+
 
 
 
     public void Start()
     {
         currentHealth = health;
+        Vector3 position = tilemap.WorldToCell(transform.position);
+        Debug.Log(position);
     }
 
     public void DestroyPot()

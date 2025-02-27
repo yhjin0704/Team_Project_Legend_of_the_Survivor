@@ -11,6 +11,9 @@ public class MapManager : MonoBehaviour
     private SpriteRenderer portalRenderer;
     public GameObject potPrefab;        // �׾Ƹ� ������
     public Vector2[] potPositions;      // �ν����Ϳ��� ������ ��ǥ �迭
+    public int currentMap;            // ���� ��
+    public int minEnemies = 4;        // ���� �ּ� �� 
+    public int maxEnemies = 8;        // ���� �ְ� ��
 
     private void Awake()
     {
@@ -79,11 +82,7 @@ public class MapManager : MonoBehaviour
         GameObject portalObject = Instantiate(portalPrefab, spawnPosition, Quaternion.identity);
         portalObject.GetComponent<SpawnManager>();
         SetPortalActive(true); // ��Ż Ȱ��ȭ
-    public int currentMap;            // ���� ��
-    public int minEnemies = 4;        // ���� �ּ� �� 
-    public int maxEnemies = 8;        // ���� �ְ� ��
-
-    private void Start()
-    {
     }
+
+
 }
