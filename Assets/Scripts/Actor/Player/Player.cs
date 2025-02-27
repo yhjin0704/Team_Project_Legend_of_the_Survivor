@@ -8,13 +8,20 @@ public class Player : Actor
 
     public int gold = 0;
 
-    Transform takeGoldRange;
+    Transform takeItemRange;
 
     protected override void Awake()
     {
         base.Awake();
+        if (FindObjectsOfType<Player>().Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-        takeGoldRange = transform.Find("TakeGoldRange");
+        takeItemRange = transform.Find("TakeItemRange");
+
+        DontDestroyOnLoad(gameObject);
     }
 
     protected override void Start()

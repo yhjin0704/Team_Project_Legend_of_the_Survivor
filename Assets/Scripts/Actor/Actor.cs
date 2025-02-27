@@ -7,7 +7,6 @@ public enum EState
     Idle,
     Move,
     Attack,
-    Hit,
     Dead
 }
 

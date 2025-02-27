@@ -6,6 +6,7 @@ public class PlayerSkillManager : SkillManager
 {
     Player player;
     PlayerController playerController;
+
     protected override void Awake()
     {
         base.Awake();
@@ -13,8 +14,7 @@ public class PlayerSkillManager : SkillManager
         player = actor as Player;
         playerController = baseController as PlayerController;
 
-        StraightShotting straightShotting = new StraightShotting();
-        AddSkill(straightShotting);
+        AddSkill(new StraightShotting());
     }
 
     protected override void Start()
@@ -59,5 +59,10 @@ public class PlayerSkillManager : SkillManager
     public void SelectHeal(float _heal)
     {
         playerController.Healed(_heal);
+    }
+
+    public void OnDoubleShotAblilty()
+    {
+        playerController.isDoubleShot = true;
     }
 }
