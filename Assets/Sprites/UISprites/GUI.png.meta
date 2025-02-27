@@ -711,7 +711,7 @@ TextureImporter:
         width: 6
         height: 6
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -719,6 +719,48 @@ TextureImporter:
       bones: []
       spriteID: 21a9c48aa41a67f449b31a27c7fa47b9
       internalID: -1370614440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skill
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 177
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd9e126ee1e23684e96c2a6f8fad47db
+      internalID: -445765361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkillBackBoard
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 176
+        width: 48
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12a775d4e5f88fe4f9b7b706f0c3557c
+      internalID: 791078183
       vertices: []
       indices: 
       edges: []
@@ -758,6 +800,8 @@ TextureImporter:
       NText: 1293285878
       OText: -1800569720
       RText: 1634443334
+      Skill: -445765361
+      SkillBackBoard: 791078183
       StartText: 2037323004
       VText: 822714839
       WText: -2065321990

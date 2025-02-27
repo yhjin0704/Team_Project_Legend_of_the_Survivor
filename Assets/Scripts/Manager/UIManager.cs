@@ -50,16 +50,19 @@ public class UIManager : MonoBehaviour // UI를 관리하는 클래스
         skillSelectUI.RandomSkill();
         skillSelectUI.SetSkillText();
         skillSelectUI.SetActive(UIState.SkillSelect);
+        Time.timeScale = 0;
     }
 
     public void SetDeactiveSkillSelect() // 스킬 선택 비활성화 함수
     {
         skillSelectUI.SetActive(UIState.GamePlay);
+        Time.timeScale = 1;
     }
 
     public void SetActiveMenu() // 메뉴 활성화 함수
     {
         menuUI.SetActive(UIState.Menu);
+        Time.timeScale = 0;
     }
 
     public void ChangeGold(int gold) // 골드 변경 함수

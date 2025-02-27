@@ -33,6 +33,7 @@ public class TakeItemRange : MonoBehaviour
             player.CheckLevelUp();
 
             GameManager.Instance.UIManagerProperty.ChangeGold(player.gold);
+            GameManager.Instance.UIManagerProperty.ChangeEXP(player.exp, player.maxExp);
         }
     }
 }
