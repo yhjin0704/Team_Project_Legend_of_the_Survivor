@@ -38,5 +38,12 @@ public class PlayerBullet : Bullet
             }
                 Destroy(gameObject);
         }
+        else if (_collision.CompareTag("Wall"))
+        {
+            _rigidbody.velocity = Vector2.zero;
+            GetComponent<Collider2D>().enabled = false;
+
+            Destroy(gameObject, 0.5f);
+        }
     }
 }
