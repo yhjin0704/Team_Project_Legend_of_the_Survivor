@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1845718105156131068}
   - component: {fileID: 1647610206605219369}
   - component: {fileID: 8779956054728961805}
-  - component: {fileID: 3931585436533108375}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Player
@@ -158,22 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e477bd34914234fb05627c6b2c1b2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3931585436533108375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4433673406668647355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2649011ea7de834195e37107521b3d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isSkillUseActor: 0
-  shotPosDistance: 0
-  listMonsters: []
-  player: {fileID: 0}
 --- !u!1 &5104822597518474103
 GameObject:
   m_ObjectHideFlags: 0
