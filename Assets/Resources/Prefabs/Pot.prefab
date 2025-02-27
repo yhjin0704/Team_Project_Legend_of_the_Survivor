@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 0
   m_Sprite: {fileID: -1166832053, guid: 037c03f9787e1b84292223caa8c3e994, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   potionPrefabs:
   - {fileID: 951283346793885083, guid: 5939b8b527bf8de4cb8a0f5aeb790a66, type: 3}
   potionCount: 1
-  dropChance: 1
+  dropChance: 0.25
   health: 0
   tilemap: {fileID: 0}
 --- !u!61 &3743806033210091422

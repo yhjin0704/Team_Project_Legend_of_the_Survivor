@@ -214,6 +214,8 @@ MonoBehaviour:
   IsAlive: 1
   defaultBulletPrefab: {fileID: 1468526609800095872, guid: e28bdba90f9845642aa96fa842731585, type: 3}
   level: 1
+  maxExp: 0
+  exp: 0
   gold: 0
 --- !u!114 &1647610206605219369
 MonoBehaviour:
@@ -229,7 +231,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSkillUseActor: 1
   shotPosDistance: 0.5
-  listMonsters: []
   isDoubleShot: 1
 --- !u!114 &8779956054728961805
 MonoBehaviour:
@@ -328,7 +329,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 30
+  m_SortingOrder: 0
   m_Sprite: {fileID: 1956237279, guid: 8bc8843b261f1904ea7e39707b6dc6d8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
