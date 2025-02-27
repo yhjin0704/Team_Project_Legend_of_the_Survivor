@@ -23,6 +23,10 @@ public class Actor : MonoBehaviour
     {
         return maxHp;
     }
+    public void SetMaxHp(float _maxHp)
+    {
+        maxHp = _maxHp;
+    }
 
     [Range(1f, 20f)] public float speed = 3;
     public float atk = 1;

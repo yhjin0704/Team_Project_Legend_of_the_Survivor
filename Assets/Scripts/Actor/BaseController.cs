@@ -156,6 +156,11 @@ public class BaseController : MonoBehaviour
         gameObject.GetComponentInChildren<ActorUI>().ChangeHPBar(actor.hp, actor.GetMaxHp());
     }
 
+    public virtual void Healed(float _heal)
+    {
+        
+    }
+
     protected virtual void Dead()
     {
         actor.hp = 0;
