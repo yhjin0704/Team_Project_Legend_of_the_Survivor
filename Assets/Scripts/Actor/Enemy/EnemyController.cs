@@ -21,7 +21,8 @@ public class EnemyController : BaseController
 
     [SerializeField] private float attackRange = 1f;
     [SerializeField] private float attackDelay = 1f;
-    private float currentTime = 0f;
+    private float attackTime = 0f;
+    private float hitTime = 0f;
     private bool isHit = false;
     [SerializeField] private int coinCount;
     [SerializeField] GameObject coinPrefab;
@@ -44,6 +45,12 @@ public class EnemyController : BaseController
 
     protected override void Update()
     {
+        if (!actor.IsAlive)
+        {
+            agent.velocity = Vector3.zero;
+            return;
+        }
+
         if (isAttacking || isHit)
         {
             StopPlayer();
@@ -67,22 +74,23 @@ public class EnemyController : BaseController
     private void StopPlayer()
     {
         agent.velocity = Vector3.zero;
+
         if (isHit)
         {
-            currentTime += Time.deltaTime;
-            if (currentTime > 1)
+            hitTime += Time.deltaTime;
+            if (hitTime > 1)
             {
-                currentTime = 0f;
+                hitTime = 0f;
                 isHit = false;
                 animationHandler.InvincibilityEnd();
             }
         }
-        else if (isAttacking)
+        if (isAttacking)
         {
-            currentTime += Time.deltaTime;
-            if (currentTime > attackDelay)
+            attackTime += Time.deltaTime;
+            if (attackTime > attackDelay)
             {
-                currentTime = 0f;
+                attackTime = 0f;
                 isAttacking = false;
                 animationHandler.AttackEnd();
             }
@@ -214,7 +222,7 @@ public class EnemyController : BaseController
     {
         base.Dead();
 
-        isHit = true;
+        actor.IsAlive = false;
         for (int i = 0; i < coinCount; i++)
         {
             float vec = Random.Range(-1f, 1f);
@@ -233,8 +241,7 @@ public class EnemyController : BaseController
         if (actor.hp <= 0)
         {
             actor.hp = 0;
-            actor.IsAlive = false;
-            animationHandler.Dead();
+            Dead();
         }
         else
         {
