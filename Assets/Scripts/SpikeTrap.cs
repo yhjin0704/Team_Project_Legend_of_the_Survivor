@@ -20,6 +20,13 @@ public class SpikeTrap : MonoBehaviour
             repeatCoroutine = StartCoroutine(RepeatTrapAttack());
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<BaseController>().Hit(damage);
+        }
+    }
 
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -30,7 +37,15 @@ public class SpikeTrap : MonoBehaviour
             repeatCoroutine = null;
         }
     }
-    
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<BaseController>().Hit(damage);
+        }
+    }
+
     private IEnumerator RepeatTrapAttack()
     {
         while (isInside)
