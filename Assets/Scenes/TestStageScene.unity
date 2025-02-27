@@ -7767,10 +7767,8 @@ GameObject:
   - component: {fileID: 1095050706}
   - component: {fileID: 1095050705}
   - component: {fileID: 1095050707}
-  - component: {fileID: 1095050708}
   - component: {fileID: 1095050711}
   - component: {fileID: 1095050710}
-  - component: {fileID: 1095050709}
   m_Layer: 0
   m_Name: Spike1
   m_TagString: Untagged
@@ -8279,34 +8277,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1095050708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1095050703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74117414f8334b44f97736903ec555a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator:
-  - {fileID: 0}
-  isActive: 1
-  damage: 10
---- !u!114 &1095050709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1095050703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a64eb7118424d924f87f5687be6d8715, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &1095050710
 Rigidbody2D:
   serializedVersion: 4
@@ -10613,8 +10583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portalPrefab: {fileID: 953211424}
   potPrefab: {fileID: 355626543}
-  potPositions:
-  - {x: 0, y: 0}
+  potPositions: []
 --- !u!61 &1160968204
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12066,7 +12035,7 @@ Tilemap:
       - {fileID: 21300000, guid: 421426eae75bcb74eb29722e80361989, type: 3}
       - {fileID: 21300000, guid: de94f968a00e4e347b1a3f87e4cc99ea, type: 3}
       - {fileID: 21300000, guid: de94f968a00e4e347b1a3f87e4cc99ea, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 1
       m_Flags: 0
   - first: {x: 6, y: 2, z: 0}
