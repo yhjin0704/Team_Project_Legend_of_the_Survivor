@@ -12,6 +12,8 @@ public class PlayerController : BaseController
     public List<GameObject> listMonsters = new List<GameObject>();
     GameObject closestMonster = null;
 
+    public bool isDoubleShot = true;
+
     GameManager gameManager = GameManager.Instance;
 
     protected override void Awake()
@@ -47,11 +49,15 @@ public class PlayerController : BaseController
                 break;
             case EState.Move:
                 Movement(movementDirection);
-                animationHandler.Move(_rigidbody.velocity);
-                break;
-            case EState.Hit:
-                Movement(movementDirection);
-                break;
+                if (isHit == false)
+                {
+                    animationHandler.Move(_rigidbody.velocity);
+                }
+                else 
+                {
+
+                }
+                    break;
             case EState.Dead:
                 _rigidbody.velocity = Vector2.zero;
                 break;
@@ -110,6 +116,10 @@ public class PlayerController : BaseController
         foreach (ISkillUseDelay _shootingSkill in skillManager.GetSkillList())
         {
             _shootingSkill.Use();
+            if (isDoubleShot == true)
+            {
+                StartCoroutine(UseDoubleShot(_shootingSkill));
+            }
         }
         isAttacking = false;
         StartCoroutine(AtkAnimEnd(0.75f));
@@ -183,5 +193,12 @@ public class PlayerController : BaseController
         yield return new WaitForSeconds(_delay);
 
         animationHandler.AttackEnd();
+    }
+
+    IEnumerator UseDoubleShot(ISkillUseDelay _skill)
+    {
+        yield return new WaitForSeconds(0.3f);
+
+        _skill.Use();
     }
 }

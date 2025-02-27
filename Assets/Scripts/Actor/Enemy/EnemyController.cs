@@ -23,7 +23,6 @@ public class EnemyController : BaseController
     [SerializeField] private float attackDelay = 1f;
     private float attackTime = 0f;
     private float hitTime = 0f;
-    private bool isHit = false;
     [SerializeField] private int coinCount;
     [SerializeField] GameObject coinPrefab;
     [SerializeField] private int potionCount;

@@ -13,8 +13,8 @@ public class BaseController : MonoBehaviour
     protected Vector2 movementDirection = Vector2.zero;
     public Vector2 MovementDirection { get { return movementDirection; } }
 
-    protected Vector2 lookDirection = Vector2.zero;
-    public Vector2 LookDirection { get { return lookDirection; } }
+    protected Vector3 lookDirection = Vector2.zero;
+    public Vector3 LookDirection { get { return lookDirection; } }
 
     protected Vector2 knockback = Vector2.zero;
     protected float knockbackDuration = 0.0f;
@@ -41,6 +41,7 @@ public class BaseController : MonoBehaviour
         return shotPos;
     }
 
+    protected bool isHit = false;
     protected bool isAttacking;
     protected float timeSinceLastAttack = float.MaxValue;
 
@@ -72,8 +73,6 @@ public class BaseController : MonoBehaviour
                     Attack();
                     Invoke("UseSkills", 0.5f);
                 }
-                break;
-            case EState.Hit:
                 break;
             case EState.Dead:
                 Dead();
@@ -135,14 +134,14 @@ public class BaseController : MonoBehaviour
 
     public virtual void Hit(float _damage)
     {
-        if (actor.GetState() == EState.Hit ||
+        if (isHit == true ||
             actor.GetState() == EState.Dead)
         {
             return;
         }
         actor.hp -= _damage;
-        actor.SetState(EState.Hit);
-
+        isHit = true;
+        animationHandler.Damage();
         StartCoroutine(HitTime(0.5f));
 
         if (actor.hp <= 0)
@@ -184,13 +183,13 @@ public class BaseController : MonoBehaviour
             return;
         }
 
-        Vector3 direction = (_targetPos.position - transform.position).normalized;
+        lookDirection = (_targetPos.position - transform.position).normalized;
 
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
         shotPos.rotation = Quaternion.Euler(0, 0, angle);
 
-        shotPos.position = transform.position + direction * shotPosDistance;
-        shotPos.position = transform.position + direction * shotPosDistance;
+        shotPos.position = transform.position + lookDirection * shotPosDistance;
+        shotPos.position = transform.position + lookDirection * shotPosDistance;
     }
 
     void OnDrawGizmos()
@@ -207,6 +206,8 @@ public class BaseController : MonoBehaviour
     IEnumerator HitTime(float _delay)
     {
         yield return new WaitForSeconds(_delay);
-        actor.SetState(EState.Idle);
+        
+        isHit = false;
+        animationHandler.InvincibilityEnd();
     }
 }
