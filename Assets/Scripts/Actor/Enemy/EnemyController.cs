@@ -121,6 +121,7 @@ public class EnemyController : BaseController
                 hitTime = 0f;
                 isHit = false;
                 animationHandler.InvincibilityEnd();
+                actor.GetComponent<Collider2D>().enabled = true;
             }
         }
         if (isAttacking)
@@ -331,6 +332,7 @@ public class EnemyController : BaseController
         }
         else
         {
+            actor.GetComponent<Collider2D>().enabled = false;
             animationHandler.Damage();
         }
         gameObject.GetComponentInChildren<ActorUI>().ShowCombatValue((int)_damage, true);
