@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; } // 싱글톤을 할당할 전역 변수
 
-    private UIManager uiManager; // UIManager를 할당할 변수
+    public UIManager UIManagerProperty { get; private set; } // UIManager를 할당할 변수
 
     private SceneState currentSceneState; // 현재 씬 상태를 저장할 변수
 
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         }
 
         // UIManager 할당
-        uiManager = GetComponentInChildren<UIManager>();
+        UIManagerProperty = GetComponentInChildren<UIManager>();
 
         Maps = Resources.LoadAll<GameObject>("Prefabs/Map"); // 맵 할당
         PlayerPrefab = Resources.Load<GameObject>("Prefabs/Player/Archer"); // 플레이어 할당
@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
             Destroy(PlayerGameObject.gameObject); // 플레이어 게임 오브젝트 삭제
         }
         IsGameOver = true;
-        uiManager.ChangeState(UIState.GameOver);
+        UIManagerProperty.ChangeState(UIState.GameOver);
     }
 
     public bool IsGoldOnTilemap(Vector3 position)
