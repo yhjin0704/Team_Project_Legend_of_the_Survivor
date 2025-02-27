@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
         UIManagerProperty.ChangeState(UIState.GameOver);
     }
 
-    public bool IsGoldOnTilemap(Vector3 position)
+    public bool IsOnTilemap(Vector3 position)
     {
         if (FloorTilemap == null)
         {
