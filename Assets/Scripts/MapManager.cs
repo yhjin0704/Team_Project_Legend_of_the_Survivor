@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviour
 {
-    public GameObject portalPrefab;     // »ý¼ºÇÒ Æ÷Å» ÇÁ¸®ÆÕ
+    public GameObject portalPrefab;      // »ý¼ºÇÒ Æ÷Å» ÇÁ¸®ÆÕ
     private Collider2D portalCollider;
     private SpriteRenderer portalRenderer;
+    public GameObject potPrefab;        // Ç×¾Æ¸® ÇÁ¸®ÆÕ
+    public Vector2[] potPositions;      // ÀÎ½ºÆåÅÍ¿¡¼­ ¼³Á¤ÇÒ ÁÂÇ¥ ¹è¿­
 
     private void Awake()
     {
@@ -40,11 +42,27 @@ public class MapManager : MonoBehaviour
         SceneManager.LoadScene(currentSceneIndex + 1);
     }
 
-    void Update()
+
+    void Start()
     {
-        if (AllEnemiesDefeated() == null)
+        SpawnPots();
+    }
+
+    void SpawnPots()
+    {
+        foreach (Vector2 position in potPositions)
         {
-            SpawnPortal();
+            Instantiate(potPrefab, position, Quaternion.identity);
+        }
+
+
+
+        void Update()
+        {
+            if (AllEnemiesDefeated() == null)
+            {
+                SpawnPortal();
+            }
         }
     }
 
