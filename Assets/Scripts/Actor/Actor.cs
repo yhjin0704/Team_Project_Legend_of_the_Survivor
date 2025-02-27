@@ -47,17 +47,17 @@ public class Actor : MonoBehaviour
 
     protected Animator animator;
 
-    protected Transform _renderer;
-    public Transform GetRenderer()
+    protected SpriteRenderer _renderer;
+    public Transform GetRendererTransform()
     {
-        return _renderer;
+        return _renderer.transform;
     }
 
     protected virtual void Awake()
     {
         animator = GetComponentInChildren<Animator>();
 
-        _renderer = transform.Find("Renderer");
+        _renderer = GetComponentInChildren<SpriteRenderer>();
 
         maxHp = hp;
     }
@@ -72,5 +72,11 @@ public class Actor : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+    }
+
+    protected virtual void LateUpdate()
+    {
+        Vector3Int cellPos = GameManager.Instance.ChangeToCellPosition(_renderer.transform.position);
+        _renderer.sortingOrder = -(int)cellPos.y;
     }
 }

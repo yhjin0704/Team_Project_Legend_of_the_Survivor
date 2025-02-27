@@ -88,11 +88,11 @@ public class PlayerController : BaseController
 
         if (_direction.x > 0)
         {
-            player.GetRenderer().transform.localScale = new Vector3(1, 1, 1);
+            player.GetRendererTransform().transform.localScale = new Vector3(1, 1, 1);
         }
         else if (_direction.x < 0)
         {
-            player.GetRenderer().transform.localScale = new Vector3(-1, 1, 1);
+            player.GetRendererTransform().transform.localScale = new Vector3(-1, 1, 1);
         }
 
         _rigidbody.velocity = _direction * actor.speed;
@@ -174,11 +174,11 @@ public class PlayerController : BaseController
         {
             if (shotPos.transform.position.x <= target.position.x)
             {
-                player.GetRenderer().transform.localScale = new Vector3(1, 1, 1);
+                player.GetRendererTransform().transform.localScale = new Vector3(1, 1, 1);
             }
             else if (shotPos.transform.position.x > target.position.x)
             {
-                player.GetRenderer().transform.localScale = new Vector3(-1, 1, 1);
+                player.GetRendererTransform().transform.localScale = new Vector3(-1, 1, 1);
             }
         }
     }

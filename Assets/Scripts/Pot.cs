@@ -12,16 +12,23 @@ public class Pot : MonoBehaviour
     private int currentHealth;
     public Tilemap tilemap;
 
+    private SpriteRenderer spriteRenderer;
+
     private void Awake()
     {
         tilemap = FindObjectOfType<Tilemap>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void Start()
     {
         currentHealth = health;
-        Vector3 position = tilemap.WorldToCell(transform.position);
-        Debug.Log(position);
+    }
+
+    public void LateUpdate()
+    {
+        Vector3Int cellPos = GameManager.Instance.ChangeToCellPosition(spriteRenderer.transform.position);
+        spriteRenderer.sortingOrder = -(int)cellPos.y;
     }
 
     public void DestroyPot()

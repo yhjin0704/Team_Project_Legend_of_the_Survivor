@@ -220,16 +220,22 @@ public class GameManager : MonoBehaviour
 
     public bool IsOnTilemap(Vector3 position)
     {
-        if (FloorTilemap == null)
-        {
-            Debug.LogError("Tilemap is null");
-            return false;
-        }
-
-        // 골드 오브젝트의 월드 좌표를 타일 좌표로 변환
-        Vector3Int cellPosition = FloorTilemap.WorldToCell(position);
+        Vector3Int cellPosition = ChangeToCellPosition(position);
 
         // 해당 위치에 타일이 있는지 확인
         return FloorTilemap.HasTile(cellPosition);
+    }
+
+    public Vector3Int ChangeToCellPosition(Vector3 position)
+    {
+        if (FloorTilemap == null)
+        {
+            Debug.LogError("Tilemap is null");
+            return Vector3Int.zero;
+        }
+        // 골드 오브젝트의 월드 좌표를 타일 좌표로 변환
+        Vector3Int cellPosition = FloorTilemap.WorldToCell(position);
+        
+        return cellPosition;
     }
 }

@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Potion : MonoBehaviour
 {
+    private SpriteRenderer spriteRenderer;
+
     public float healValue = 5.0f;
 
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
     void Start()
     {
         
@@ -15,6 +21,12 @@ public class Potion : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void LateUpdate()
+    {
+        Vector3Int cellPos = GameManager.Instance.ChangeToCellPosition(spriteRenderer.transform.position);
+        spriteRenderer.sortingOrder = -(int)cellPos.y;
     }
 
     private void OnTriggerEnter2D(Collider2D _collision)
