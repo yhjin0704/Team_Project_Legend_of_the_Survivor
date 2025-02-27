@@ -10,6 +10,7 @@ public class SpikeTrap : MonoBehaviour
     private Coroutine repeatCoroutine;
     private bool isInside = false;
     private Collider2D player;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!isInside && other.CompareTag("Player"))
