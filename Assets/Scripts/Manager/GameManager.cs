@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,13 +13,10 @@ public enum SceneState // UI상태를 나타내는 열거형
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance; // 싱글톤을 할당할 전역 변수
+    public static GameManager Instance { get; private set; } // 싱글톤을 할당할 전역 변수
 
-    [SerializeField]private UIManager uiManager; // UIManager를 할당할 변수
+    public UIManager UIManagerProperty { get; private set; } // UIManager를 할당할 변수
 
-<<<<<<< HEAD
-    [SerializeField]private SceneState currentSceneState; // 현재 씬 상태를 저장할 변수
-=======
     private SceneState currentSceneState; // 현재 씬 상태를 저장할 변수
 
     public GameObject[] Maps { get; private set; } // 맵을 할당할 변수
@@ -34,7 +32,6 @@ public class GameManager : MonoBehaviour
     public int ClearStage { get; private set; } // 클리어한 스테이지를 저장할 변수
 
     public bool IsGameOver { get; private set; } // 게임 오버 상태를 저장할 변수
->>>>>>> dev
 
     private void Awake()
     {
@@ -50,10 +47,13 @@ public class GameManager : MonoBehaviour
         }
 
         // UIManager 할당
-        uiManager = GetComponentInChildren<UIManager>();
+        UIManagerProperty = GetComponentInChildren<UIManager>();
+
+        Maps = Resources.LoadAll<GameObject>("Prefabs/Map"); // 맵 할당
+        PlayerPrefab = Resources.Load<GameObject>("Prefabs/Player/Archer"); // 플레이어 할당
+        EnemyPrefabs = Resources.LoadAll<GameObject>("Prefabs/Enemy"); // 몬스터 할당
+
         currentSceneState = SceneState.Lobby; // 초기 씬 상태는 로비
-<<<<<<< HEAD
-=======
         ClearStage = 0; // 클리어한 스테이지 초기화
     }
 
@@ -102,7 +102,6 @@ public class GameManager : MonoBehaviour
         {
             OnAllEnemiesDefeated?.Invoke(); // 이벤트 발생
         }
->>>>>>> dev
     }
 
     public SceneState GetCurrentSceneState() // 현재 씬 상태를 반환하는 함수
@@ -128,8 +127,6 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
-<<<<<<< HEAD
-=======
 
     public void GameOver() // 게임 오버 메서드
     {
@@ -138,10 +135,10 @@ public class GameManager : MonoBehaviour
             Destroy(PlayerGameObject.gameObject); // 플레이어 게임 오브젝트 삭제
         }
         IsGameOver = true;
-        uiManager.ChangeState(UIState.GameOver);
+        UIManagerProperty.ChangeState(UIState.GameOver);
     }
 
-    public bool IsGoldOnTilemap(Vector3 position)
+    public bool IsOnTilemap(Vector3 position)
     {
         if (FloorTilemap == null)
         {
@@ -155,5 +152,4 @@ public class GameManager : MonoBehaviour
         // 해당 위치에 타일이 있는지 확인
         return FloorTilemap.HasTile(cellPosition);
     }
->>>>>>> dev
 }
