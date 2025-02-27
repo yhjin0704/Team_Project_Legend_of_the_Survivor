@@ -121,13 +121,13 @@ public class BaseController : MonoBehaviour
     {
         if (skillManager.GetSkillList() == null)
         {
-            Debug.LogError("SkillList�� null�Դϴ�.");
+            Debug.Log("SkillList�� null�Դϴ�.");
             return;
         }
 
         if (target == null)
         {
-            Debug.LogError("Target�� null�Դϴ�.");
+            Debug.Log("Target�� null�Դϴ�.");
             return;
         }
     }

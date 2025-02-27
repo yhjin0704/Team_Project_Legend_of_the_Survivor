@@ -131,13 +131,10 @@ public class PlayerController : BaseController
 
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Enemy");
 
-        int count = 0;
-
         foreach (var monster in monsters)
         {
             // 몬스터를 리스트에 추가
             listMonsters.Add(monster);
-            count++;
         }
 
         // 거리 기준으로 리스트 정렬 (가장 가까운 몬스터가 맨 앞에 오도록)
