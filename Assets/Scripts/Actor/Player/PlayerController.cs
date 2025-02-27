@@ -104,15 +104,15 @@ public class PlayerController : BaseController
 
         isAttacking = true;
         animationHandler.Attack();
-        SetShotPos(target);
         LookAtTarget();
+        SetShotPos(target);
 
         foreach (ISkillUseDelay _shootingSkill in skillManager.GetSkillList())
         {
             _shootingSkill.Use();
         }
         isAttacking = false;
-        animationHandler.AttackEnd();
+        StartCoroutine(AtkAnimEnd(0.75f));
     }
 
     void UpdateMonsterList()
@@ -176,5 +176,12 @@ public class PlayerController : BaseController
         base.Dead();
 
         gameManager.GameOver();
+    }
+
+    IEnumerator AtkAnimEnd(float _delay)
+    {
+        yield return new WaitForSeconds(_delay);
+
+        animationHandler.AttackEnd();
     }
 }
