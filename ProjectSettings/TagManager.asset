@@ -5,8 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - SceneUI
+<<<<<<< HEAD
   - UIManager
   - Monster
+=======
+  - Potion
+  - PlayerRange
+  - Floor
+>>>>>>> dev
   layers:
   - Default
   - TransparentFX
