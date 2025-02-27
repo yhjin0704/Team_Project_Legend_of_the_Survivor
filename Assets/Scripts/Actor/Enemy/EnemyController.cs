@@ -8,7 +8,8 @@ using Random = UnityEngine.Random; // ���� �߰�
 enum Enemy_Type
 {
     Close,
-    Far
+    Far,
+    Boss
 }
 
 public class EnemyController : BaseController
@@ -90,6 +91,62 @@ public class EnemyController : BaseController
             obj.GetComponent<Bullet>().SetDamage(actor.atk);
             obj.GetComponent<Bullet>().SetDir(direction);
         }
+        else if (enemy_Type == Enemy_Type.Boss)
+        {
+            int index = Random.Range(0, 4);
+            index = 1;
+            switch (index)
+            {
+                case 0:
+                    NormalAttack();
+                    break;
+                case 1:
+                    MultipleAttack();
+                    break;
+                case 2:
+                    ArcAttack();
+                    break;
+                case 3:
+                    AroundAttack();
+                    break;
+            }
+        }
+    }
+
+    private void NormalAttack()
+    {
+        GameObject obj = Instantiate(bullet, transform.position, Quaternion.identity);
+        Vector2 direction = (target.position - transform.position).normalized;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        obj.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        obj.GetComponent<Bullet>().SetDamage(actor.atk);
+        obj.GetComponent<Bullet>().SetDir(direction);
+    }
+
+    private void MultipleAttack()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Vector3 vec = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+            GameObject obj = Instantiate(bullet, vec, Quaternion.identity);
+            Vector2 direction = (target.position - transform.position).normalized;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            obj.transform.rotation = Quaternion.Euler(0, 0, angle);
+            obj.GetComponent<Bullet>().SetDamage(actor.atk);
+            obj.GetComponent<Bullet>().SetDir(direction);
+        }
+    }
+
+    private void ArcAttack()
+    {
+
+    }
+
+    private void AroundAttack()
+    {
+
     }
 
     private void LateUpdate()
