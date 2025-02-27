@@ -33,7 +33,7 @@ public class FollowCamera : MonoBehaviour
         transform.position = pos;
     }
 
-    public void  GetPlayerComponent(Transform _player)
+    public void SetTarget()
     {
         Target = GameObject.FindGameObjectWithTag("Player").transform;
     }

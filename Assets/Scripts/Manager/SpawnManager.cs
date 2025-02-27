@@ -99,6 +99,8 @@ public class SpawnManager : MonoBehaviour
     {
         var newObject = Instantiate(playerPrefab, spawnPlayerPosition.position, Quaternion.identity);
         newObject.name = "Archer";
+        gameManager.MainCamera = GameObject.FindWithTag("MainCamera").GetComponent<FollowCamera>();
+        gameManager.MainCamera.SetTarget();
     }
 }
 

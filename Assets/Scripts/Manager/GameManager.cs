@@ -18,9 +18,10 @@ public class GameManager : MonoBehaviour
 
     private SceneState currentSceneState; // 현재 씬 상태를 저장할 변수
 
-    public GameObject[] Maps { get; private set; }
+    public GameObject[] Maps { get; private set; } // 맵을 할당할 변수
     public GameObject PlayerPrefab { get; private set; } // 플레이어를 할당할 변수
     public GameObject[] EnemyPrefabs { get; private set; } // 몬스터를 할당할 변수
+    public FollowCamera MainCamera { get; set; } // 메인 카메라를 할당할 변수
 
     private List<Enemy> enemies = new List<Enemy>(); // 적 리스트
     private event Action OnAllEnemiesDefeated; // 모든 적을 물리친 후 발생할 이벤트
