@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Potion : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float healValue = 5.0f;
+
     void Start()
     {
         
@@ -20,16 +21,9 @@ public class Coin : MonoBehaviour
     {
         if (_collision.CompareTag("PlayerRange"))
         {
-            _collision.GetComponentInParent<Player>().gold += 1;
+            _collision.GetComponentInParent<PlayerController>().Healed(healValue);
 
-            GetComponent<Collider2D>().enabled = false;
-
-            GetComponent<Animator>().Play("Coin_Destroy");
+            Destroy(gameObject);
         }
-    }
-
-    public void DestroyCoin()
-    {
-        Destroy(gameObject);
     }
 }

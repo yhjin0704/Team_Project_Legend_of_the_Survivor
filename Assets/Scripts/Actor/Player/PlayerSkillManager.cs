@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class PlayerSkillManager : SkillManager
 {
+    Player player;
+    PlayerController playerController;
     protected override void Awake()
     {
         base.Awake();
+
+        player = actor as Player;
+        playerController = baseController as PlayerController;
 
         StraightShotting straightShotting = new StraightShotting();
         AddSkill(straightShotting);
@@ -25,13 +30,13 @@ public class PlayerSkillManager : SkillManager
 
     public void IncreaseHp(float _IncreaseValue)
     {
-        actor.SetMaxHp(actor.GetMaxHp() + _IncreaseValue);
-        actor.hp += _IncreaseValue;
+        player.SetMaxHp(player.GetMaxHp() + _IncreaseValue);
+        player.hp += _IncreaseValue;
     }
 
     public void IncreaseAtk(float _IncreaseValue)
     {
-        actor.atk += _IncreaseValue;
+        player.atk += _IncreaseValue;
     }
 
     public void ReduceAtkDelay(float _ReduceValue)// 공속 : 비율로 감소시킬 예정 1.0f 이하로 입력해야함
@@ -43,11 +48,16 @@ public class PlayerSkillManager : SkillManager
         }
         _ReduceValue = 1.0f - _ReduceValue;
 
-        actor.atkDelay *= _ReduceValue;
+        player.atkDelay *= _ReduceValue;
     }
 
     public void IncreaseSpeed(float _IncreaseValue)
     {
-        actor.speed += _IncreaseValue;
+        player.speed += _IncreaseValue;
+    }
+
+    public void SelectHeal(float _heal)
+    {
+        playerController.Healed(_heal);
     }
 }

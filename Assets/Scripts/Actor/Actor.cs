@@ -17,7 +17,7 @@ public class Actor : MonoBehaviour
 
     protected AnimationHandler animationHandler;
 
-    [Range(1, 100)] public float hp = 100;
+    public float hp = 100;
     protected float maxHp;
     public float GetMaxHp()
     {

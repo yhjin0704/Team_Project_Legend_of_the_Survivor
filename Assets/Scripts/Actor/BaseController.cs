@@ -158,7 +158,17 @@ public class BaseController : MonoBehaviour
 
     public virtual void Healed(float _heal)
     {
-        
+        if (actor.hp + _heal <= actor.GetMaxHp())
+        {
+            actor.hp += _heal;
+        }
+        else
+        {
+            actor.hp = actor.GetMaxHp();
+        }
+
+        gameObject.GetComponentInChildren<ActorUI>().ShowCombatValue((int)_heal, false);
+        gameObject.GetComponentInChildren<ActorUI>().ChangeHPBar(actor.hp, actor.GetMaxHp());
     }
 
     protected virtual void Dead()
