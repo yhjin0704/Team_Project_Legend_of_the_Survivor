@@ -2660,7 +2660,7 @@ GameObject:
   - component: {fileID: 497277066871327554}
   m_Layer: 0
   m_Name: Floor2
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6711,6 +6711,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d91d6382a81e36439d08af1f7db0ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  potPrefab: {fileID: 1568434906083888995, guid: bf47425d69ca4104aafd9198084d74db, type: 3}
+  SpawnPotTilemap: {fileID: 9195926090822181570}
 --- !u!114 &3715627520654482201
 MonoBehaviour:
   m_ObjectHideFlags: 0

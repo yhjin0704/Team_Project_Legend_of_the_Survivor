@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 public enum SceneState // UI상태를 나타내는 열거형
 {
     Lobby,
@@ -24,8 +25,9 @@ public class GameManager : MonoBehaviour
     public PlayerSkillManager PlayerSkillManagerProperty { get; set; } // 플레이어 스킬 매니저를 할당할 변수
     public GameObject[] EnemyPrefabs { get; private set; } // 몬스터를 할당할 변수
     public FollowCamera MainCamera { get; set; } // 메인 카메라를 할당할 변수
+    public Tilemap FloorTilemap { get; set; } // 타일맵을 할당할 변수
 
-    private List<Enemy> enemies = new List<Enemy>(); // 적 리스트
+    private List<EnemyController> enemies = new List<EnemyController>(); // 적 리스트
     private event Action OnAllEnemiesDefeated; // 모든 적을 물리친 후 발생할 이벤트
     public int ClearStage { get; private set; } // 클리어한 스테이지를 저장할 변수
 
@@ -87,11 +89,11 @@ public class GameManager : MonoBehaviour
         OnAllEnemiesDefeated -= action;
     }
 
-    public void RegisterEnemy(Enemy enemy) // 적 리스트에 몬스터 추가 함수
+    public void RegisterEnemy(EnemyController enemy) // 적 리스트에 몬스터 추가 함수
     {
         enemies.Add(enemy);
     }
-    public void UnregisterEnemy(Enemy enemy) // 적 리스트에서 몬스터 제거 함수
+    public void UnregisterEnemy(EnemyController enemy) // 적 리스트에서 몬스터 제거 함수
     {
         ClearStage++;
         enemies.Remove(enemy);
@@ -128,12 +130,26 @@ public class GameManager : MonoBehaviour
 
     public void GameOver() // 게임 오버 메서드
     {
-        Player player = FindObjectOfType<Player>();
-        if (player != null)
+        if (PlayerGameObject != null)
         {
-            Destroy(player.gameObject);
+            Destroy(PlayerGameObject.gameObject); // 플레이어 게임 오브젝트 삭제
         }
         IsGameOver = true;
         uiManager.ChangeState(UIState.GameOver);
+    }
+
+    public bool IsGoldOnTilemap(Vector3 position)
+    {
+        if (FloorTilemap == null)
+        {
+            Debug.LogError("Tilemap is null");
+            return false;
+        }
+
+        // 골드 오브젝트의 월드 좌표를 타일 좌표로 변환
+        Vector3Int cellPosition = FloorTilemap.WorldToCell(position);
+
+        // 해당 위치에 타일이 있는지 확인
+        return FloorTilemap.HasTile(cellPosition);
     }
 }
