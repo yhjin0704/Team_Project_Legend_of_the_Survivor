@@ -129,7 +129,7 @@ MonoBehaviour:
   atk: 1
   atkDelay: 1
   IsAlive: 1
-  defaultBulletPrefab: {fileID: 0}
+  defaultBulletPrefab: {fileID: 1468526609800095872, guid: f2a446e513c664d4099694cfd54fe2d3, type: 3}
 --- !u!114 &9201240106118676453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,7 +418,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9044253289244898055, guid: b1792f9b21ccf4247983fb75617a6ff1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 200
+      value: 250
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

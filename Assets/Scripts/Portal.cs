@@ -13,6 +13,7 @@ public class Portal : MonoBehaviour
     {
         portalCollider = GetComponent<Collider2D>();
         portalRenderer = GetComponent<TilemapRenderer>();
+        GameManager.Instance.PortalProperty = this;
         GameManager.Instance.AddOnAllEnemiesDefeated(SetActivePortalActive);
         portalCollider.enabled = false;
         portalRenderer.enabled = false;

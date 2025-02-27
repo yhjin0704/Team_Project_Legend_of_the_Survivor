@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] EnemyPrefabs { get; private set; } // 몬스터를 할당할 변수
     public FollowCamera MainCamera { get; set; } // 메인 카메라를 할당할 변수
     public Tilemap FloorTilemap { get; set; } // 타일맵을 할당할 변수
+    public Portal PortalProperty { get; set; } // 포탈을 할당할 변수
 
 
     public bool isSpreadShotting;
@@ -169,6 +170,16 @@ public class GameManager : MonoBehaviour
         return currentSceneState;
     }
 
+    public void ResetGame()
+    {
+        isSpreadShotting = false;
+        isSideShotting = false;
+        isBackShotting = false;
+        isDoubleShotting = false;
+        ClearStage = 0; // 클리어한 스테이지 초기화
+        RemoveOnAllEnemiesDefeated(PortalProperty.SetActivePortalActive);
+    }
+
     public void ChangeScene(SceneState sceneState) // 씬 상태를 변경하는 함수
     {
         currentSceneState = sceneState;
@@ -194,12 +205,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(PlayerGameObject.gameObject); // 플레이어 게임 오브젝트 삭제
         }
-        IsGameOver = true; 
-        isSpreadShotting = false;
-        isSideShotting = false;
-        isBackShotting = false;
-        isDoubleShotting = false;
-        ClearStage = 0; // 클리어한 스테이지 초기화
+        IsGameOver = true;
         UIManagerProperty.ChangeState(UIState.GameOver);
     }
 
@@ -209,12 +215,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(PlayerGameObject.gameObject); // 플레이어 게임 오브젝트 삭제
         }
+        ResetGame();
         IsGameOver = false;
-        isSpreadShotting = false;
-        isSideShotting = false;
-        isBackShotting = false;
-        isDoubleShotting = false;
-        ClearStage = 0; // 클리어한 스테이지 초기화
         ChangeScene(SceneState.Lobby);
     }
 
