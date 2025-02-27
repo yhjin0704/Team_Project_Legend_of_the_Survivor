@@ -9,9 +9,12 @@ public class PlayerController : BaseController
 
     private Vector2 moveInput;
 
+    GameManager gameManager = GameManager.Instance;
+
     protected override void Awake()
     {
         base.Awake();
+
         player = actor as Player;
         animator = GetComponentInChildren<Animator>();
     }
@@ -33,18 +36,26 @@ public class PlayerController : BaseController
     {
         base.FixedUpdate();
 
-        switch(actor.GetState())
+        switch (actor.GetState())
         {
             case EState.Idle:
                 _rigidbody.velocity = Vector2.zero;
+                animationHandler.Move(_rigidbody.velocity);
                 break;
             case EState.Move:
                 Movement(movementDirection);
+                animationHandler.Move(_rigidbody.velocity);
                 break;
             case EState.Attack:
-                Attack();
+                _rigidbody.velocity = Vector2.zero;
+                break;
+            case EState.Hit:
+                Movement(movementDirection);
                 break;
             case EState.Dead:
+                _rigidbody.velocity = Vector2.zero;
+                break;
+            default:
                 break;
         }
         //TestCode
@@ -70,21 +81,16 @@ public class PlayerController : BaseController
     {
         base.Movement(_direction);
 
-        //if (_direction.x > 0)
-        //{
-        //    player.GetRenderer().transform.localScale = new Vector3(1, 1, 1);
-        //}
-        //else if (_direction.x < 0)
-        //{
-        //    player.GetRenderer().transform.localScale = new Vector3(-1, 1, 1);
-        //}
+        if (_direction.x > 0)
+        {
+            player.GetRenderer().transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (_direction.x < 0)
+        {
+            player.GetRenderer().transform.localScale = new Vector3(-1, 1, 1);
+        }
 
         _rigidbody.velocity = _direction * actor.speed;
-    }
-
-    protected override void Attack()
-    {
-        base.Attack();
     }
 
     protected override void UseSkills()
@@ -93,7 +99,7 @@ public class PlayerController : BaseController
 
         if (target == null)
         {
-            Debug.LogError("Target�� null�Դϴ�.");
+            Debug.LogError("Target이 null입니다.");
             return;
         }
 
@@ -103,5 +109,14 @@ public class PlayerController : BaseController
         {
             _shootingSkill.Use();
         }
+        isAttacking = false;
+        animationHandler.AttackEnd();
+    }
+
+    protected override void Dead()
+    {
+        base.Dead();
+
+        gameManager.GameOver();
     }
 }

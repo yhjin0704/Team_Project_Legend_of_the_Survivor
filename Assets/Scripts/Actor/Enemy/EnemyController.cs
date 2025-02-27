@@ -13,9 +13,11 @@ public class EnemyController : BaseController
     [SerializeField]
     private float attackDelay = 1f;
     private float currentTime = 0f;
-    private bool isDamage = false;
+    private bool isHit = false;
     [SerializeField]
-    private int coin;
+    private int coinCount;
+    [SerializeField]
+    GameObject coinPrefab;
 
     protected override void Start()
     {
@@ -30,20 +32,21 @@ public class EnemyController : BaseController
 
     protected override void Update()
     {
-        if (isAttacking || isDamage)
+        if (isAttacking || isHit)
         {
-            if (isAttacking && isDamage)
+            if (isAttacking && isHit)
             {
                 currentTime = 0f;
                 isAttacking = false;
             }
             agent.velocity = Vector3.zero;
+
             currentTime += Time.deltaTime;
             if (currentTime > attackDelay)
             {
                 currentTime = 0f;
                 isAttacking = false;
-                isDamage = false;
+                isHit = false;
                 animationHandler.AttackEnd();
                 animationHandler.InvincibilityEnd();
             }
@@ -58,7 +61,7 @@ public class EnemyController : BaseController
         }
         animationHandler.Move(agent.velocity);
 
-        if (DistanceToTarget() <= attackRange && !isDamage)
+        if (DistanceToTarget() <= attackRange && !isHit)
         {
             Attack();
         }
@@ -67,8 +70,8 @@ public class EnemyController : BaseController
     protected override void Attack()
     {
         base.Attack();
-        isAttacking = true;
-        animationHandler.Attack();
+
+        //target.GetComponent<PlayerController>().Damage();
     }
 
     private void LateUpdate()
@@ -88,31 +91,44 @@ public class EnemyController : BaseController
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("PlayerBullet"))
+        if (collision.CompareTag("Player"))
         {
-            if (actor.IsAlive && !isDamage)
-            {
-                actor.hp--;
-
-                if (actor.hp <= 0)
-                {
-                    actor.hp = 0;
-                    isDamage = true;
-                    animationHandler.Dead();
-                    for (int i = 0; i < coin; i++)
-                    {
-                        // 코인 생성
-                    }
-                    actor.IsAlive = false;
-                }
-                else
-                {
-                    isDamage = true;
-                    animationHandler.Damage();
-                }
-
-                Destroy(collision.gameObject);
-            }
+            collision.GetComponent<BaseController>().Hit(actor.atk);
         }
+    }
+
+    protected override void Dead()
+    {
+        base.Dead();
+
+        isHit = true;
+        for (int i = 0; i < coinCount; i++)
+        {
+            float vec = Random.Range(-1f, 1f);
+            Instantiate(coinPrefab, transform.position + new Vector3(vec, vec, 0), Quaternion.identity);
+        }
+        Destroy(gameObject, 1f);
+    }
+
+    public override void Hit(float _damage)
+    {
+        base.Hit(_damage);
+
+        isHit = true;
+    }
+
+    protected override void UseSkills()
+    {
+        base.UseSkills();
+
+        if (target == null)
+        {
+            Debug.LogError("Target이 null입니다.");
+            return;
+        }
+
+        SetShotPos(target);
+
+        skillManager.GetSkillList()[0].Use();
     }
 }

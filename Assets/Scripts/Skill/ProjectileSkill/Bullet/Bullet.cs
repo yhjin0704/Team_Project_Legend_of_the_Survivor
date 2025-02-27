@@ -6,9 +6,19 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] protected float speed = 10.0f;
 
-    private Vector2 dir;
+    protected Vector2 dir;
 
-    private Rigidbody2D _rigidbody;
+    protected Rigidbody2D _rigidbody;
+
+    protected float damage;
+    public float GetDamage()
+    {
+        return this.damage;
+    }
+    public void SetDamage(float _damage)
+    {
+        this.damage = _damage;
+    }
 
     protected virtual void Awake()
     {
@@ -38,5 +48,16 @@ public class Bullet : MonoBehaviour
     public void SetDir(Vector2 _dir)
     {
         dir = _dir.normalized;
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D _collision)
+    {
+        if (_collision.CompareTag("Wall"))
+        {
+            _rigidbody.velocity = Vector2.zero;
+            GetComponent<Collider2D>().enabled = false;
+
+            Destroy(gameObject, 0.5f);
+        }
     }
 }
