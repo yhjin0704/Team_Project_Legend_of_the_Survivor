@@ -128,6 +128,11 @@ public class GameManager : MonoBehaviour
 
     public void GameOver() // 게임 오버 메서드
     {
+        Player player = FindObjectOfType<Player>();
+        if (player != null)
+        {
+            Destroy(player.gameObject);
+        }
         IsGameOver = true;
         uiManager.ChangeState(UIState.GameOver);
     }
