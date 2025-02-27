@@ -103,12 +103,16 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnPlayer() // 플레이어 스폰 메서드
     {
-        if(gameManager.PlayerGameObject == null)
+        if (gameManager.PlayerGameObject == null)
         {
             var newObject = Instantiate(playerPrefab, spawnPlayerPosition.position, Quaternion.identity);
             newObject.name = "Archer";
             gameManager.PlayerGameObject = GameObject.FindGameObjectWithTag("Player");
             gameManager.PlayerSkillManagerProperty = gameManager.PlayerGameObject.GetComponent<PlayerSkillManager>();
+        }
+        else
+        {
+            gameManager.PlayerGameObject.transform.position = spawnPlayerPosition.position;
         }
         gameManager.MainCamera = Camera.main.GetComponent<FollowCamera>();
         gameManager.MainCamera.SetTarget();
