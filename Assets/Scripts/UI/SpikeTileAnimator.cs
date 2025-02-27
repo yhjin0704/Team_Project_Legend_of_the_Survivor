@@ -22,6 +22,7 @@ public class SpikeTileAnimator : MonoBehaviour
     {
         while (true)
         {
+
             tilemap.SetTile(tilePosition, spikeTiles[index]);
 
             // 마지막 프레임(솟아난 상태)일 때 활성화
