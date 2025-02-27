@@ -84,16 +84,7 @@ public class EnemyController : BaseController
     {
         base.FixedUpdate();
 
-        Vector3 dir = target.position - actor.transform.position;
-        RaycastHit2D ray = Physics2D.Raycast(actor.transform.position, dir, dir.magnitude, 1 << LayerMask.NameToLayer("Wall"));
-        if (ray.collider == null)
-        {
-            CanAttak = true;
-        }
-        else
-        {
-            CanAttak = false;
-        }
+        CheakWall();
     }
 
     private void StopPlayer()
@@ -120,6 +111,20 @@ public class EnemyController : BaseController
                 isAttacking = false;
                 animationHandler.AttackEnd();
             }
+        }
+    }
+
+    protected void CheakWall()
+    {
+        Vector3 dir = target.position - actor.transform.position;
+        RaycastHit2D ray = Physics2D.Raycast(actor.transform.position, dir, dir.magnitude, 1 << LayerMask.NameToLayer("Wall"));
+        if (ray.collider == null)
+        {
+            CanAttak = true;
+        }
+        else
+        {
+            CanAttak = false;
         }
     }
 
