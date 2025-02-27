@@ -31,7 +31,7 @@ public class PlayerBullet : Bullet
 
         if (_collision.CompareTag("Enemy"))
         {
-            _collision.gameObject.GetComponent<BaseController>().Hit(damage);
+            _collision.gameObject.GetComponent<EnemyController>().Hit(damage);
             Destroy(gameObject);
         }
     }

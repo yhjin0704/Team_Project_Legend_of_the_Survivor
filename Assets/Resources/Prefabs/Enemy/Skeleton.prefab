@@ -123,10 +123,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterRenderer: {fileID: 0}
-  hp: 100
+  hp: 30
   speed: 3
   atk: 1
-  atkDelay: 3
+  atkDelay: 1
   IsAlive: 1
   defaultBulletPrefab: {fileID: 0}
 --- !u!114 &9201240106118676453
@@ -155,9 +155,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSkillUseActor: 0
   shotPosDistance: 0
-  attackRange: 6
+  attackRange: 5
   attackDelay: 1
-  coin: 0
+  coinCount: 3
+  coinPrefab: {fileID: 2456746063334075949, guid: 6297283c69788f04b81162811dbb5b42, type: 3}
 --- !u!195 &2544724352020858603
 NavMeshAgent:
   m_ObjectHideFlags: 0

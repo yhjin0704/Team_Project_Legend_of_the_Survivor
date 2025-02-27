@@ -3,8 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI; // ���� �߰�
 
+enum Enemy_Type
+{
+    Close,
+    Far
+}
+
 public class EnemyController : BaseController
 {
+    [SerializeField]
+    Enemy_Type enemy_Type;
     NavMeshAgent agent;
     SpriteRenderer spriteRenderer;
 
@@ -53,7 +61,6 @@ public class EnemyController : BaseController
             return;
         }
 
-        base.Update();
         agent.SetDestination(target.position);
         if (agent.pathPending == false && agent.remainingDistance <= agent.stoppingDistance)
         {
@@ -71,7 +78,12 @@ public class EnemyController : BaseController
     {
         base.Attack();
 
-        //target.GetComponent<PlayerController>().Damage();
+        if (enemy_Type == Enemy_Type.Close)
+            target.GetComponent<BaseController>().Hit(actor.atk);
+        else if (enemy_Type == Enemy_Type.Far)
+        {
+            Instantiate();
+        }
     }
 
     private void LateUpdate()
@@ -89,14 +101,6 @@ public class EnemyController : BaseController
         return (target.position - transform.position).normalized;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            collision.GetComponent<BaseController>().Hit(actor.atk);
-        }
-    }
-
     protected override void Dead()
     {
         base.Dead();
@@ -112,9 +116,23 @@ public class EnemyController : BaseController
 
     public override void Hit(float _damage)
     {
-        base.Hit(_damage);
+        if (isHit || !actor.IsAlive)
+            return;
 
         isHit = true;
+        actor.hp -= _damage;
+        if (actor.hp <= 0)
+        {
+            actor.hp = 0;
+            actor.IsAlive = false;
+            animationHandler.Dead();
+        }
+        else
+        {
+            animationHandler.Damage();
+        }
+        gameObject.GetComponentInChildren<ActorUI>().ShowCombatValue((int)_damage, true);
+        gameObject.GetComponentInChildren<ActorUI>().ChangeHPBar(actor.hp, actor.GetMaxHp());
     }
 
     protected override void UseSkills()
