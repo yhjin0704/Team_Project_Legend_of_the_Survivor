@@ -82,22 +82,6 @@ public class ClosestDistance : PlayerController
                 }
             }
         }
-        else
-        {
-            // 몬스터 리스트가 비어있을 경우, 플레이어 입력 방향으로 회전
-            float horizontalInput = Input.GetAxis("Horizontal");
-
-            if (horizontalInput > 0)
-            {
-                // 오른쪽 보기
-                player.transform.localScale = new Vector3(Mathf.Abs(player.transform.localScale.x), player.transform.localScale.y, player.transform.localScale.z);
-            }
-            else if (horizontalInput < 0)
-            {
-                // 왼쪽 보기
-                player.transform.localScale = new Vector3(-Mathf.Abs(player.transform.localScale.x), player.transform.localScale.y, player.transform.localScale.z);
-            }
-        }
     }
 
     protected override void FixedUpdate()
