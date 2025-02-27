@@ -116,8 +116,6 @@ public class BaseController : MonoBehaviour
 
     protected virtual void Attack()
     {
-        isAttacking = true;
-        animationHandler.Attack();
     }
 
     protected virtual void UseSkills()

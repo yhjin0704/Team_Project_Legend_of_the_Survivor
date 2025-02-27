@@ -9,6 +9,9 @@ public class PlayerController : BaseController
 
     private Vector2 moveInput;
 
+    public List<GameObject> listMonsters = new List<GameObject>();
+    GameObject closestMonster = null;
+
     GameManager gameManager = GameManager.Instance;
 
     protected override void Awake()
@@ -46,9 +49,6 @@ public class PlayerController : BaseController
                 Movement(movementDirection);
                 animationHandler.Move(_rigidbody.velocity);
                 break;
-            case EState.Attack:
-                _rigidbody.velocity = Vector2.zero;
-                break;
             case EState.Hit:
                 Movement(movementDirection);
                 break;
@@ -59,9 +59,8 @@ public class PlayerController : BaseController
                 break;
         }
         //TestCode
-        EnemyController enemyControllerIns = FindObjectOfType<EnemyController>();
-
-        target = enemyControllerIns.gameObject.transform;
+        UpdateMonsterList();   // 몬스터 리스트 갱신
+        FindClosestMonster();  // 가장 가까운 몬스터 찾기
     }
 
     private void InputMovement()
@@ -103,7 +102,10 @@ public class PlayerController : BaseController
             return;
         }
 
+        isAttacking = true;
+        animationHandler.Attack();
         SetShotPos(target);
+        LookAtTarget();
 
         foreach (ISkillUseDelay _shootingSkill in skillManager.GetSkillList())
         {
@@ -111,6 +113,62 @@ public class PlayerController : BaseController
         }
         isAttacking = false;
         animationHandler.AttackEnd();
+    }
+
+    void UpdateMonsterList()
+    {
+        listMonsters.Clear();
+
+        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Enemy");
+
+        int count = 0;
+
+        foreach (var monster in monsters)
+        {
+            // 몬스터를 리스트에 추가
+            listMonsters.Add(monster);
+            count++;
+        }
+
+        // 거리 기준으로 리스트 정렬 (가장 가까운 몬스터가 맨 앞에 오도록)
+        listMonsters.Sort((monster1, monster2) =>
+        {
+            float distance1 = Vector3.Distance(player.transform.position, monster1.transform.position);
+            float distance2 = Vector3.Distance(player.transform.position, monster2.transform.position);
+            return distance1.CompareTo(distance2);  // 거리가 가까운 순으로 정렬
+        });
+    }
+
+    void FindClosestMonster()
+    {
+        if (listMonsters == null || listMonsters.Count == 0)
+        {
+            closestMonster = null;
+            target = null;  // 몬스터가 없으면 target을 null로 설정
+            return;
+        }
+
+        // 가장 가까운 몬스터는 이미 리스트의 앞에 위치하므로
+        closestMonster = listMonsters[0];
+
+        // 가장 가까운 몬스터의 Transform을 target에 할당
+        target = closestMonster != null ? closestMonster.transform : null;
+    }
+
+    // 가장 가까운 몬스터를 바라보는 메소드
+    void LookAtTarget()
+    {
+        if (target != null)
+        {
+            if (shotPos.transform.position.x <= target.position.x)
+            {
+                player.GetRenderer().transform.localScale = new Vector3(1, 1, 1);
+            }
+            else if (shotPos.transform.position.x > target.position.x)
+            {
+                player.GetRenderer().transform.localScale = new Vector3(-1, 1, 1);
+            }
+        }
     }
 
     protected override void Dead()
