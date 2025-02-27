@@ -41,28 +41,27 @@ public class SpawnManager : MonoBehaviour
         availablePositions = new List<Vector3>(spawnPositions);
         SpawnPlayer(); // 캐릭터 스폰
 
-        int clearStageLevel = gameManager.ClearStage; // 현재 스테이지
+        int clearStageLevel = gameManager.ClearStage + 1; // 현재 스테이지
         int enemyCount = enemyPrefabs.Count(); // 몬스터 개수
-        if (clearStageLevel == 0)
+        switch (clearStageLevel % 5)
         {
-            for (int i = 0; i < enemyCount; i++)
-            {
-                SpawnEnemy(i, 1); // 몬스터 스폰
-            }
-        }
-        else if (clearStageLevel % 2 == 0) // 짝수 스테이지일 때
-        {
-            for(int i = 0; i < enemyCount / 2; i++)
-            {
-                SpawnEnemy(i, 1 + clearStageLevel / 2); // 몬스터 스폰
-            }
-        }
-        else
-        {
-            for (int i = enemyCount - 1 ; i >= enemyCount / 2; i--)
-            {
-                SpawnEnemy(i, 2 + clearStageLevel / 2); // 몬스터 스폰
-            }
+            case 0:
+                SpawnEnemy(0, clearStageLevel / 5); // 몬스터 스폰
+                break;
+            case 1:
+                SpawnEnemy(1, 2 + clearStageLevel / 5); // 몬스터 스폰
+                break;
+            case 2:
+                SpawnEnemy(1, 1 + clearStageLevel / 5); // 몬스터 스폰
+                SpawnEnemy(2, 1 + clearStageLevel / 5); // 몬스터 스폰
+                break;
+            case 3:
+                SpawnEnemy(2, 2 + clearStageLevel / 5); // 몬스터 스폰
+                break;
+            case 4:
+                SpawnEnemy(1, 2 + clearStageLevel / 5); // 몬스터 스폰
+                SpawnEnemy(2, 1 + clearStageLevel / 5); // 몬스터 스폰
+                break;
         }
     }
 
