@@ -20,10 +20,6 @@ public class Coin : MonoBehaviour
     {
         if (_collision.CompareTag("PlayerRange"))
         {
-            _collision.GetComponentInParent<Player>().gold += 1;
-
-            GameManager.Instance.UIManagerProperty.ChangeGold(_collision.GetComponentInParent<Player>().gold);
-
             GetComponent<Collider2D>().enabled = false;
 
             GetComponent<Animator>().Play("Coin_Destroy");

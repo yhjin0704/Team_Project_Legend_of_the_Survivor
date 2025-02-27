@@ -144,7 +144,7 @@ public class EnemyController : BaseController
         animationHandler.Attack();
 =======
 
-        SoundManager.instance.PlaySfx(SoundManager.Sfx.Arrow);
+        //SoundManager.instance.PlaySfx(SoundManager.Sfx.Arrow);
 
         isAttacking = true;
         animationHandler.Attack();
@@ -322,7 +322,7 @@ public class EnemyController : BaseController
         if (isHit || !actor.IsAlive)
             return;
 
-        SoundManager.instance.PlaySfx(SoundManager.Sfx.Hit);
+            //SoundManager.instance.PlaySfx(SoundManager.Sfx.Hit);
 
         isHit = true;
         actor.hp -= _damage;

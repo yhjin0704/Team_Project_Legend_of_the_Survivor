@@ -5,7 +5,8 @@ using UnityEngine;
 public class Player : Actor
 {
     public int level = 1;
-
+    public int maxExp;
+    public int exp = 0;
     public int gold = 0;
 <<<<<<< HEAD
     protected override void Awake()
@@ -23,7 +24,7 @@ public class Player : Actor
             Destroy(gameObject);
             return;
         }
-
+        maxExp = (level * 2) + 8;
         takeItemRange = transform.Find("TakeItemRange");
 
         DontDestroyOnLoad(gameObject);
@@ -43,6 +44,18 @@ public class Player : Actor
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+    }
+
+    public void CheckLevelUp()
+    {
+        if (exp >= maxExp)
+        {
+            exp -= maxExp;
+
+            level++;
+
+            maxExp = (level * 2) + 8;
+        }
     }
 }
 

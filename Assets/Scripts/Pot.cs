@@ -43,4 +43,12 @@ public class Pot : MonoBehaviour
         // 항아리 오브젝트 삭제
         Destroy(gameObject);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("PlayerBullet"))
+        {
+            DestroyPot();
+        }
+    }
 }

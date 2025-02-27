@@ -33,8 +33,19 @@ public class PlayerBullet : Bullet
 
         if (_collision.CompareTag("Enemy"))
         {
-            _collision.gameObject.GetComponent<EnemyController>().Hit(damage);
-            Destroy(gameObject);
+            EnemyController enemyController = _collision.GetComponent<EnemyController>();
+            if (enemyController != null)
+            {
+                enemyController.Hit(damage);
+            }
+                Destroy(gameObject);
+        }
+        else if (_collision.CompareTag("Wall"))
+        {
+            _rigidbody.velocity = Vector2.zero;
+            GetComponent<Collider2D>().enabled = false;
+
+            Destroy(gameObject, 0.5f);
         }
     }
 >>>>>>> dev
