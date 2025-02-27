@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     private UIManager uiManager; // UIManager를 할당할 변수
 
     private SceneState currentSceneState; // 현재 씬 상태를 저장할 변수
+
+    public GameObject[] Maps { get; private set; }
     public GameObject PlayerPrefab { get; private set; } // 플레이어를 할당할 변수
     public GameObject[] EnemyPrefabs { get; private set; } // 몬스터를 할당할 변수
 
@@ -42,6 +44,7 @@ public class GameManager : MonoBehaviour
         // UIManager 할당
         uiManager = GetComponentInChildren<UIManager>();
 
+        Maps = Resources.LoadAll<GameObject>("Prefabs/Map"); // 맵 할당
         PlayerPrefab = Resources.Load<GameObject>("Prefabs/Player/Archer"); // 플레이어 할당
         EnemyPrefabs = Resources.LoadAll<GameObject>("Prefabs/Enemy"); // 몬스터 할당
 

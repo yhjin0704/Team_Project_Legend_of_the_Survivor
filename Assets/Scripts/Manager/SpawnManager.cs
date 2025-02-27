@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ public class SpawnManager : MonoBehaviour
     private Tilemap SpawnEnemyTilemap; // 타일맵을 할당할 변수
     private Transform spawnPlayerPosition; // 플레이어의 위치를 할당할 변수
 
-    GameManager gameManager = GameManager.Instance;
+    GameManager gameManager;
 
     private List<Vector3> spawnPositions = new List<Vector3>(); // 몬스터 스폰 위치를 저장할 리스트
     private List<Vector3> availablePositions; // 사용 가능한 스폰 위치를 저장할 리스트
@@ -22,6 +23,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Awake()
     {
+        gameManager = GameManager.Instance; // 게임 매니저 할당
         playerPrefab = gameManager.PlayerPrefab; // 플레이어 할당
         enemyPrefabs = gameManager.EnemyPrefabs; // 몬스터 할당
         SpawnEnemyTilemap = GameObject.FindWithTag("EnemySpawnArea").GetComponent<Tilemap>(); // 타일맵 할당
@@ -85,7 +87,7 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = 0; i < spawnCount && availablePositions.Count > 0; i++)
         {
-            int ableIIndex = Random.Range(0, availablePositions.Count);
+            int ableIIndex = UnityEngine.Random.Range(0, availablePositions.Count);
             Vector3 spawnPos = availablePositions[ableIIndex];
 
             Instantiate(enemyPrefabs[index], spawnPos, Quaternion.identity);

@@ -519,8 +519,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49aea7ebde85f554c8580fb844dbe672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiManager: {fileID: 0}
-  currentSceneState: 0
 --- !u!222 &4002488373674280
 CanvasRenderer:
   m_ObjectHideFlags: 0
