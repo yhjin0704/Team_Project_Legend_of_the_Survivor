@@ -30,6 +30,8 @@ public class EnemyController : BaseController
 
     [SerializeField] GameObject bullet;
 
+    bool CanAttak = false;
+
     private int curPatternCount = 0;
     private int maxPatternCount = 50;
 
@@ -72,7 +74,7 @@ public class EnemyController : BaseController
         }
         animationHandler.Move(agent.velocity);
 
-        if (DistanceToTarget() <= attackRange && !isHit)
+        if (DistanceToTarget() <= attackRange && !isHit && CanAttak == true)
         {
             Attack();
         }
@@ -82,11 +84,16 @@ public class EnemyController : BaseController
     {
         base.FixedUpdate();
 
-        //Vector3 dir = target.position - actor.transform.position;
-        //RaycastHit2D ray = Physics2D.Raycast(actor.transform.position, dir, dir.magnitude, 1 << LayerMask.NameToLayer("Wall"));
-        //if (ray.collider != null)
-        //{
-        //}
+        Vector3 dir = target.position - actor.transform.position;
+        RaycastHit2D ray = Physics2D.Raycast(actor.transform.position, dir, dir.magnitude, 1 << LayerMask.NameToLayer("Wall"));
+        if (ray.collider == null)
+        {
+            CanAttak = true;
+        }
+        else
+        {
+            CanAttak = false;
+        }
     }
 
     private void StopPlayer()
