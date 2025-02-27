@@ -153,6 +153,7 @@ public class BaseController : MonoBehaviour
         }
         gameObject.GetComponentInChildren<ActorUI>().ShowCombatValue((int)_damage, true);
         gameObject.GetComponentInChildren<ActorUI>().ChangeHPBar(actor.hp, actor.GetMaxHp());
+        gameObject.GetComponentInChildren<ActorUI>().ChangeCurrentHP(actor.hp);
     }
 
     public virtual void Healed(float _heal)
@@ -168,6 +169,7 @@ public class BaseController : MonoBehaviour
 
         gameObject.GetComponentInChildren<ActorUI>().ShowCombatValue((int)_heal, false);
         gameObject.GetComponentInChildren<ActorUI>().ChangeHPBar(actor.hp, actor.GetMaxHp());
+        gameObject.GetComponentInChildren<ActorUI>().ChangeCurrentHP(actor.hp);
     }
 
     protected virtual void Dead()
