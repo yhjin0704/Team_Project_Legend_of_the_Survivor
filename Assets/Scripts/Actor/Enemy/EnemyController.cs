@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI; // ���� �߰�
+using UnityEngine.AI;
+using Random = UnityEngine.Random; // ���� �߰�
 
 enum Enemy_Type
 {
@@ -11,21 +13,18 @@ enum Enemy_Type
 
 public class EnemyController : BaseController
 {
-    [SerializeField]
-    Enemy_Type enemy_Type;
+    [SerializeField] Enemy_Type enemy_Type;
     NavMeshAgent agent;
     SpriteRenderer spriteRenderer;
 
-    [SerializeField]
-    private float attackRange = 1f;
-    [SerializeField]
-    private float attackDelay = 1f;
+    [SerializeField] private float attackRange = 1f;
+    [SerializeField] private float attackDelay = 1f;
     private float currentTime = 0f;
     private bool isHit = false;
-    [SerializeField]
-    private int coinCount;
-    [SerializeField]
-    GameObject coinPrefab;
+    [SerializeField] private int coinCount;
+    [SerializeField] GameObject coinPrefab;
+
+    [SerializeField] GameObject bullet;
 
     protected override void Start()
     {
@@ -82,7 +81,14 @@ public class EnemyController : BaseController
             target.GetComponent<BaseController>().Hit(actor.atk);
         else if (enemy_Type == Enemy_Type.Far)
         {
-            Instantiate();
+            GameObject obj = Instantiate(bullet, transform.position, Quaternion.identity);
+            Vector2 direction = (target.position - transform.position).normalized;
+
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            obj.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+            obj.GetComponent<Bullet>().SetDamage(actor.atk);
+            obj.GetComponent<Bullet>().SetDir(direction);
         }
     }
 
