@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3291370598097430201}
   - component: {fileID: 2544724352020858603}
   m_Layer: 6
-  m_Name: Orc
+  m_Name: Boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,7 +70,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.06}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -81,7 +81,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1}
+  m_Size: {x: 0.89, y: 1.33}
   m_EdgeRadius: 0
 --- !u!50 &69575386199754473
 Rigidbody2D:
@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterRenderer: {fileID: 0}
-  hp: 50
-  speed: 3
+  hp: 100
+  speed: 1
   atk: 1
   atkDelay: 1
   IsAlive: 1
@@ -155,10 +155,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSkillUseActor: 0
   shotPosDistance: 0
-  attackRange: 1
-  attackDelay: 1
-  coinCount: 2
+  enemy_Type: 2
+  attackRange: 7
+  attackDelay: 3
+  coinCount: 10
   coinPrefab: {fileID: 2456746063334075949, guid: 6297283c69788f04b81162811dbb5b42, type: 3}
+  bullet: {fileID: 1468526609800095872, guid: f2a446e513c664d4099694cfd54fe2d3, type: 3}
 --- !u!195 &2544724352020858603
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -255,7 +257,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: -609593731, guid: b180e271e3425cb4d9995c126162270a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f5e6d35bdb33e764d90d4dc406c16a46, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -276,7 +278,7 @@ Animator:
   m_GameObject: {fileID: 1342321363346578229}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 92eee17007148804dbff4ed0039dbabb, type: 2}
+  m_Controller: {fileID: 9100000, guid: 746326ebee067f14eb3415e92dd8b88b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

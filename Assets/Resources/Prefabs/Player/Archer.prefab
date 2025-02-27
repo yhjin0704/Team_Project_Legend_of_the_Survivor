@@ -207,10 +207,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterRenderer: {fileID: 8726219597992717354}
-  hp: 100
+  hp: 30
   speed: 3
-  atk: 10
-  atkDelay: 3
+  atk: 5
+  atkDelay: 1
   IsAlive: 1
   defaultBulletPrefab: {fileID: 1468526609800095872, guid: e28bdba90f9845642aa96fa842731585, type: 3}
   level: 1
