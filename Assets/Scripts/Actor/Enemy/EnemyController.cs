@@ -256,7 +256,7 @@ public class EnemyController : BaseController
         if (isHit || !actor.IsAlive)
             return;
 
-        SoundManager.instance.PlaySfx(SoundManager.Sfx.Hit);
+            //SoundManager.instance.PlaySfx(SoundManager.Sfx.Hit);
 
         isHit = true;
         actor.hp -= _damage;

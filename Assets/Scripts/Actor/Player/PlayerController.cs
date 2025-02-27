@@ -13,7 +13,7 @@ public class PlayerController : BaseController
 
     GameObject closestMonster = null;
 
-    public bool isDoubleShot = true;
+    public bool isDoubleShot = false;
 
     GameManager gameManager = GameManager.Instance;
 
