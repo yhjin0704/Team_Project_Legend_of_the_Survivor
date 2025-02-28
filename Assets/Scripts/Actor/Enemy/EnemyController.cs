@@ -139,15 +139,14 @@ public class EnemyController : BaseController
             target.GetComponent<BaseController>().Hit(actor.atk);
         else if (enemy_Type == Enemy_Type.Far)
         {
-            UseSkills();
-            //GameObject obj = Instantiate(bullet, transform.position, Quaternion.identity);
-            //Vector2 direction = (target.position - transform.position).normalized;
+            GameObject obj = Instantiate(bullet, transform.position, Quaternion.identity);
+            Vector2 direction = (target.position - transform.position).normalized;
 
-            //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            //obj.transform.rotation = Quaternion.Euler(0, 0, angle);
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            obj.transform.rotation = Quaternion.Euler(0, 0, angle);
 
-            //obj.GetComponent<Bullet>().SetDamage(actor.atk);
-            //obj.GetComponent<Bullet>().SetDir(direction);
+            obj.GetComponent<Bullet>().SetDamage(actor.atk);
+            obj.GetComponent<Bullet>().SetDir(direction);
         }
         else if (enemy_Type == Enemy_Type.Boss)
         {
