@@ -106,6 +106,8 @@ public class PlayerController : BaseController
 
     protected override void UseSkills()
     {
+        SoundManager.instance.PlaySfx(SoundManager.Sfx.Arrow);
+
         base.UseSkills();
 
         if (target == null)
