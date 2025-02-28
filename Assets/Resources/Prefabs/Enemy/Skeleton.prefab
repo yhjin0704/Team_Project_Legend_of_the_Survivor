@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3819488573264837918}
   - component: {fileID: 9201240106118676453}
   - component: {fileID: 3291370598097430201}
+  - component: {fileID: 6500729707933830520}
   - component: {fileID: 2544724352020858603}
   m_Layer: 6
   m_Name: Skeleton
@@ -164,6 +165,18 @@ MonoBehaviour:
   potionCount: 1
   potionPrefab: {fileID: 951283346793885083, guid: 5939b8b527bf8de4cb8a0f5aeb790a66, type: 3}
   bullet: {fileID: 1468526609800095872, guid: f2a446e513c664d4099694cfd54fe2d3, type: 3}
+--- !u!114 &6500729707933830520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241997740830865549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11099c69c21df994ea2a5b66f8ad76a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!195 &2544724352020858603
 NavMeshAgent:
   m_ObjectHideFlags: 0
