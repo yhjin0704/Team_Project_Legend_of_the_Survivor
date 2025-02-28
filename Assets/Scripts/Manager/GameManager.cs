@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
             case 7:
                 if (!isBackShotting)
                 {
-                    PlayerSkillManagerProperty.AddSkill(new SideShotting());
+                    PlayerSkillManagerProperty.AddSkill(new BackShotting());
                     isBackShotting = true;
                 }
                 else
@@ -160,12 +160,12 @@ public class GameManager : MonoBehaviour
     }
     public void UnregisterEnemy(EnemyController enemy) // 적 리스트에서 몬스터 제거 함수
     {
-        ClearStage++;
         enemies.Remove(enemy);
 
         if (enemies.Count == 0) // 모든 적이 죽었을 때
         {
             OnAllEnemiesDefeated?.Invoke(); // 이벤트 발생
+            ClearStage++;
         }
     }
 
@@ -176,6 +176,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
+        enemies.Clear();
         isSpreadShotting = false;
         isSideShotting = false;
         isBackShotting = false;

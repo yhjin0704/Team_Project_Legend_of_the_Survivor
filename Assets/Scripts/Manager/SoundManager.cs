@@ -51,6 +51,7 @@ public class SoundManager : MonoBehaviour
         bgmPlayer.playOnAwake = false;
         bgmPlayer.loop = true;
         bgmPlayer.volume = bgmVolume;
+        PlayBgm((Bgm)Random.Range(0, 3));
 
         // 효과음 플레이어 초기화
         GameObject sfxObject = new GameObject("SfxPlayer");

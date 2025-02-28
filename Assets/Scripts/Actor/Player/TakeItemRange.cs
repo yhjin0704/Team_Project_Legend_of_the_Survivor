@@ -28,6 +28,7 @@ public class TakeItemRange : MonoBehaviour
     {
         if (_collision.CompareTag("Coin"))
         {
+            SoundManager.instance.PlaySfx(SoundManager.Sfx.Coin);
             player.gold += 1;
             player.exp += 1;
             player.CheckLevelUp();

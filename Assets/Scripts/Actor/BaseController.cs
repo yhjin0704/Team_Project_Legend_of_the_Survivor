@@ -148,6 +148,8 @@ public class BaseController : MonoBehaviour
 
     public virtual void Hit(float _damage)
     {
+        SoundManager.instance.PlaySfx(SoundManager.Sfx.Hit);
+
         if (isHit == true ||
             actor.GetState() == EState.Dead)
         {

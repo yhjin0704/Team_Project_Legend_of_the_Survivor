@@ -44,6 +44,8 @@ public class Player : Actor
     {
         if (exp >= maxExp)
         {
+            SoundManager.instance.PlaySfx(SoundManager.Sfx.Levelup);
+
             exp -= maxExp;
 
             level++;
