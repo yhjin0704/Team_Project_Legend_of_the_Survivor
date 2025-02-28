@@ -34,6 +34,9 @@ public class SkillBase
         this.baseController = _baseController;
     }
 
+    protected bool isFinish = true;
+    public bool IsFinish { get { return isFinish; } }
+
     public virtual void Use()
     { 
     }

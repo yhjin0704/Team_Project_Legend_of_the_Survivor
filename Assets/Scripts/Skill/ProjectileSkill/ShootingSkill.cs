@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ShootingSkill : ProjectileSkill, ISkillUseDelay
 {
-    public bool isFinish = true;
-
 }
 
 public class StraightShotting : ShootingSkill
