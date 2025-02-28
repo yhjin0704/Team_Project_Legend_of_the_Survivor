@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShootingSkill : ProjectileSkill, ISkillUseDelay
 {
+    public bool isFinish = true;
 
 }
 
@@ -16,6 +17,7 @@ public class StraightShotting : ShootingSkill
             Debug.LogError("Actor가 null입니다.");
             return;
         }
+        isFinish = false;
 
         damage = actor.atk * skillMagnification;
 
@@ -24,6 +26,8 @@ public class StraightShotting : ShootingSkill
             baseController.GetShotPos().rotation);
         bullet.GetComponent<Bullet>().SetDir(baseController.GetShotPos().right);
         bullet.GetComponent<Bullet>().SetDamage(damage);
+
+        isFinish = true;
     }
 }
 
@@ -36,6 +40,7 @@ public class SpreadShotting : ShootingSkill
             Debug.LogError("Actor가 null입니다.");
             return;
         }
+        isFinish = false;
 
         damage = actor.atk * skillMagnification;
 
@@ -64,6 +69,7 @@ public class SpreadShotting : ShootingSkill
             bullet.GetComponent<Bullet>().SetDir(rotatedMove);
             bullet.GetComponent<Bullet>().SetDamage(damage);
         }
+        isFinish = true;
     }
 }
 
@@ -76,6 +82,7 @@ public class SideShotting : ShootingSkill
             Debug.LogError("Actor가 null입니다.");
             return;
         }
+        isFinish = false;
 
         damage = actor.atk * skillMagnification;
 
@@ -104,6 +111,7 @@ public class SideShotting : ShootingSkill
             bullet.GetComponent<Bullet>().SetDir(rotatedMove);
             bullet.GetComponent<Bullet>().SetDamage(damage);
         }
+        isFinish = true;
     }
 }
 
@@ -116,6 +124,7 @@ public class BackShotting : ShootingSkill
             Debug.LogError("Actor가 null입니다.");
             return;
         }
+        isFinish = false;
 
         damage = actor.atk * skillMagnification;
 
@@ -133,6 +142,7 @@ public class BackShotting : ShootingSkill
             bullet.GetComponent<Bullet>().SetDir(rotatedMove);
             bullet.GetComponent<Bullet>().SetDamage(damage);
         }
+        isFinish = true;
     }
 }
 
@@ -145,6 +155,7 @@ public class MultipleShotting : ShootingSkill
             Debug.LogError("Actor가 null입니다.");
             return;
         }
+        isFinish = false;
 
         damage = actor.atk * skillMagnification;
 
@@ -164,6 +175,7 @@ public class MultipleShotting : ShootingSkill
             bullet.GetComponent<Bullet>().SetDir(baseController.GetShotPos().right);
             bullet.GetComponent<Bullet>().SetDamage(damage);
         }
+        isFinish = true;
     }
 }
 
@@ -180,6 +192,7 @@ public class ArcShotting : ShootingSkill
             Debug.LogError("Actor가 null입니다.");
             return;
         }
+        isFinish = false;
 
         damage = actor.atk * skillMagnification;
 
@@ -206,6 +219,7 @@ public class ArcShotting : ShootingSkill
         else
         {
             curPatternCount = 0;
+            isFinish = true;
         }
     }
 
@@ -227,6 +241,7 @@ public class AroundShotting : ShootingSkill
             Debug.LogError("Actor가 null입니다.");
             return;
         }
+        isFinish = false;
 
         damage = actor.atk * skillMagnification;
 
@@ -242,6 +257,7 @@ public class AroundShotting : ShootingSkill
             bullet.GetComponent<Bullet>().SetDir(rotatedMove);
             bullet.GetComponent<Bullet>().SetDamage(damage);
         }
+        isFinish = true;
     }
 }
 
