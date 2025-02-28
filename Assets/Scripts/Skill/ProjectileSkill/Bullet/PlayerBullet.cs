@@ -25,4 +25,25 @@ public class PlayerBullet : Bullet
     {
         base.Update();
     }
+    protected override void OnTriggerEnter2D(Collider2D _collision)
+    {
+        base.OnTriggerEnter2D(_collision);
+
+        if (_collision.CompareTag("Enemy"))
+        {
+            EnemyController enemyController = _collision.GetComponent<EnemyController>();
+            if (enemyController != null)
+            {
+                enemyController.Hit(damage);
+            }
+                Destroy(gameObject);
+        }
+        else if (_collision.CompareTag("Wall"))
+        {
+            _rigidbody.velocity = Vector2.zero;
+            GetComponent<Collider2D>().enabled = false;
+
+            Destroy(gameObject, 0.5f);
+        }
+    }
 }

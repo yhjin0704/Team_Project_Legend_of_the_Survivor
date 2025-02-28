@@ -7,7 +7,6 @@ public enum EState
     Idle,
     Move,
     Attack,
-    Hit,
     Dead
 }
 
@@ -17,7 +16,17 @@ public class Actor : MonoBehaviour
 
     protected AnimationHandler animationHandler;
 
-    [Range(1, 100)] public float hp = 100;
+    public float hp = 100;
+    protected float maxHp;
+    public float GetMaxHp()
+    {
+        return maxHp;
+    }
+    public void SetMaxHp(float _maxHp)
+    {
+        maxHp = _maxHp;
+    }
+
     [Range(1f, 20f)] public float speed = 3;
     public float atk = 1;
     public float atkDelay = 3;
@@ -38,57 +47,36 @@ public class Actor : MonoBehaviour
 
     protected Animator animator;
 
-    protected Transform _renderer;
-    public Transform GetRenderer()
+    protected SpriteRenderer _renderer;
+    public Transform GetRendererTransform()
     {
-        return _renderer;
+        return _renderer.transform;
     }
 
     protected virtual void Awake()
     {
         animator = GetComponentInChildren<Animator>();
 
-        _renderer = transform.Find("Renderer");
+        _renderer = GetComponentInChildren<SpriteRenderer>();
+
+        maxHp = hp;
     }
 
     protected virtual void Start()
     {
     }
 
-    // Update is called once per frame
     protected virtual void Update()
     {
-
-        switch (state)
-        {
-            case EState.Idle:
-                break;
-            case EState.Move:
-                break;
-            case EState.Attack:
-                break;
-            case EState.Hit:
-                Hit();
-                break;
-            case EState.Dead:
-                Dead();
-                break;
-            default:
-                break;
-        }
     }
 
     protected virtual void FixedUpdate()
     {
-        //GameObject monsterObject = GameObject.Find("Monster");
-        //SetShotPos(monsterObject.transform);
     }
 
-    protected virtual void Hit()
+    protected virtual void LateUpdate()
     {
-    }
-
-    protected virtual void Dead()
-    {
+        Vector3Int cellPos = GameManager.Instance.ChangeToCellPosition(_renderer.transform.position);
+        _renderer.sortingOrder = -(int)cellPos.y;
     }
 }

@@ -13,8 +13,8 @@ public class BaseController : MonoBehaviour
     protected Vector2 movementDirection = Vector2.zero;
     public Vector2 MovementDirection { get { return movementDirection; } }
 
-    protected Vector2 lookDirection = Vector2.zero;
-    public Vector2 LookDirection { get { return lookDirection; } }
+    protected Vector3 lookDirection = Vector2.zero;
+    public Vector3 LookDirection { get { return lookDirection; } }
 
     protected Vector2 knockback = Vector2.zero;
     protected float knockbackDuration = 0.0f;
@@ -25,7 +25,7 @@ public class BaseController : MonoBehaviour
 
     protected AnimationHandler animationHandler;
 
-    // °ø°Ý ¸ñÇ¥
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥
     protected Transform target;
     public Transform GetTarget()
     {
@@ -34,13 +34,14 @@ public class BaseController : MonoBehaviour
 
     public float shotPosDistance;
 
-    // Åõ»çÃ¼ ¹ß»ç À§Ä¡
+    // ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ß»ï¿½ ï¿½ï¿½Ä¡
     protected Transform shotPos;
     public Transform GetShotPos()
     {
         return shotPos;
     }
 
+    protected bool isHit = false;
     protected bool isAttacking;
     protected float timeSinceLastAttack = float.MaxValue;
 
@@ -66,10 +67,15 @@ public class BaseController : MonoBehaviour
         switch (actor.GetState())
         {
             case EState.Attack:
-                if (isSkillUseActor)
+                if (isSkillUseActor && _rigidbody.velocity == Vector2.zero)
                 {
+                    timeSinceLastAttack = 0;
+                    Attack();
                     Invoke("UseSkills", 0.5f);
                 }
+                break;
+            case EState.Dead:
+                Dead();
                 break;
             default:
                 break;
@@ -89,21 +95,6 @@ public class BaseController : MonoBehaviour
     {
     }
 
-    //private void Rotate(Vector2 direction)
-    //{
-    //    float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-    //    bool isLeft = Mathf.Abs(rotZ) > 90f;
-
-    //    characterRenderer.flipX = isLeft;
-
-    //    if (weaponPivot != null)
-    //    {
-    //        weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ);
-    //    }
-
-    //    weaponHandler?.Rotate(isLeft);
-    //}
-
     public void ApplyKnockback(Transform other, float power, float duration)
     {
         knockbackDuration = duration;
@@ -116,32 +107,79 @@ public class BaseController : MonoBehaviour
         {
             timeSinceLastAttack += Time.deltaTime;
         }
-
-        if (timeSinceLastAttack >= actor.atkDelay)
+        else
         {
-            timeSinceLastAttack = 0;
             actor.SetState(EState.Attack);
         }
     }
 
     protected virtual void Attack()
     {
-
     }
 
     protected virtual void UseSkills()
     {
         if (skillManager.GetSkillList() == null)
         {
-            Debug.LogError("SkillList°¡ nullÀÔ´Ï´Ù.");
+            Debug.Log("SkillListï¿½ï¿½ nullï¿½Ô´Ï´ï¿½.");
             return;
         }
 
         if (target == null)
         {
-            Debug.LogError("TargetÀÌ nullÀÔ´Ï´Ù.");
+            Debug.Log("Targetï¿½ï¿½ nullï¿½Ô´Ï´ï¿½.");
             return;
         }
+    }
+
+    public virtual void Hit(float _damage)
+    {
+        SoundManager.instance.PlaySfx(SoundManager.Sfx.Hit);
+
+        if (isHit == true ||
+            actor.GetState() == EState.Dead)
+        {
+            return;
+        }
+        actor.hp -= _damage;
+
+        isHit = true;
+
+        animationHandler.Damage();
+        StartCoroutine(HitTime(0.5f));
+
+        if (actor.hp <= 0)
+        {
+            actor.hp = 0;
+            actor.SetState(EState.Dead);
+        }
+        gameObject.GetComponentInChildren<ActorUI>().ShowCombatValue((int)_damage, true);
+        gameObject.GetComponentInChildren<ActorUI>().ChangeHPBar(actor.hp, actor.GetMaxHp());
+        gameObject.GetComponentInChildren<ActorUI>().ChangeCurrentHP(actor.hp);
+    }
+
+    public virtual void Healed(float _heal)
+    {
+        if (actor.hp + _heal <= actor.GetMaxHp())
+        {
+            actor.hp += _heal;
+        }
+        else
+        {
+            actor.hp = actor.GetMaxHp();
+        }
+
+        gameObject.GetComponentInChildren<ActorUI>().ShowCombatValue((int)_heal, false);
+        gameObject.GetComponentInChildren<ActorUI>().ChangeHPBar(actor.hp, actor.GetMaxHp());
+        gameObject.GetComponentInChildren<ActorUI>().ChangeCurrentHP(actor.hp);
+    }
+
+    protected virtual void Dead()
+    {
+        actor.hp = 0;
+        actor.SetState(EState.Dead);
+        animationHandler.Dead();
+        actor.GetComponent<Collider2D>().enabled = false;
     }
 
     protected virtual void SetShotPos(Transform _targetPos)
@@ -151,23 +189,31 @@ public class BaseController : MonoBehaviour
             return;
         }
 
-        Vector3 direction = (_targetPos.position - transform.position).normalized;
+        lookDirection = (_targetPos.position - transform.position).normalized;
 
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
         shotPos.rotation = Quaternion.Euler(0, 0, angle);
 
-        shotPos.position = transform.position + direction * shotPosDistance;
-        shotPos.position = transform.position + direction * shotPosDistance;
+        shotPos.position = transform.position + lookDirection * shotPosDistance;
+        shotPos.position = transform.position + lookDirection * shotPosDistance;
     }
 
     void OnDrawGizmos()
     {
         if (shotPos != null)
         {
-            // ±×·ÁÁú »ö»ó ¼³Á¤
+            // ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             Gizmos.color = Color.red;
-            // 2D ¾À¿¡¼­ targetTransformÀÇ À§Ä¡¿¡ ¿ø ±×¸®±â
-            Gizmos.DrawWireSphere(shotPos.position, 0.02f);
+            // 2D ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ targetTransformï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
+            Gizmos.DrawWireSphere(shotPos.position, 0.05f);
         }
+    }
+
+    IEnumerator HitTime(float _delay)
+    {
+        yield return new WaitForSeconds(_delay);
+        
+        isHit = false;
+        animationHandler.InvincibilityEnd();
     }
 }

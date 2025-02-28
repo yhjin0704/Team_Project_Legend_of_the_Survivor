@@ -8,23 +8,26 @@ public class GameOverUI : BaseSceneUI
     // 플레이 버튼, 종료 버튼
     [SerializeField] private Button RestartButton;
     [SerializeField] private Button ExitButton;
+    private GameManager gameManager;
 
     public override void Init(UIManager uiManager)
     {
         base.Init(uiManager);
+        gameManager = GameManager.Instance;
         RestartButton.onClick.AddListener(OnClickRestartButton);
         ExitButton.onClick.AddListener(OnClickExitButton);
     }
 
     public void OnClickRestartButton() // 재시작 버튼 클릭 시
     {
-        GameManager.Instance.ChangeScene(SceneState.Main);
+        gameManager.ChangeScene(SceneState.Play);
+        gameManager.ResetGame();
         uiManager.ChangeState(UIState.GamePlay);
     }
 
     public void OnClickExitButton() // 종료 버튼 클릭 시
     {
-        GameManager.Instance.ChangeScene(SceneState.Lobby);
+        gameManager.RestartGame();
         uiManager.ChangeState(UIState.Lobby);
     }
 
