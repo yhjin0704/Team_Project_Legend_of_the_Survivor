@@ -8,6 +8,7 @@ public class PlayerController : BaseController
 {
     private Player player;
     private Animator animator;
+    private AudioSource audioSource;
 
     private Vector2 moveInput;
 
@@ -23,6 +24,7 @@ public class PlayerController : BaseController
 
         player = actor as Player;
         animator = GetComponentInChildren<Animator>();
+        audioSource = GetComponentInChildren<AudioSource>();
     }
 
     protected override void Start()
@@ -48,6 +50,7 @@ public class PlayerController : BaseController
         {
             case EState.Idle:
                 _rigidbody.velocity = Vector2.zero;
+                audioSource.Stop();
                 animationHandler.Move(_rigidbody.velocity);
                 break;
             case EState.Move:
@@ -63,6 +66,7 @@ public class PlayerController : BaseController
                     break;
             case EState.Dead:
                 _rigidbody.velocity = Vector2.zero;
+                audioSource.Stop();
                 break;
             default:
                 break;
@@ -75,6 +79,8 @@ public class PlayerController : BaseController
         if (movementDirection != Vector2.zero)
         {
             player.SetState(EState.Move);
+            if(!audioSource.isPlaying)
+                audioSource.Play();
         }
         else
         {
