@@ -141,101 +141,12 @@ public class EnemyController : BaseController
             target.GetComponent<BaseController>().Hit(actor.atk);
         else if (enemy_Type == Enemy_Type.Far)
         {
-            UseSkills();
-            //GameObject obj = Instantiate(bullet, transform.position, Quaternion.identity);
-            //Vector2 direction = (target.position - transform.position).normalized;
-
-            //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            //obj.transform.rotation = Quaternion.Euler(0, 0, angle);
-
-            //obj.GetComponent<Bullet>().SetDamage(actor.atk);
-            //obj.GetComponent<Bullet>().SetDir(direction);
+            UseSkills(0);
         }
         else if (enemy_Type == Enemy_Type.Boss)
         {
             int index = Random.Range(0, 4);
-            switch (index)
-            {
-                case 0:
-                    NormalAttack();
-                    break;
-                case 1:
-                    MultipleAttack();
-                    break;
-                case 2:
-                    ArcAttack();
-                    break;
-                case 3:
-                    AroundAttack();
-                    break;
-            }
-            curPatternCount = 0;
-        }
-    }
-
-    private void NormalAttack()
-    {
-        GameObject obj = Instantiate(bullet, transform.position, Quaternion.identity);
-        Vector2 direction = (target.position - transform.position).normalized;
-
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        obj.transform.rotation = Quaternion.Euler(0, 0, angle);
-
-        obj.GetComponent<Bullet>().SetDamage(actor.atk);
-        obj.GetComponent<Bullet>().SetDir(direction);
-    }
-
-    private void MultipleAttack()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            Vector3 vec = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
-            GameObject obj = Instantiate(bullet, vec, Quaternion.identity);
-            Vector2 direction = (target.position - transform.position).normalized;
-
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            obj.transform.rotation = Quaternion.Euler(0, 0, angle);
-
-            obj.GetComponent<Bullet>().SetDamage(actor.atk);
-            obj.GetComponent<Bullet>().SetDir(direction);
-        }
-    }
-
-    private void ArcAttack()
-    {
-        if (!actor.IsAlive) return;
-
-        GameObject obj = Instantiate(bullet, transform.position, Quaternion.identity);
-        Vector2 direction = new Vector2(Mathf.Cos(Mathf.PI * 2 * curPatternCount / maxPatternCount),
-            Mathf.Sin(Mathf.PI * 2 * curPatternCount / maxPatternCount)).normalized;
-
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        obj.transform.rotation = Quaternion.Euler(0, 0, angle);
-
-        obj.GetComponent<Bullet>().SetDamage(actor.atk);
-        obj.GetComponent<Bullet>().SetDir(direction);
-
-        curPatternCount++;
-
-        if (curPatternCount < maxPatternCount)
-            Invoke("ArcAttack", 0.15f);
-    }
-
-    private void AroundAttack()
-    {
-        int roundNum = 40;
-
-        for (int i = 0; i < roundNum; i++)
-        {
-            GameObject obj = Instantiate(bullet, transform.position, Quaternion.identity);
-            Vector2 direction = new Vector2(Mathf.Cos(Mathf.PI * 2 * i / roundNum),
-                                            Mathf.Sin(Mathf.PI * 2 * i / roundNum)).normalized;
-
-            Vector3 rot = (Vector3.forward * 360 * i / roundNum) + (Vector3.forward * 90);
-            obj.transform.Rotate(rot);
-
-            obj.GetComponent<Bullet>().SetDamage(actor.atk);
-            obj.GetComponent<Bullet>().SetDir(direction);
+            UseSkills(index);
         }
     }
 
@@ -309,7 +220,7 @@ public class EnemyController : BaseController
         gameObject.GetComponentInChildren<ActorUI>().ChangeHPBar(actor.hp, actor.GetMaxHp());
     }
 
-    protected override void UseSkills()
+    protected override void UseSkills(int _index)
     {
         base.UseSkills();
 
@@ -321,6 +232,6 @@ public class EnemyController : BaseController
 
         SetShotPos(target);
 
-        skillManager.GetSkillList()[0].Use();
+        skillManager.GetSkillList()[_index].Use();
     }
 }

@@ -131,6 +131,20 @@ public class BaseController : MonoBehaviour
             return;
         }
     }
+    protected virtual void UseSkills(int _index)
+    {
+        if (skillManager.GetSkillList() == null)
+        {
+            Debug.Log("SkillList�� null�Դϴ�.");
+            return;
+        }
+
+        if (target == null)
+        {
+            Debug.Log("Target�� null�Դϴ�.");
+            return;
+        }
+    }
 
     public virtual void Hit(float _damage)
     {

@@ -8,8 +8,10 @@ public class EnemySkillManager : SkillManager
     {
         base.Awake();
 
-        StraightShotting straightShotting = new StraightShotting();
-        AddSkill(straightShotting);
+        AddSkill(new StraightShotting());
+        AddSkill(new MultipleShotting());
+        AddSkill(new ArcShotting());
+        AddSkill(new AroundShotting());
     }
 
     protected override void Start()
