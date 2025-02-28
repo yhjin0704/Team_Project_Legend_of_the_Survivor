@@ -176,6 +176,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
+        enemies.Clear();
         isSpreadShotting = false;
         isSideShotting = false;
         isBackShotting = false;
