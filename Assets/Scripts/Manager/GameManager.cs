@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
             case 7:
                 if (!isBackShotting)
                 {
-                    PlayerSkillManagerProperty.AddSkill(new SideShotting());
+                    PlayerSkillManagerProperty.AddSkill(new BackShotting());
                     isBackShotting = true;
                 }
                 else
@@ -176,6 +176,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
+        enemies.Clear();
         isSpreadShotting = false;
         isSideShotting = false;
         isBackShotting = false;
