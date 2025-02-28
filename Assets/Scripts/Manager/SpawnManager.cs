@@ -49,7 +49,7 @@ public class SpawnManager : MonoBehaviour
                 SpawnEnemy(0, clearStageLevel / 5); // 몬스터 스폰
                 break;
             case 1:
-                SpawnEnemy(0, 2 + clearStageLevel / 5); // 몬스터 스폰
+                SpawnEnemy(1, 2 + clearStageLevel / 5); // 몬스터 스폰
                 break;
             case 2:
                 SpawnEnemy(1, 1 + clearStageLevel / 5); // 몬스터 스폰
