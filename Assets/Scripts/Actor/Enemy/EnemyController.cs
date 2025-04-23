@@ -103,7 +103,8 @@ public class EnemyController : BaseController
                 actor.GetComponent<Collider2D>().enabled = true;
             }
         }
-        if (isAttacking && skillManager.GetSkillList()[2].IsFinish)
+        //if (isAttacking && skillManager.GetSkillList()[2].IsFinish)
+        if(isAttacking)
         {
             attackTime += Time.deltaTime;
             if (attackTime > attackDelay)

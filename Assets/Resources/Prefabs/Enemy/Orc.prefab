@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9201240106118676453}
   - component: {fileID: 3291370598097430201}
   - component: {fileID: 2544724352020858603}
+  - component: {fileID: -8417392467740622433}
   m_Layer: 6
   m_Name: Orc
   m_TagString: Enemy
@@ -186,6 +187,18 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-8417392467740622433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241997740830865549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267ec0567dbc7bc4f869e6d42b0fce9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1342321363346578229
 GameObject:
   m_ObjectHideFlags: 0
